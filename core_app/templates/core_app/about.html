@@ -1,0 +1,30 @@
+<div id="about" class="container bg-white" style="border-bottom: 1px solid #d3d3d3;">
+    <h1><span class="h1-sunshine">A</span>bout</h1>
+    <div class="row">
+        <div class="col-md-8">
+            <p style="text-indent: 2em;">
+                I’m interested in <span class="text-underline">machine learning</span> and
+                <span class="text-underline">deep learning</span>
+                and my goal is to better explore these ground-breaking fields of study through university education
+                and self-paced learning.
+                I aim to build intelligent systems that make a difference and bring about positive changes in
+                people’s lives.
+            </p>
+            <p style="text-indent: 2em;">
+                I’m currently pursuing a Master of Science degree in Machine Learning at
+                <span class="text-underline">KTH</span> Royal Institute of Technology in Stockholm, Sweden. In 2020,
+                I graduated with a Bachelor of Engineering degree in Electronic Engineering degree from
+                the University of Manchester in Manchester, United Kingdom.
+            </p>
+            <a href="{% url 'cv-download' %}" class="btn btn-primary mb-2 btn-xlarge my-5">
+                Download CV as PDF ({{ cv_file_object.pdf.size|filesizeformat }})
+            </a>
+        </div>
+        <div class="col-md-4">
+            <div class="embed-responsive embed-responsive-1by1">
+                <img class="embed-responsive-item rounded-circle fadeIn" src="{{ mark_profile.image.url }}" alt="Card image cap">
+            </div>
+        </div>
+    </div>
+    {% include "core_app/timeline.html "%}
+</div>

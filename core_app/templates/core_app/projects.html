@@ -1,0 +1,61 @@
+<div id="projects" class="container bg-white" style="border-bottom: 1px solid #d3d3d3;">
+    <div class="row text-center">
+        <div class="col-md-7 text-left">
+            <h1 class="text-uppercase">Projects</h1>
+        </div>
+        <!--
+        <div class="col-md-6 text-right mt-5">
+            <a class="btn btn-outline-info mb-4 btn-xlarge active" id="all" href="all">all</a>
+            <a class="btn btn-outline-info mb-4 btn-xlarge" id="topic_1" href="topic_1">topic_1</a>
+            <a class="btn btn-outline-info mb-4 btn-xlarge" id="topic_2" href="topic_2">topic_2</a>
+        </div>
+        -->
+        <div class="col-md-3 text-center mt-5 pt-3">
+            <h3 class="text-uppercase">Filter by topic</h3>
+        </div>
+        <div class="col-md-2 text-center">
+            <div class="dropdown show">
+                <a class="btn btn-secondary dropdown-toggle btn-xlarge mt-5" href="all" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    all
+                </a>
+
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <a class="dropdown-item" href="all">all</a>
+                    <a class="dropdown-item" href="topic_1">topic_1</a>
+                    <a class="dropdown-item" href="topic_2">topic_2</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div id="posts" class="row justify-content-center">
+        {% for project in first_page %}
+            <div class="col-lg-4 d-flex align-items-stretch">
+                <div class="card my-5">
+                    <div class="card-header"># {{ project.tags }}</div>
+                    <div class="embed-responsive embed-responsive-16by9 ">
+                        <img class="card-img-top embed-responsive-item fadeIn" src="{{ project.image.url }}" alt="Card image cap">
+                    </div>
+                    <div class="card-body">
+                        <h2 class="card-title">{{ project.title }}</h2>
+                        <p class="card-text">{{ project.description }}</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">{{ project.technologies }}</li>
+                    </ul>
+                    <div class="card-body align-items-center d-flex justify-content-center">
+                        <a href="{{ project.project_url }}" target="_blank" class="btn btn-primary mb-2 btn-xlarge mx-2">View on GitHub</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="col-md-12 text-center">
+        <a class="btn btn-outline-info mb-4 btn-xlarge active" id="paginator_pages_first" href="{{ first_page.number }}">First</a>
+        <a class="btn btn-outline-info mb-4 btn-xlarge disabled" id="paginator_pages_prev" href="#">Previous</a>
+        <a class="btn btn-outline-info mb-4 btn-xlarge active" id="paginator_pages_current" href="{{ first_page.number }}">{{ first_page.number }}/{{ paginator.num_pages }}</a>
+        <a class="btn btn-outline-info mb-4 btn-xlarge" id="paginator_pages_next" href="{{ first_page.next_page_number }}">Next</a>
+        <a class="btn btn-outline-info mb-4 btn-xlarge" id="paginator_pages_last" href="{{ paginator.num_pages }}">Last</a>
+    </div>
+</div>
+

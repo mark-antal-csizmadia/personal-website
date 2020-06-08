@@ -1,0 +1,652 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'core_app/main.css' %}">
+    <!-- Glyps -->
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+
+    {% if title %}
+        <title>Mark Csizmadia - {{ title }}</title>
+    {% else %}
+        <title>Mark Csizmadia</title>
+    {% endif %}
+
+
+</head>
+
+<body>
+    <div class="container">
+        <nav id="navbar" class="navbar navbar-expand-lg navbar-dark bg-aqua fixed-top">
+        <div class="container">
+            <a id="navbarbrand" class="navbar-brand text-uppercase" href="#">Mark Csizmadia</a>
+            <button id="navibut" class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarToggle">
+                <span class="icon-bar top-bar"></span>
+                <span class="icon-bar middle-bar"></span>
+                <span class="icon-bar bottom-bar"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarToggle">
+                <div class="navbar-nav ml-auto">
+                    <a class="nav-link text-uppercase" href="#about">About</a>
+                    <a class="nav-link text-uppercase" href="#projects">Projects</a>
+                    <a class="nav-link text-uppercase" href="#contact">Contact</a>
+                    <a class="nav-link text-uppercase" href="#to_blog">Blog</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    </div>
+
+    {% include "core_app/jumbotron.html" %}
+
+    {% include "core_app/messages.html" %}
+
+    {% include "core_app/about.html" %}
+
+    {% include "core_app/projects.html" %}
+
+    {% include "core_app/contact.html" %}
+
+    {% include "core_app/to_blog.html" %}
+
+    {% include "core_app/footer.html" %}
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous">
+    </script>
+
+    <script>
+        $('.dropdown-item').click(function(event){
+            event.preventDefault();
+            var topic = $(this).attr('href');
+            var page_n = 1;
+
+            // ajax
+            $.ajax({
+                type: "POST",
+                data : {
+                    topic: topic,
+                    page_n: page_n,
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                },
+                success: function (resp) {
+                    $("a#dropdownMenuLink").attr('href', topic)
+                    $('a#dropdownMenuLink').text(topic)
+                    //loop
+                    $('#posts').html('')
+                    $.each(resp.serializer, function(i, val) {
+                        //apending posts
+                        $('#posts').append(
+                            '<div class="col-lg-4 d-flex align-items-stretch">' +
+                                '<div class="card my-5">' +
+                                    '<div class="card-header"># '+val.tag+'</div>' +
+                                    '<img class="card-img-top embed-responsive-item fadeIn" src="'+val.image+'" alt="Card image cap">' +
+                                    '<div class="card-body">' +
+                                        '<h2 class="card-title">' + val.title + '</h2>' +
+                                        '<p class="card-text">' + val.description + '</p>' +
+                                    '</div>' +
+                                    '<ul class="list-group list-group-flush">' +
+                                        '<li class="list-group-item">'+ val.technologies +'</li>' +
+                                    '</ul>' +
+                                    '<div class="card-body align-items-center d-flex justify-content-center">' +
+                                        '<a href='+ val.project_url +' target="_blank" class="btn btn-primary mb-2 btn-xlarge mx-2">View on GitHub</a>' +
+                                    '</div>' +
+                                '</div>' +
+                            '</div>'
+                        )
+
+                    });
+                    if (resp.page_n == resp.num_pages) {
+                        $('a#paginator_pages_first').attr("class", "btn btn-outline-info mb-4 btn-xlarge active")
+                        $('a#paginator_pages_prev').attr("class", "btn btn-outline-info mb-4 btn-xlarge disabled")
+                        $('a#paginator_pages_current').attr("class", "btn btn-outline-info mb-4 btn-xlarge active")
+
+                        $('a#paginator_pages_next').attr("class", "btn btn-outline-info mb-4 btn-xlarge disabled")
+                        $('a#paginator_pages_last').attr("class", "btn btn-outline-info mb-4 btn-xlarge active")
+                        $("a#paginator_pages_last").attr('href', resp.num_pages)
+                    }
+                    else {
+                        if (resp.page_n == resp.previous_page_n) {
+                            $('a#paginator_pages_first').attr("class", "btn btn-outline-info mb-4 btn-xlarge active")
+                            $('a#paginator_pages_prev').attr("class", "btn btn-outline-info mb-4 btn-xlarge disabled")
+                            $('a#paginator_pages_current').attr("class", "btn btn-outline-info mb-4 btn-xlarge active")
+
+                            $('a#paginator_pages_next').attr("class", "btn btn-outline-info mb-4 btn-xlarge")
+                            $("a#paginator_pages_next").attr('href', resp.next_page_n)
+                            $('a#paginator_pages_last').attr("class", "btn btn-outline-info mb-4 btn-xlarge")
+                            $("a#paginator_pages_last").attr('href', resp.num_pages)
+                        }
+                        else if (resp.page_n == resp.next_page_n) {
+                            $('a#paginator_pages_first').attr("class", "btn btn-outline-info mb-4 btn-xlarge")
+                            $('a#paginator_pages_prev').attr("class", "btn btn-outline-info mb-4 btn-xlarge")
+                            $("a#paginator_pages_prev").attr('href', resp.previous_page_n)
+                            $('a#paginator_pages_current').attr("class", "btn btn-outline-info mb-4 btn-xlarge active")
+
+                            $('a#paginator_pages_next').attr("class", "btn btn-outline-info mb-4 btn-xlarge disabled")
+                            $('a#paginator_pages_last').attr("class", "btn btn-outline-info mb-4 btn-xlarge active")
+                            $("a#paginator_pages_last").attr('href', resp.num_pages)
+                        }
+                        else {
+                            $('a#paginator_pages_first').attr("class", "btn btn-outline-info mb-4 btn-xlarge")
+                            $('a#paginator_pages_prev').attr("class", "btn btn-outline-info mb-4 btn-xlarge")
+                            $("a#paginator_pages_prev").attr('href', resp.previous_page_n)
+                            $('a#paginator_pages_current').attr("class", "btn btn-outline-info mb-4 btn-xlarge active")
+
+                            $('a#paginator_pages_next').attr("class", "btn btn-outline-info mb-4 btn-xlarge")
+                            $("a#paginator_pages_next").attr('href', resp.next_page_n)
+                            $('a#paginator_pages_last').attr("class", "btn btn-outline-info mb-4 btn-xlarge")
+                            $("a#paginator_pages_last").attr('href', resp.num_pages)
+                        }
+                    }
+                    $("a#paginator_pages_current").attr('href', page_n)
+                    $('a#paginator_pages_current').text(page_n + "/" + resp.num_pages)
+
+                },
+                error: function () {}
+            }); //
+            $('html, body').animate({
+                    scrollTop: $("#projects").offset().top
+            }, 800, function() {
+
+                // Add hash (#) to URL when done scrolling (default click behavior)
+                window.location.hash = "project";
+              });
+        });
+    </script>
+    <script>
+        $('.btn-outline-info').click(function(event){
+            event.preventDefault();
+            var topic = $("a#dropdownMenuLink").attr('href')
+            var page_n = $(this).attr('href');
+
+            // ajax
+            $.ajax({
+                type: "POST",
+                data : {
+                    topic: topic,
+                    page_n: page_n,
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                },
+                success: function (resp) {
+                    $("a#dropdownMenuLink").attr('href', topic)
+                    $('a#dropdownMenuLink').text(topic)
+                    //loop
+                    $('#posts').html('')
+                    $.each(resp.serializer, function(i, val) {
+                        //apending posts
+                        $('#posts').append(
+                            '<div class="col-lg-4 d-flex align-items-stretch">' +
+                                '<div class="card my-5">' +
+                                    '<div class="card-header"># '+val.tags+'</div>' +
+                                    '<img class="card-img-top embed-responsive-item fadeIn" src="'+val.image+'" alt="Card image cap">' +
+                                    '<div class="card-body">' +
+                                        '<h2 class="card-title">' + val.title + '</h2>' +
+                                        '<p class="card-text">' + val.description + '</p>' +
+                                    '</div>' +
+                                    '<ul class="list-group list-group-flush">' +
+                                        '<li class="list-group-item">'+ val.technologies +'</li>' +
+                                    '</ul>' +
+                                    '<div class="card-body align-items-center d-flex justify-content-center">' +
+                                        '<a href='+ val.project_url +' target="_blank" class="btn btn-primary mb-2 btn-xlarge mx-2">View on GitHub</a>' +
+                                    '</div>' +
+                                '</div>' +
+                            '</div>'
+                        )
+
+                    });
+                    if (resp.page_n == resp.previous_page_n && resp.page_n == resp.next_page_n) {
+                        $('a#paginator_pages_first').attr("class", "btn btn-outline-info mb-4 btn-xlarge active")
+                        $('a#paginator_pages_prev').attr("class", "btn btn-outline-info mb-4 btn-xlarge disabled")
+                        $('a#paginator_pages_current').attr("class", "btn btn-outline-info mb-4 btn-xlarge active")
+
+                        $('a#paginator_pages_next').attr("class", "btn btn-outline-info mb-4 btn-xlarge disabled")
+                        $('a#paginator_pages_last').attr("class", "btn btn-outline-info mb-4 btn-xlarge active")
+                        $("a#paginator_pages_last").attr('href', resp.num_pages)
+                    }
+                    else {
+                        if (resp.page_n == resp.previous_page_n) {
+                            $('a#paginator_pages_first').attr("class", "btn btn-outline-info mb-4 btn-xlarge active")
+                            $('a#paginator_pages_prev').attr("class", "btn btn-outline-info mb-4 btn-xlarge disabled")
+                            $('a#paginator_pages_current').attr("class", "btn btn-outline-info mb-4 btn-xlarge active")
+
+                            $('a#paginator_pages_next').attr("class", "btn btn-outline-info mb-4 btn-xlarge")
+                            $("a#paginator_pages_next").attr('href', resp.next_page_n)
+                            $('a#paginator_pages_last').attr("class", "btn btn-outline-info mb-4 btn-xlarge")
+                            $("a#paginator_pages_last").attr('href', resp.num_pages)
+                        }
+                        else if (resp.page_n == resp.next_page_n) {
+                            $('a#paginator_pages_first').attr("class", "btn btn-outline-info mb-4 btn-xlarge")
+                            $('a#paginator_pages_prev').attr("class", "btn btn-outline-info mb-4 btn-xlarge")
+                            $("a#paginator_pages_prev").attr('href', resp.previous_page_n)
+                            $('a#paginator_pages_current').attr("class", "btn btn-outline-info mb-4 btn-xlarge active")
+
+                            $('a#paginator_pages_next').attr("class", "btn btn-outline-info mb-4 btn-xlarge disabled")
+                            $('a#paginator_pages_last').attr("class", "btn btn-outline-info mb-4 btn-xlarge active")
+                            $("a#paginator_pages_last").attr('href', resp.num_pages)
+                        }
+                        else {
+                            $('a#paginator_pages_first').attr("class", "btn btn-outline-info mb-4 btn-xlarge")
+                            $('a#paginator_pages_prev').attr("class", "btn btn-outline-info mb-4 btn-xlarge")
+                            $("a#paginator_pages_prev").attr('href', resp.previous_page_n)
+                            $('a#paginator_pages_current').attr("class", "btn btn-outline-info mb-4 btn-xlarge active")
+
+                            $('a#paginator_pages_next').attr("class", "btn btn-outline-info mb-4 btn-xlarge")
+                            $("a#paginator_pages_next").attr('href', resp.next_page_n)
+                            $('a#paginator_pages_last').attr("class", "btn btn-outline-info mb-4 btn-xlarge")
+                            $("a#paginator_pages_last").attr('href', resp.num_pages)
+                        }
+                    }
+                    $("a#paginator_pages_current").attr('href', page_n)
+                    $('a#paginator_pages_current').text(page_n + "/" + resp.num_pages)
+
+                },
+                error: function () {}
+            }); //
+            $('html, body').animate({
+                    scrollTop: $("#projects").offset().top
+            }, 800, function() {
+
+                // Add hash (#) to URL when done scrolling (default click behavior)
+                window.location.hash = "project";
+              });
+        });
+    </script>
+    <script>
+        $(document).ready(function(){
+            // Add scrollspy to <body>
+            $('body').scrollspy({target: ".navbar", offset: 50});
+
+            // Add smooth scrolling on all links inside the navbar
+            $("#navbarToggle a").on('click', function(event) {
+                // Make sure this.hash has a value before overriding default behavior
+                if (this.hash !== "") {
+                    // Prevent default anchor click behavior
+                    event.preventDefault();
+
+                    // Store hash
+                    var hash = this.hash;
+
+                    // Using jQuery's animate() method to add smooth page scroll
+                    // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+                    $('html, body').animate({
+                        scrollTop: $(hash).offset().top
+                    }, 800, function(){
+
+                        // Add hash (#) to URL when done scrolling (default click behavior)
+                    window.location.hash = hash;
+                    });
+
+                }  // End if
+
+                if ( $('#navbarToggle').hasClass('show')) {
+                    $('.collapse').collapse("hide")
+                }
+            });
+
+
+            $(".navbar-brand").on('click', function(event) {
+                $("html, body").animate({
+                    scrollTop: 0
+                }, 800);
+            });
+
+            $("#contactfooter").on('click', function(event) {
+                // Make sure this.hash has a value before overriding default behavior
+                if (this.hash !== "") {
+                    // Prevent default anchor click behavior
+                    event.preventDefault();
+
+                    // Store hash
+                    var hash = this.hash;
+
+                    // Using jQuery's animate() method to add smooth page scroll
+                    // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+                    $('html, body').animate({
+                        scrollTop: $(hash).offset().top
+                    }, 800, function(){
+
+                        // Add hash (#) to URL when done scrolling (default click behavior)
+                        window.location.hash = hash;
+                    });
+
+                }  // End if
+            });
+
+            $("#totop").on('click', function(event) {
+                $("html, body").animate({
+                    scrollTop: 0
+                }, 800);
+            });
+
+        });
+    </script>
+    <script>
+        // When the user scrolls down 80px from the top of the document, resize the navbar's padding and the logo's font size
+        window.onscroll = function() {scrollFunction()};
+
+        function scrollFunction() {
+          if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
+            document.getElementById("navbar").style.padding = "1rem 1rem";
+            document.getElementById("navbar").style.borderBottom = "2px solid #fff";
+            document.getElementById("navbarbrand").style.font = "25px Arial, sans-serif !important";
+          } else {
+            document.getElementById("navbar").style.padding = "2.5rem 1.5rem";
+            document.getElementById("navbar").style.borderBottom = "0px solid #fff";
+            document.getElementById("navbarbrand").style.fontSize = "18px Arial, sans-serif !important";
+          }
+        }
+    </script>
+    <script>
+        $(window).scroll(function() {
+            $('.fadedfx').each(function(){
+                var imagePos = $(this).offset().top;
+
+                var topOfWindow = $(window).scrollTop();
+                if (imagePos < topOfWindow+500) {
+                    $(this).addClass("fadeIn");
+                }
+            });
+        });
+    </script>
+    <script>
+        $(window).scroll(function() {
+            $('.fadedfx').each(function(){
+                var imagePos = $(this).offset().top;
+
+                var topOfWindow = $(window).scrollTop();
+                if (imagePos < topOfWindow+500) {
+                    $(this).addClass("fadeIn");
+                }
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function($){
+            var timelines = $('.cd-horizontal-timeline'),
+                eventsMinDistance = 60;
+
+            (timelines.length > 0) && initTimeline(timelines);
+
+            function initTimeline(timelines) {
+                timelines.each(function(){
+                    var timeline = $(this),
+                        timelineComponents = {};
+                    //cache timeline components
+                    timelineComponents['timelineWrapper'] = timeline.find('.events-wrapper');
+                    timelineComponents['eventsWrapper'] = timelineComponents['timelineWrapper'].children('.events');
+                    timelineComponents['fillingLine'] = timelineComponents['eventsWrapper'].children('.filling-line');
+                    timelineComponents['timelineEvents'] = timelineComponents['eventsWrapper'].find('a');
+                    timelineComponents['timelineDates'] = parseDate(timelineComponents['timelineEvents']);
+                    timelineComponents['eventsMinLapse'] = minLapse(timelineComponents['timelineDates']);
+                    timelineComponents['timelineNavigation'] = timeline.find('.cd-timeline-navigation');
+                    timelineComponents['eventsContent'] = timeline.children('.events-content');
+
+                    //assign a left postion to the single events along the timeline
+                    setDatePosition(timelineComponents, eventsMinDistance);
+                    //assign a width to the timeline
+                    var timelineTotWidth = setTimelineWidth(timelineComponents, eventsMinDistance);
+                    //the timeline has been initialize - show it
+                    timeline.addClass('loaded');
+
+                    //detect click on the next arrow
+                    timelineComponents['timelineNavigation'].on('click', '.next', function(event){
+                        event.preventDefault();
+                        updateSlide(timelineComponents, timelineTotWidth, 'next');
+                    });
+                    //detect click on the prev arrow
+                    timelineComponents['timelineNavigation'].on('click', '.prev', function(event){
+                        event.preventDefault();
+                        updateSlide(timelineComponents, timelineTotWidth, 'prev');
+                    });
+                    //detect click on the a single event - show new event content
+                    timelineComponents['eventsWrapper'].on('click', 'a', function(event){
+                        event.preventDefault();
+                        timelineComponents['timelineEvents'].removeClass('selected');
+                        $(this).addClass('selected');
+                        updateOlderEvents($(this));
+                        updateFilling($(this), timelineComponents['fillingLine'], timelineTotWidth);
+                        updateVisibleContent($(this), timelineComponents['eventsContent']);
+                    });
+
+                    //on swipe, show next/prev event content
+                    timelineComponents['eventsContent'].on('swipeleft', function(){
+                        var mq = checkMQ();
+                        ( mq == 'mobile' ) && showNewContent(timelineComponents, timelineTotWidth, 'next');
+                    });
+                    timelineComponents['eventsContent'].on('swiperight', function(){
+                        var mq = checkMQ();
+                        ( mq == 'mobile' ) && showNewContent(timelineComponents, timelineTotWidth, 'prev');
+                    });
+
+                    //keyboard navigation
+                    $(document).keyup(function(event){
+                        if(event.which=='37' && elementInViewport(timeline.get(0)) ) {
+                            showNewContent(timelineComponents, timelineTotWidth, 'prev');
+                        } else if( event.which=='39' && elementInViewport(timeline.get(0))) {
+                            showNewContent(timelineComponents, timelineTotWidth, 'next');
+                        }
+                    });
+                });
+            }
+
+            function updateSlide(timelineComponents, timelineTotWidth, string) {
+                //retrieve translateX value of timelineComponents['eventsWrapper']
+                var translateValue = getTranslateValue(timelineComponents['eventsWrapper']),
+                    wrapperWidth = Number(timelineComponents['timelineWrapper'].css('width').replace('px', ''));
+                //translate the timeline to the left('next')/right('prev')
+                (string == 'next')
+                    ? translateTimeline(timelineComponents, translateValue - wrapperWidth + eventsMinDistance, wrapperWidth - timelineTotWidth)
+                    : translateTimeline(timelineComponents, translateValue + wrapperWidth - eventsMinDistance);
+            }
+
+            function showNewContent(timelineComponents, timelineTotWidth, string) {
+                //go from one event to the next/previous one
+                var visibleContent =  timelineComponents['eventsContent'].find('.selected'),
+                    newContent = ( string == 'next' ) ? visibleContent.next() : visibleContent.prev();
+
+                if ( newContent.length > 0 ) { //if there's a next/prev event - show it
+                    var selectedDate = timelineComponents['eventsWrapper'].find('.selected'),
+                        newEvent = ( string == 'next' ) ? selectedDate.parent('li').next('li').children('a') : selectedDate.parent('li').prev('li').children('a');
+
+                    updateFilling(newEvent, timelineComponents['fillingLine'], timelineTotWidth);
+                    updateVisibleContent(newEvent, timelineComponents['eventsContent']);
+                    newEvent.addClass('selected');
+                    selectedDate.removeClass('selected');
+                    updateOlderEvents(newEvent);
+                    updateTimelinePosition(string, newEvent, timelineComponents);
+                }
+            }
+
+            function updateTimelinePosition(string, event, timelineComponents) {
+                //translate timeline to the left/right according to the position of the selected event
+                var eventStyle = window.getComputedStyle(event.get(0), null),
+                    eventLeft = Number(eventStyle.getPropertyValue("left").replace('px', '')),
+                    timelineWidth = Number(timelineComponents['timelineWrapper'].css('width').replace('px', '')),
+                    timelineTotWidth = Number(timelineComponents['eventsWrapper'].css('width').replace('px', ''));
+                var timelineTranslate = getTranslateValue(timelineComponents['eventsWrapper']);
+
+                if( (string == 'next' && eventLeft > timelineWidth - timelineTranslate) || (string == 'prev' && eventLeft < - timelineTranslate) ) {
+                    translateTimeline(timelineComponents, - eventLeft + timelineWidth/2, timelineWidth - timelineTotWidth);
+                }
+            }
+
+            function translateTimeline(timelineComponents, value, totWidth) {
+                var eventsWrapper = timelineComponents['eventsWrapper'].get(0);
+                value = (value > 0) ? 0 : value; //only negative translate value
+                value = ( !(typeof totWidth === 'undefined') &&  value < totWidth ) ? totWidth : value; //do not translate more than timeline width
+                setTransformValue(eventsWrapper, 'translateX', value+'px');
+                //update navigation arrows visibility
+                (value == 0 ) ? timelineComponents['timelineNavigation'].find('.prev').addClass('inactive') : timelineComponents['timelineNavigation'].find('.prev').removeClass('inactive');
+                (value == totWidth ) ? timelineComponents['timelineNavigation'].find('.next').addClass('inactive') : timelineComponents['timelineNavigation'].find('.next').removeClass('inactive');
+            }
+
+            function updateFilling(selectedEvent, filling, totWidth) {
+                //change .filling-line length according to the selected event
+                var eventStyle = window.getComputedStyle(selectedEvent.get(0), null),
+                    eventLeft = eventStyle.getPropertyValue("left"),
+                    eventWidth = eventStyle.getPropertyValue("width");
+                eventLeft = Number(eventLeft.replace('px', '')) + Number(eventWidth.replace('px', ''))/2;
+                var scaleValue = eventLeft/totWidth;
+                setTransformValue(filling.get(0), 'scaleX', scaleValue);
+            }
+
+            function setDatePosition(timelineComponents, min) {
+                for (i = 0; i < timelineComponents['timelineDates'].length; i++) {
+                    var distance = daydiff(timelineComponents['timelineDates'][0], timelineComponents['timelineDates'][i]),
+                        distanceNorm = Math.round(distance/timelineComponents['eventsMinLapse']) + 2;
+                    timelineComponents['timelineEvents'].eq(i).css('left', distanceNorm*min+'px');
+                }
+            }
+
+            function setTimelineWidth(timelineComponents, width) {
+                var timeSpan = daydiff(timelineComponents['timelineDates'][0], timelineComponents['timelineDates'][timelineComponents['timelineDates'].length-1]),
+                    timeSpanNorm = timeSpan/timelineComponents['eventsMinLapse'],
+                    timeSpanNorm = Math.round(timeSpanNorm) + 4,
+                    totalWidth = timeSpanNorm*width;
+                timelineComponents['eventsWrapper'].css('width', totalWidth+'px');
+                updateFilling(timelineComponents['eventsWrapper'].find('a.selected'), timelineComponents['fillingLine'], totalWidth);
+                updateTimelinePosition('next', timelineComponents['eventsWrapper'].find('a.selected'), timelineComponents);
+
+                return totalWidth;
+            }
+
+            function updateVisibleContent(event, eventsContent) {
+                var eventDate = event.data('date'),
+                    visibleContent = eventsContent.find('.selected'),
+                    selectedContent = eventsContent.find('[data-date="'+ eventDate +'"]'),
+                    selectedContentHeight = selectedContent.height();
+
+                if (selectedContent.index() > visibleContent.index()) {
+                    var classEnetering = 'selected enter-right',
+                        classLeaving = 'leave-left';
+                } else {
+                    var classEnetering = 'selected enter-left',
+                        classLeaving = 'leave-right';
+                }
+
+                selectedContent.attr('class', classEnetering);
+                visibleContent.attr('class', classLeaving).one('webkitAnimationEnd oanimationend msAnimationEnd animationend', function(){
+                    visibleContent.removeClass('leave-right leave-left');
+                    selectedContent.removeClass('enter-left enter-right');
+                });
+                eventsContent.css('height', selectedContentHeight+'px');
+            }
+
+            function updateOlderEvents(event) {
+                event.parent('li').prevAll('li').children('a').addClass('older-event').end().end().nextAll('li').children('a').removeClass('older-event');
+            }
+
+            function getTranslateValue(timeline) {
+                var timelineStyle = window.getComputedStyle(timeline.get(0), null),
+                    timelineTranslate = timelineStyle.getPropertyValue("-webkit-transform") ||
+                        timelineStyle.getPropertyValue("-moz-transform") ||
+                        timelineStyle.getPropertyValue("-ms-transform") ||
+                        timelineStyle.getPropertyValue("-o-transform") ||
+                        timelineStyle.getPropertyValue("transform");
+
+                if( timelineTranslate.indexOf('(') >=0 ) {
+                    var timelineTranslate = timelineTranslate.split('(')[1];
+                    timelineTranslate = timelineTranslate.split(')')[0];
+                    timelineTranslate = timelineTranslate.split(',');
+                    var translateValue = timelineTranslate[4];
+                } else {
+                    var translateValue = 0;
+                }
+
+                return Number(translateValue);
+            }
+
+            function setTransformValue(element, property, value) {
+                element.style["-webkit-transform"] = property+"("+value+")";
+                element.style["-moz-transform"] = property+"("+value+")";
+                element.style["-ms-transform"] = property+"("+value+")";
+                element.style["-o-transform"] = property+"("+value+")";
+                element.style["transform"] = property+"("+value+")";
+            }
+
+            //based on http://stackoverflow.com/questions/542938/how-do-i-get-the-number-of-days-between-two-dates-in-javascript
+            function parseDate(events) {
+                var dateArrays = [];
+                events.each(function(){
+                    var singleDate = $(this),
+                        dateComp = singleDate.data('date').split('T');
+                    if( dateComp.length > 1 ) { //both DD/MM/YEAR and time are provided
+                        var dayComp = dateComp[0].split('/'),
+                            timeComp = dateComp[1].split(':');
+                    } else if( dateComp[0].indexOf(':') >=0 ) { //only time is provide
+                        var dayComp = ["2000", "0", "0"],
+                            timeComp = dateComp[0].split(':');
+                    } else { //only DD/MM/YEAR
+                        var dayComp = dateComp[0].split('/'),
+                            timeComp = ["0", "0"];
+                    }
+                    var	newDate = new Date(dayComp[2], dayComp[1]-1, dayComp[0], timeComp[0], timeComp[1]);
+                    dateArrays.push(newDate);
+                });
+                return dateArrays;
+            }
+
+            function daydiff(first, second) {
+                return Math.round((second-first));
+            }
+
+            function minLapse(dates) {
+                //determine the minimum distance among events
+                var dateDistances = [];
+                for (i = 1; i < dates.length; i++) {
+                    var distance = daydiff(dates[i-1], dates[i]);
+                    dateDistances.push(distance);
+                }
+                return Math.min.apply(null, dateDistances);
+            }
+
+            /*
+                How to tell if a DOM element is visible in the current viewport?
+                http://stackoverflow.com/questions/123999/how-to-tell-if-a-dom-element-is-visible-in-the-current-viewport
+            */
+            function elementInViewport(el) {
+                var top = el.offsetTop;
+                var left = el.offsetLeft;
+                var width = el.offsetWidth;
+                var height = el.offsetHeight;
+
+                while(el.offsetParent) {
+                    el = el.offsetParent;
+                    top += el.offsetTop;
+                    left += el.offsetLeft;
+                }
+
+                return (
+                    top < (window.pageYOffset + window.innerHeight) &&
+                    left < (window.pageXOffset + window.innerWidth) &&
+                    (top + height) > window.pageYOffset &&
+                    (left + width) > window.pageXOffset
+                );
+            }
+
+            function checkMQ() {
+                //check if mobile or desktop device
+                return window.getComputedStyle(document.querySelector('.cd-horizontal-timeline'), '::before').getPropertyValue('content').replace(/'/g, "").replace(/"/g, "");
+            }
+        });
+
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+</body>
+</html>

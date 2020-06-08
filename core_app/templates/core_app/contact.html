@@ -1,0 +1,28 @@
+{% load crispy_forms_tags %}
+<div id="contact" class="container" style="border-bottom: 1px solid #d3d3d3;">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="text-uppercase">Contact Me</h1>
+        </div>
+        <div class="col-md-6 bg-white py-5">
+            <p>Send me a message and I will get back to you within 24 hours.</p>
+            <p><span class="glyphicon glyphicon-map-marker"></span> Manchester, UK</p>
+            <p><span class="glyphicon glyphicon-phone"></span> +44 7706647664 (UK), +36 309524269 (HU)</p>
+            <p><span class="glyphicon glyphicon-envelope"></span> mark.antal.csizmadia@gmail.com</p>
+            <p><span class="fa fa-linkedin fa-lg"></span> <a href="https://www.linkedin.com/in/mark-antal-csizmadia/" target="_blank"> LinkedIn</a></p>
+            <p><span class="fa fa-github fa-lg"></span> <a href="https://github.com/mark-antal-csizmadia" target="_blank"> GitHub</a></p>
+        </div>
+        <div class="col-md-6">
+            <form method="POST">
+                {% csrf_token %}
+                <fieldset class="form-group bg-white row">
+                    {{ form|crispy }}
+                </fieldset>
+                <div class="form-group text-center">
+                    <button class="btn btn-primary btn-xlarge mx-2" type="submit">Send Message</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>

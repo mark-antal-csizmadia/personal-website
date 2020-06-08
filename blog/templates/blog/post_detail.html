@@ -1,0 +1,37 @@
+{% extends "blog/blog_base.html" %}
+{% block content %}
+    <div class="progress-container" id="progress_container">
+        <div class="progress-bar" id="myBar"></div>
+    </div>
+    <div class="container">
+        <div id="detailed_post_embedded" class="container">
+            <div class="embed-responsive embed-responsive-16by9">
+                <img class="embed-responsive-item fadeIn" src="{{ object.image.url }}" alt="Card image cap">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-3">
+                <div id="sidebar" class="container sticky-top">
+                    <h3 id="contents_header" class="mb-5">Conents</h3>
+                    <div id="sidebar_list" class="list-group">
+                        {% for section_id, section_text in sections.items %}
+                            <a href="#{{ section_id }}" class="list-group-item list-group-item-action my-2 text-left">{{ section_text }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-lg-9">
+                <div id="post_list" class="container">
+                    <div class="header">
+                        <small class="text-muted">Posted on {{ object.date_posted|date:"F d, Y" }}</small>
+                        <small class="text-muted pull-right">Topic: {{ object.project.title }}</small>
+                    </div>
+
+                    {{ object.content|safe }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
