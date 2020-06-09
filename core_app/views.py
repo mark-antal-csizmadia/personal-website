@@ -98,23 +98,16 @@ def core_app_view(request):
         "form": form,
         "mark_profile": Profile.objects.get(user=User.objects.get(username="mark")),
         "cv_file_object": FilePDF.objects.get(identifier="cv"),
-        "project_report": FilePDF.objects.get(identifier="project_report")
+        "project_report_file_object": FilePDF.objects.get(identifier="project_report"),
+        "internship_report_file_object": FilePDF.objects.get(identifier="internship_report"),
     }
 
     return render(request, 'core_app/base.html', context)
 
 
-def download_cv_as_pdf(request):
-    cv_file_object = FilePDF.objects.get(identifier="cv")
-    response = HttpResponse(cv_file_object.pdf, content_type='text/plain')
-    response['Content-Disposition'] = 'attachment; filename={0}'.format(cv_file_object.title + ".pdf")
-
+def download_pdf(request, pdf_file_identifier):
+    file_object = FilePDF.objects.get(identifier=pdf_file_identifier)
+    response = HttpResponse(file_object.pdf, content_type='text/plain')
+    response['Content-Disposition'] = 'attachment; filename={0}'.format(file_object.title + ".pdf")
     return response
 
-
-def download_project_report_as_pdf(request):
-    cv_file_object = FilePDF.objects.get(identifier="project_report")
-    response = HttpResponse(cv_file_object.pdf, content_type='text/plain')
-    response['Content-Disposition'] = 'attachment; filename={0}'.format(cv_file_object.title + ".pdf")
-
-    return response

@@ -16,7 +16,7 @@
                 I graduated with a Bachelor of Engineering degree in Electronic Engineering degree from
                 the University of Manchester in Manchester, United Kingdom.
             </p>
-            <a href="{% url 'cv-download' %}" class="btn btn-primary mb-2 btn-xlarge my-5">
+            <a href="{% url 'download-pdf' cv_file_object.identifier %}" class="btn btn-primary mb-2 btn-xlarge my-5">
                 Download CV as PDF ({{ cv_file_object.pdf.size|filesizeformat }})
             </a>
         </div>

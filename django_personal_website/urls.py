@@ -26,8 +26,7 @@ urlpatterns = [
     path('', core_app_views.core_app_view, name="core_app_view"),
     path('summernote/', include('django_summernote.urls')),
     path('blog/', include('blog.urls')),
-    path('cv/', core_app_views.download_cv_as_pdf, name='cv-download'),
-    path('project_report/', core_app_views.download_project_report_as_pdf, name='project-report-download'),
+    path('pdf/<str:pdf_file_identifier>', core_app_views.download_pdf, name='download-pdf'),
 ]
 
 if settings.DEBUG:
