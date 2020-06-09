@@ -151,22 +151,36 @@
                                     </p>
                                 </li>
                                 <li class="" data-date="17/01/2019">
-                                    <p>Presenting my project to the internal R&D forum</p>
-                                    <p>17/01/2019</p>
-                                    <hr>
-                                    <p>
-                                        Having been in development for four months, I gave my first presentation in the
-                                        monthly, internal R&D company meeting that welcomed engineers from the United
-                                        Kingdom, the Netherlands, Germany, and Singapore. In my 30-minute-long
-                                        presentation, I described how the scientific simulation and analysis software
-                                        optimized device design and manufacturing, and its value to the company in
-                                        the long-term. My presentation induced interest and several other departments
-                                        asked me after the presentation to integrate it into their workflow.
-                                        Furthermore, I started working closely with the German branch to set up a
-                                        full-scale, internal device design workflow that was going to be built in Python.
-                                        <br>
-                                        <button class="btn btn-primary btn-round">Read more</button>
-                                    </p>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <p class="p-small">17/01/2019</p>
+                                            <h3>
+                                                <span class="h3-sunshine">P</span>resenting my project to the internal R&D forum
+                                            </h3>
+                                            <hr>
+                                            <p style = "text-indent : 2em;">
+                                                Having been in development for four months, I gave my
+                                                <span class="text-underline">first presentation</span> in the
+                                                monthly, internal R&D company meeting that welcomed engineers from the United
+                                                Kingdom, the Netherlands, Germany, and Singapore. In my
+                                                <span class="text-underline">30-minute-long</span>
+                                                presentation, I described how the scientific simulation and analysis software
+                                                optimized device design and manufacturing, and its value to the company in
+                                                the long-term. My presentation
+                                                <span class="text-underline">induced interest</span> and several other departments
+                                                asked me after the presentation to integrate it into their workflow.
+                                                Furthermore, I started working closely with the German branch to set up a
+                                                full-scale, internal device design workflow that was going to be built in Python.
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 text-center">
+                                            <a href="{% url 'download-pdf' internship_report_file_object.identifier %}" class="btn btn-primary btn-xlarge mt-5" style="color: #fff;">
+                                                Download Internship Report as PDF ({{ internship_report_file_object.pdf.size|filesizeformat }})
+                                            </a>
+                                        </div>
+                                    </div>
                                 </li>
                                 <li class="" data-date="25/03/2019">
                                     <div class="row">
