@@ -16,15 +16,21 @@
                 I graduated with a Bachelor of Engineering degree in Electronic Engineering degree from
                 the University of Manchester in Manchester, United Kingdom.
             </p>
-            <div class="d-flex justify-content-center">
-                <a href="{% url 'download-pdf' cv_file_object.identifier %}" class="btn btn-primary btn-xlarge my-4">
-                    Download CV as PDF ({{ cv_file_object.pdf.size|filesizeformat }})
-                </a>
-            </div>
-            <div class="d-flex justify-content-center">
-                <a href="{% url 'download-pdf' project_report_file_object.identifier %}" class="btn btn-primary btn-xlarge my-4">
-                    Download Thesis as PDF ({{ project_report_file_object.pdf.size|filesizeformat }})
-                </a>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="d-flex justify-content-center">
+                        <a href="{% url 'download-pdf' cv_file_object.identifier %}" class="btn btn-primary btn-xlarge my-4">
+                            Download CV as PDF ({{ cv_file_object.pdf.size|filesizeformat }})
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="d-flex justify-content-center">
+                        <a href="{% url 'download-pdf' project_report_file_object.identifier %}" class="btn btn-primary btn-xlarge my-4">
+                            Download Thesis as PDF ({{ project_report_file_object.pdf.size|filesizeformat }})
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="col-md-4">
