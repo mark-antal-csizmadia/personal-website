@@ -19,6 +19,9 @@
             <a href="{% url 'download-pdf' cv_file_object.identifier %}" class="btn btn-primary mb-2 btn-xlarge my-5">
                 Download CV as PDF ({{ cv_file_object.pdf.size|filesizeformat }})
             </a>
+            <a href="{% url 'download-pdf' project_report_file_object.identifier %}" class="btn btn-primary mb-2 btn-xlarge my-5">
+                Download Thesis as PDF ({{ project_report_file_object.pdf.size|filesizeformat }})
+            </a>
         </div>
         <div class="col-md-4">
             <div class="embed-responsive embed-responsive-1by1">
