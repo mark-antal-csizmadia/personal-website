@@ -1,15 +1,21 @@
 from django.db import models
 from django.contrib.auth.models import User
-from projects.models import Project
 from django.utils import  timezone
 from django.template.defaultfilters import slugify
 from django.urls import reverse
 from PIL import Image
 
 
-# Create your models here.
+class TagNameField(models.CharField):
+    def __init__(self, *args, **kwargs):
+        super(TagNameField, self).__init__(*args, **kwargs)
+
+    def get_prep_value(self, value):
+        return str(value).title()
+
+
 class Tag(models.Model):
-    name = models.CharField(max_length=32)
+    name = TagNameField(max_length=32)
     slug = models.SlugField(default="")
 
     def __str__(self):
