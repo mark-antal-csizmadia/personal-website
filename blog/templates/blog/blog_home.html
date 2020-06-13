@@ -89,7 +89,7 @@
                                 <ul class="list-inline">
                                     <span class="glyphicon glyphicon-tags"></span>
                                     {% for tag in post.tags.all %}
-                                        <a href="{% url 'blog-filter' tag.slug %}"><li class="list-inline-item text-muted"> {{ tag.name }}</li></a>
+                                        <a href="{% url 'blog-filter' tag.slug %}"><li class="list-inline-item p-small"> {{ tag.name }}</li></a>
                                     {% endfor %}
                             </ul>
                             </div>

@@ -70,38 +70,45 @@
     <script>
         $('.dropdown-item').click(function(event){
             event.preventDefault();
-            var topic = $(this).attr('href');
+            var filtered_tag_slug_jquery = $(this).attr('href');
+            var filtered_tag_name_jquery = $(this).text();
             var page_n = 1;
 
             // ajax
             $.ajax({
                 type: "POST",
                 data : {
-                    topic: topic,
+                    filtered_tag_slug_jquery: filtered_tag_slug_jquery,
                     page_n: page_n,
                     csrfmiddlewaretoken: '{{ csrf_token }}',
                 },
                 success: function (resp) {
-                    $("a#dropdownMenuLink").attr('href', topic)
-                    $('a#dropdownMenuLink').text(topic)
+                    $('a#dropdownMenuLink').text(filtered_tag_name_jquery)
+                    $('a#dropdownMenuLink').attr("href", filtered_tag_slug_jquery)
                     //loop
                     $('#posts').html('')
                     $.each(resp.serializer, function(i, val) {
                         //apending posts
                         $('#posts').append(
                             '<div class="col-lg-4 d-flex align-items-stretch">' +
-                                '<div class="card my-5">' +
-                                    '<div class="card-header"># '+val.tag+'</div>' +
-                                    '<img class="card-img-top embed-responsive-item fadeIn" src="'+val.image+'" alt="Card image cap">' +
+                                '<div class="card mb-5">' +
+                                    '<div class="card-header">' +
+                                       '<p class="p-small"><span class="glyphicon glyphicon-tags"></span> '+ val.tags_as_str +'</p>' +
+                                    '</div>' +
+                                    '<div class="embed-responsive embed-responsive-16by9 ">' +
+                                        '<img class="card-img-top embed-responsive-item fadeIn" src="'+ val.image +'" alt="Card image cap">' +
+                                    '</div>' +
                                     '<div class="card-body">' +
-                                        '<h2 class="card-title">' + val.title + '</h2>' +
-                                        '<p class="card-text">' + val.description + '</p>' +
+                                        '<h3 class="card-title">'+ val.title +'</h3>' +
+                                        '<p class="card-text">'+ val.description +'</p>' +
                                     '</div>' +
                                     '<ul class="list-group list-group-flush">' +
-                                        '<li class="list-group-item">'+ val.technologies +'</li>' +
+                                        '<li class="list-group-item p-small py-2"><span class="glyphicon glyphicon-wrench"></span>'+ val.technologies +'</li>' +
                                     '</ul>' +
                                     '<div class="card-body align-items-center d-flex justify-content-center">' +
-                                        '<a href='+ val.project_url +' target="_blank" class="btn btn-primary mb-2 btn-xlarge mx-2">View on GitHub</a>' +
+                                        '<a href="'+ val.project_url +'" target="_blank" class="btn btn-primary btn-xlarge href_p">' +
+                                            'View on <span class="fa fa-github fa-lg"></span>' +
+                                        '</a>' +
                                     '</div>' +
                                 '</div>' +
                             '</div>'
@@ -109,44 +116,44 @@
 
                     });
                     if (resp.page_n == resp.num_pages) {
-                        $('a#paginator_pages_first').attr("class", "btn btn-outline-info mb-4 btn-xlarge active")
-                        $('a#paginator_pages_prev').attr("class", "btn btn-outline-info mb-4 btn-xlarge disabled")
-                        $('a#paginator_pages_current').attr("class", "btn btn-outline-info mb-4 btn-xlarge active")
+                        $('a#paginator_pages_first').attr("class", "btn btn-outline-info btn-xlarge href_p active")
+                        $('a#paginator_pages_prev').attr("class", "btn btn-outline-info btn-xlarge href_p disabled")
+                        $('a#paginator_pages_current').attr("class", "btn btn-outline-info btn-xlarge href_p active")
 
-                        $('a#paginator_pages_next').attr("class", "btn btn-outline-info mb-4 btn-xlarge disabled")
-                        $('a#paginator_pages_last').attr("class", "btn btn-outline-info mb-4 btn-xlarge active")
+                        $('a#paginator_pages_next').attr("class", "btn btn-outline-info btn-xlarge href_p disabled")
+                        $('a#paginator_pages_last').attr("class", "btn btn-outline-info btn-xlarge href_p active")
                         $("a#paginator_pages_last").attr('href', resp.num_pages)
                     }
                     else {
                         if (resp.page_n == resp.previous_page_n) {
-                            $('a#paginator_pages_first').attr("class", "btn btn-outline-info mb-4 btn-xlarge active")
-                            $('a#paginator_pages_prev').attr("class", "btn btn-outline-info mb-4 btn-xlarge disabled")
-                            $('a#paginator_pages_current').attr("class", "btn btn-outline-info mb-4 btn-xlarge active")
+                            $('a#paginator_pages_first').attr("class", "btn btn-outline-info btn-xlarge href_p active")
+                            $('a#paginator_pages_prev').attr("class", "btn btn-outline-info btn-xlarge href_p disabled")
+                            $('a#paginator_pages_current').attr("class", "btn btn-outline-info btn-xlarge href_p active")
 
-                            $('a#paginator_pages_next').attr("class", "btn btn-outline-info mb-4 btn-xlarge")
+                            $('a#paginator_pages_next').attr("class", "btn btn-outline-info btn-xlarge href_p")
                             $("a#paginator_pages_next").attr('href', resp.next_page_n)
-                            $('a#paginator_pages_last').attr("class", "btn btn-outline-info mb-4 btn-xlarge")
+                            $('a#paginator_pages_last').attr("class", "btn btn-outline-info btn-xlarge href_p")
                             $("a#paginator_pages_last").attr('href', resp.num_pages)
                         }
                         else if (resp.page_n == resp.next_page_n) {
-                            $('a#paginator_pages_first').attr("class", "btn btn-outline-info mb-4 btn-xlarge")
-                            $('a#paginator_pages_prev').attr("class", "btn btn-outline-info mb-4 btn-xlarge")
+                            $('a#paginator_pages_first').attr("class", "btn btn-outline-info btn-xlarge href_p")
+                            $('a#paginator_pages_prev').attr("class", "btn btn-outline-info btn-xlarge href_p")
                             $("a#paginator_pages_prev").attr('href', resp.previous_page_n)
-                            $('a#paginator_pages_current').attr("class", "btn btn-outline-info mb-4 btn-xlarge active")
+                            $('a#paginator_pages_current').attr("class", "btn btn-outline-info btn-xlarge href_p active")
 
-                            $('a#paginator_pages_next').attr("class", "btn btn-outline-info mb-4 btn-xlarge disabled")
-                            $('a#paginator_pages_last').attr("class", "btn btn-outline-info mb-4 btn-xlarge active")
+                            $('a#paginator_pages_next').attr("class", "btn btn-outline-info btn-xlarge href_p disabled")
+                            $('a#paginator_pages_last').attr("class", "btn btn-outline-info btn-xlarge href_p active")
                             $("a#paginator_pages_last").attr('href', resp.num_pages)
                         }
                         else {
-                            $('a#paginator_pages_first').attr("class", "btn btn-outline-info mb-4 btn-xlarge")
-                            $('a#paginator_pages_prev').attr("class", "btn btn-outline-info mb-4 btn-xlarge")
+                            $('a#paginator_pages_first').attr("class", "btn btn-outline-info btn-xlarge href_p")
+                            $('a#paginator_pages_prev').attr("class", "btn btn-outline-info btn-xlarge href_p")
                             $("a#paginator_pages_prev").attr('href', resp.previous_page_n)
-                            $('a#paginator_pages_current').attr("class", "btn btn-outline-info mb-4 btn-xlarge active")
+                            $('a#paginator_pages_current').attr("class", "btn btn-outline-info btn-xlarge href_p active")
 
-                            $('a#paginator_pages_next').attr("class", "btn btn-outline-info mb-4 btn-xlarge")
+                            $('a#paginator_pages_next').attr("class", "btn btn-outline-info btn-xlarge href_p")
                             $("a#paginator_pages_next").attr('href', resp.next_page_n)
-                            $('a#paginator_pages_last').attr("class", "btn btn-outline-info mb-4 btn-xlarge")
+                            $('a#paginator_pages_last').attr("class", "btn btn-outline-info btn-xlarge href_p")
                             $("a#paginator_pages_last").attr('href', resp.num_pages)
                         }
                     }
@@ -168,86 +175,84 @@
     <script>
         $('.btn-outline-info').click(function(event){
             event.preventDefault();
-            var topic = $("a#dropdownMenuLink").attr('href')
+            var filtered_tag_slug_jquery = $("a#dropdownMenuLink").attr('href');
+            var filtered_tag_name_jquery = $("a#dropdownMenuLink").text();
             var page_n = $(this).attr('href');
 
             // ajax
             $.ajax({
                 type: "POST",
                 data : {
-                    topic: topic,
+                    filtered_tag_slug_jquery: filtered_tag_slug_jquery,
                     page_n: page_n,
                     csrfmiddlewaretoken: '{{ csrf_token }}',
                 },
                 success: function (resp) {
-                    $("a#dropdownMenuLink").attr('href', topic)
-                    $('a#dropdownMenuLink').text(topic)
+                    $('a#dropdownMenuLink').text(filtered_tag_name_jquery)
+                    $('a#dropdownMenuLink').attr("href", filtered_tag_slug_jquery)
                     //loop
                     $('#posts').html('')
                     $.each(resp.serializer, function(i, val) {
                         //apending posts
                         $('#posts').append(
                             '<div class="col-lg-4 d-flex align-items-stretch">' +
-                                '<div class="card my-5">' +
-                                    '<div class="card-header"># '+val.tags+'</div>' +
-                                    '<img class="card-img-top embed-responsive-item fadeIn" src="'+val.image+'" alt="Card image cap">' +
+                                '<div class="card mb-5">' +
+                                    '<div class="card-header">' +
+                                       '<p class="p-small"><span class="glyphicon glyphicon-tags"></span> '+ val.tags_as_str +'</p>' +
+                                    '</div>' +
+                                    '<div class="embed-responsive embed-responsive-16by9 ">' +
+                                        '<img class="card-img-top embed-responsive-item fadeIn" src="'+ val.image +'" alt="Card image cap">' +
+                                    '</div>' +
                                     '<div class="card-body">' +
-                                        '<h2 class="card-title">' + val.title + '</h2>' +
-                                        '<p class="card-text">' + val.description + '</p>' +
+                                        '<h3 class="card-title">'+ val.title +'</h3>' +
+                                        '<p class="card-text">'+ val.description +'</p>' +
                                     '</div>' +
                                     '<ul class="list-group list-group-flush">' +
-                                        '<li class="list-group-item">'+ val.technologies +'</li>' +
+                                        '<li class="list-group-item p-small py-2"><span class="glyphicon glyphicon-wrench"></span>'+ val.technologies +'</li>' +
                                     '</ul>' +
                                     '<div class="card-body align-items-center d-flex justify-content-center">' +
-                                        '<a href='+ val.project_url +' target="_blank" class="btn btn-primary mb-2 btn-xlarge mx-2">View on GitHub</a>' +
+                                        '<a href="'+ val.project_url +'" target="_blank" class="btn btn-primary btn-xlarge href_p">' +
+                                            'View on <span class="fa fa-github fa-lg"></span>' +
+                                        '</a>' +
                                     '</div>' +
                                 '</div>' +
                             '</div>'
                         )
 
                     });
-                    if (resp.page_n == resp.previous_page_n && resp.page_n == resp.next_page_n) {
-                        $('a#paginator_pages_first').attr("class", "btn btn-outline-info mb-4 btn-xlarge active")
-                        $('a#paginator_pages_prev').attr("class", "btn btn-outline-info mb-4 btn-xlarge disabled")
-                        $('a#paginator_pages_current').attr("class", "btn btn-outline-info mb-4 btn-xlarge active")
 
-                        $('a#paginator_pages_next').attr("class", "btn btn-outline-info mb-4 btn-xlarge disabled")
-                        $('a#paginator_pages_last').attr("class", "btn btn-outline-info mb-4 btn-xlarge active")
+                    if (resp.page_n == resp.previous_page_n) {
+                        $('a#paginator_pages_first').attr("class", "btn btn-outline-info btn-xlarge href_p active")
+                        $('a#paginator_pages_prev').attr("class", "btn btn-outline-info btn-xlarge href_p disabled")
+                        $('a#paginator_pages_current').attr("class", "btn btn-outline-info btn-xlarge href_p active")
+
+                        $('a#paginator_pages_next').attr("class", "btn btn-outline-info btn-xlarge href_p")
+                        $("a#paginator_pages_next").attr('href', resp.next_page_n)
+                        $('a#paginator_pages_last').attr("class", "btn btn-outline-info btn-xlarge href_p")
+                        $("a#paginator_pages_last").attr('href', resp.num_pages)
+                    }
+                    else if (resp.page_n == resp.next_page_n) {
+                        $('a#paginator_pages_first').attr("class", "btn btn-outline-info btn-xlarge href_p")
+                        $('a#paginator_pages_prev').attr("class", "btn btn-outline-info btn-xlarge href_p")
+                        $("a#paginator_pages_prev").attr('href', resp.previous_page_n)
+                        $('a#paginator_pages_current').attr("class", "btn btn-outline-info btn-xlarge href_p active")
+
+                        $('a#paginator_pages_next').attr("class", "btn btn-outline-info btn-xlarge href_p disabled")
+                        $('a#paginator_pages_last').attr("class", "btn btn-outline-info btn-xlarge href_p active")
                         $("a#paginator_pages_last").attr('href', resp.num_pages)
                     }
                     else {
-                        if (resp.page_n == resp.previous_page_n) {
-                            $('a#paginator_pages_first').attr("class", "btn btn-outline-info mb-4 btn-xlarge active")
-                            $('a#paginator_pages_prev').attr("class", "btn btn-outline-info mb-4 btn-xlarge disabled")
-                            $('a#paginator_pages_current').attr("class", "btn btn-outline-info mb-4 btn-xlarge active")
+                        $('a#paginator_pages_first').attr("class", "btn btn-outline-info btn-xlarge href_p")
+                        $('a#paginator_pages_prev').attr("class", "btn btn-outline-info btn-xlarge href_p")
+                        $("a#paginator_pages_prev").attr('href', resp.previous_page_n)
+                        $('a#paginator_pages_current').attr("class", "btn btn-outline-info btn-xlarge href_p active")
 
-                            $('a#paginator_pages_next').attr("class", "btn btn-outline-info mb-4 btn-xlarge")
-                            $("a#paginator_pages_next").attr('href', resp.next_page_n)
-                            $('a#paginator_pages_last').attr("class", "btn btn-outline-info mb-4 btn-xlarge")
-                            $("a#paginator_pages_last").attr('href', resp.num_pages)
-                        }
-                        else if (resp.page_n == resp.next_page_n) {
-                            $('a#paginator_pages_first').attr("class", "btn btn-outline-info mb-4 btn-xlarge")
-                            $('a#paginator_pages_prev').attr("class", "btn btn-outline-info mb-4 btn-xlarge")
-                            $("a#paginator_pages_prev").attr('href', resp.previous_page_n)
-                            $('a#paginator_pages_current').attr("class", "btn btn-outline-info mb-4 btn-xlarge active")
-
-                            $('a#paginator_pages_next').attr("class", "btn btn-outline-info mb-4 btn-xlarge disabled")
-                            $('a#paginator_pages_last').attr("class", "btn btn-outline-info mb-4 btn-xlarge active")
-                            $("a#paginator_pages_last").attr('href', resp.num_pages)
-                        }
-                        else {
-                            $('a#paginator_pages_first').attr("class", "btn btn-outline-info mb-4 btn-xlarge")
-                            $('a#paginator_pages_prev').attr("class", "btn btn-outline-info mb-4 btn-xlarge")
-                            $("a#paginator_pages_prev").attr('href', resp.previous_page_n)
-                            $('a#paginator_pages_current').attr("class", "btn btn-outline-info mb-4 btn-xlarge active")
-
-                            $('a#paginator_pages_next').attr("class", "btn btn-outline-info mb-4 btn-xlarge")
-                            $("a#paginator_pages_next").attr('href', resp.next_page_n)
-                            $('a#paginator_pages_last').attr("class", "btn btn-outline-info mb-4 btn-xlarge")
-                            $("a#paginator_pages_last").attr('href', resp.num_pages)
-                        }
+                        $('a#paginator_pages_next').attr("class", "btn btn-outline-info btn-xlarge href_p")
+                        $("a#paginator_pages_next").attr('href', resp.next_page_n)
+                        $('a#paginator_pages_last').attr("class", "btn btn-outline-info btn-xlarge href_p")
+                        $("a#paginator_pages_last").attr('href', resp.num_pages)
                     }
+
                     $("a#paginator_pages_current").attr('href', page_n)
                     $('a#paginator_pages_current').text(page_n + "/" + resp.num_pages)
 

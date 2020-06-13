@@ -101,6 +101,15 @@ p {
     letter-spacing: 2px;
 }
 
+
+.href_p {
+    font: 16px Arial, sans-serif !important;
+    padding-top: 5px;
+    padding-bottom: 0px;
+    line-height: 1.4 !important;
+    letter-spacing: 2px;
+}
+
 .p-sunshine {
     font: 16px Arial, sans-serif !important;
     padding-top: 5px;
