@@ -1,21 +1,63 @@
-<div id="to_blog" class="container bg-white" style="border-top:2px solid #fba100;">
-    <div class="row">
-        <div class="col-md-12">
-            <h1 class="text-uppercase">Check out my blog</h1>
+<div id="to_blog" class="container bg-white" style="border-bottom: 1px solid #d3d3d3;">
+    <h1><span class="h1-sunshine">B</span>log</h1>
+    <div class="row pt-5">
+        <div class="col-md-6 py-3">
+            <div class="row">
+                <div class="col-6">
+                    <div class="d-flex justify-content-center">
+                        <span class="glyphicon glyphicon-cog" style="font-size: 3rem; color: #fba100;"></span>
+                    </div>
+                    <div class="d-flex justify-content-center mt-4">
+                        <h3>Projects</h3>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="d-flex justify-content-center">
+                        <span class="glyphicon glyphicon-book" style="font-size: 3rem; color: #fba100;"></span>
+                    </div>
+                    <div class="d-flex justify-content-center mt-4">
+                        <h3>Tutorials</h3>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col-md-6 text-right">
-            <h1>First</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin enim ex, gravida ac consequat eu,
-                tristique non lacus. Sed faucibus a diam iaculis rhoncus.</p>
+        <div class="col-md-6 py-3">
+            <div class="row">
+                <div class="col-6">
+                    <div class="d-flex justify-content-center">
+                        <span class="glyphicon glyphicon-pencil" style="font-size: 3rem; color: #fba100;"></span>
+                    </div>
+                    <div class="d-flex justify-content-center mt-4">
+                        <h3>Thoughts</h3>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="d-flex justify-content-center">
+                        <span class="glyphicon glyphicon-globe" style="font-size: 3rem; color: #fba100;"></span>
+                    </div>
+                    <div class="d-flex justify-content-center mt-4">
+                        <h3>Experiences</h3>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col-md-6 text-left">
-            <h1>Second</h1>
-            <p>Cras est nisi, gravida scelerisque quam at, placerat porta elit. Fusce gravida dolor eu
-                dignissim sagittis. Suspendisse mauris ante, laoreet et massa ac, gravida vulputate odio.
-                Suspendisse pellentesque est quis nulla eleifend, id aliquam leo viverra. </p>
+    </div>
+    <div class="row pt-5">
+        <div class="col-md-6">
+            <p style="text-indent: 2em;">
+                I am writing a blog to capture my professional development and journey.
+            </p>
         </div>
-        <div class="col-md-12 text-center">
-            <a href="{% url 'blog-home' %}" class="btn btn-primary mb-2 btn-xlarge mx-2">Go to Blog</a>
+        <div class="col-md-6">
+            <p style="text-indent: 2em;">
+                I mostly go into the details of my <span class="text-underline">projects</span>,
+                create <span class="text-underline">tutorial-like guides</span>,
+                put down my <span class="text-underline">thoughts</span> on machine learning and deep learning related topics,
+                and elaborate on my <span class="text-underline">experiences</span> that shaped my thinking and interests.
+            </p>
         </div>
+    </div>
+    <div class="d-flex justify-content-center my-5">
+        <a href="{% url 'blog-home' %}" class="btn btn-primary btn-xlarge href_p">Check Out the Blog</a>
     </div>
 </div>
