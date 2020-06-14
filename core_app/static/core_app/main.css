@@ -7,6 +7,8 @@
   --main-color-4: #b6a19e; /*dusty rose*/
   --main-color-white: #ffffff; /*white*/
   --main-color-text: #000000; /*black*/
+  --main-color-hyperlink: #0000dd; /*hyperlink blue*/
+  --main-color-hyperlink-visited: #551a8b;
 }
 
 /* root end */
@@ -71,7 +73,9 @@ h1 {
 }
 
 .text-underline {
-    border-bottom: 2px solid var(--main-color-2);
+    font-weight: 600!important;
+    font-style: italic;
+    color: var(--main-color-2)!important;
 }
 
 h2 {
@@ -110,6 +114,26 @@ p {
     letter-spacing: 2px;
 }
 
+.href-a {
+    font: 16px Arial, sans-serif !important;
+    padding-top: 5px;
+    padding-bottom: 0px;
+    line-height: 1.4 !important;
+    letter-spacing: 2px;
+    text-decoration: none!important;
+    color: var(--main-color-hyperlink)!important;
+}
+
+.href-a:hover {
+    color: var(--main-color-hyperlink)!important;
+    border-bottom: 1px solid var(--main-color-hyperlink);
+}
+
+.href-a:active, .href-a:focus {
+    color: var(--main-color-hyperlink-visited)!important;
+    border-bottom: 1px solid var(--main-color-hyperlink-visited);
+}
+
 .p-sunshine {
     font: 16px Arial, sans-serif !important;
     padding-top: 5px;
@@ -131,6 +155,7 @@ p {
     color: var(--main-color-3);
 
 }
+
 /* basics end */
 /* body  start */
 
