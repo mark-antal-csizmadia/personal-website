@@ -3,12 +3,6 @@ from django.views.generic import ListView, DetailView
 from blog.models import Post, Tag
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-# Create your views here.
-
-
-def about_the_blog_view(request):
-    return render(request, "blog/about_the_blog.html")
-
 
 def blog_home_view(request):
     page = request.GET.get('page', 1)

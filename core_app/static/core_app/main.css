@@ -73,7 +73,6 @@ h1 {
 }
 
 .text-underline {
-    font-weight: 600!important;
     font-style: italic;
     color: var(--main-color-2)!important;
 }
@@ -358,13 +357,13 @@ body {
     width: 100%;
     opacity: 0;
     transition: .5s ease;
-    background-color: #d3d3d3;
+    background-color: #fff;
 }
 
 .overlay-text {
     opacity: 0;
     transition: .5s ease;
-    color: #fff;
+    color: #000;
 }
 
 .embed-responsive-select-featured-effect:hover .overlay {

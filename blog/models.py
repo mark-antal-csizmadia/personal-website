@@ -37,7 +37,7 @@ class Post(models.Model):
     technologies = models.CharField(max_length=300, default="default_technology")
     date_posted = models.DateTimeField(default=timezone.now)
     date_updated = models.DateTimeField(default=timezone.now)
-    slug = models.SlugField(default="", unique=True)
+    slug = models.SlugField(default="", unique=True, max_length=200)
     featured = models.BooleanField(default=False)
 
     def __str__(self):

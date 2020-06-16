@@ -30,7 +30,7 @@
     <div class="container">
         <nav id="navbar" class="navbar navbar-expand-lg navbar-dark bg-aqua fixed-top">
             <div class="container">
-                <a id="navbarbrand" class="navbar-brand text-uppercase" href="#">
+                <a id="navbarbrand" class="navbar-brand text-uppercase" href="{% url 'blog-home' %}">
                     Mark Csizmadia <span class="bg-sunshine py-2 px-2">BLOG</span>
                 </a>
                 <button id="navibut" class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarToggle">
@@ -40,7 +40,6 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarToggle">
                     <div class="navbar-nav ml-auto">
-                        <a class="nav-link text-uppercase" href="{% url 'about-the-blog' %}">About the Blog</a>
                         <a class="nav-link text-uppercase" href="{% url 'core_app_view' %}">Back to the Website</a>
                     </div>
                 </div>
@@ -48,10 +47,13 @@
         </nav>
     </div>
     <div id="jumbotron" class="jumbotron text-center bg-aqua">
-        <h1>Lorem ipsum dolor sit amet. </h1>
-        <h2>Lorem ipsum dolor sit amet. </h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin enim ex, gravida ac consequat eu,
-            tristique non lacus. Sed faucibus a diam iaculis rhoncus.</p>
+        <h1>Hey there!</h1>
+        <p>I’m Mark Csizmadia - a machine learning and deep learning MSc student and engineer.</p>
+        <p>
+            I mostly go into the details of my projects, create tutorial-like guides,
+            put down my thoughts on machine learning and deep learning related topics,
+            and elaborate on my experiences that shaped my thinking and interests.
+        </p>
     </div>
     {% block content %}{% endblock %}
     <footer id="footer" class="page-footer">
@@ -64,7 +66,7 @@
             <a id="totop" href="#"><span id="totopicon" class="glyphicon glyphicon-chevron-up"></span></a>
         </div>
         <div class="footer-copyright text-center pt-5">
-            © 2020 Mark Csizmadia
+            <p>© 2020 Mark Csizmadia</p>
         </div>
     </footer>
     <script
