@@ -221,20 +221,9 @@
 
                     });
 
-                    if (resp.page_n == resp.previous_page_n) {
+                    if (resp.page_n == resp.num_pages) {
                         $('a#paginator_pages_first').attr("class", "btn btn-outline-info btn-xlarge href_p active")
                         $('a#paginator_pages_prev').attr("class", "btn btn-outline-info btn-xlarge href_p disabled")
-                        $('a#paginator_pages_current').attr("class", "btn btn-outline-info btn-xlarge href_p active")
-
-                        $('a#paginator_pages_next').attr("class", "btn btn-outline-info btn-xlarge href_p")
-                        $("a#paginator_pages_next").attr('href', resp.next_page_n)
-                        $('a#paginator_pages_last').attr("class", "btn btn-outline-info btn-xlarge href_p")
-                        $("a#paginator_pages_last").attr('href', resp.num_pages)
-                    }
-                    else if (resp.page_n == resp.next_page_n) {
-                        $('a#paginator_pages_first').attr("class", "btn btn-outline-info btn-xlarge href_p")
-                        $('a#paginator_pages_prev').attr("class", "btn btn-outline-info btn-xlarge href_p")
-                        $("a#paginator_pages_prev").attr('href', resp.previous_page_n)
                         $('a#paginator_pages_current').attr("class", "btn btn-outline-info btn-xlarge href_p active")
 
                         $('a#paginator_pages_next').attr("class", "btn btn-outline-info btn-xlarge href_p disabled")
@@ -242,15 +231,37 @@
                         $("a#paginator_pages_last").attr('href', resp.num_pages)
                     }
                     else {
-                        $('a#paginator_pages_first').attr("class", "btn btn-outline-info btn-xlarge href_p")
-                        $('a#paginator_pages_prev').attr("class", "btn btn-outline-info btn-xlarge href_p")
-                        $("a#paginator_pages_prev").attr('href', resp.previous_page_n)
-                        $('a#paginator_pages_current').attr("class", "btn btn-outline-info btn-xlarge href_p active")
+                        if (resp.page_n == resp.previous_page_n) {
+                            $('a#paginator_pages_first').attr("class", "btn btn-outline-info btn-xlarge href_p active")
+                            $('a#paginator_pages_prev').attr("class", "btn btn-outline-info btn-xlarge href_p disabled")
+                            $('a#paginator_pages_current').attr("class", "btn btn-outline-info btn-xlarge href_p active")
 
-                        $('a#paginator_pages_next').attr("class", "btn btn-outline-info btn-xlarge href_p")
-                        $("a#paginator_pages_next").attr('href', resp.next_page_n)
-                        $('a#paginator_pages_last').attr("class", "btn btn-outline-info btn-xlarge href_p")
-                        $("a#paginator_pages_last").attr('href', resp.num_pages)
+                            $('a#paginator_pages_next').attr("class", "btn btn-outline-info btn-xlarge href_p")
+                            $("a#paginator_pages_next").attr('href', resp.next_page_n)
+                            $('a#paginator_pages_last').attr("class", "btn btn-outline-info btn-xlarge href_p")
+                            $("a#paginator_pages_last").attr('href', resp.num_pages)
+                        }
+                        else if (resp.page_n == resp.next_page_n) {
+                            $('a#paginator_pages_first').attr("class", "btn btn-outline-info btn-xlarge href_p")
+                            $('a#paginator_pages_prev').attr("class", "btn btn-outline-info btn-xlarge href_p")
+                            $("a#paginator_pages_prev").attr('href', resp.previous_page_n)
+                            $('a#paginator_pages_current').attr("class", "btn btn-outline-info btn-xlarge href_p active")
+
+                            $('a#paginator_pages_next').attr("class", "btn btn-outline-info btn-xlarge href_p disabled")
+                            $('a#paginator_pages_last').attr("class", "btn btn-outline-info btn-xlarge href_p active")
+                            $("a#paginator_pages_last").attr('href', resp.num_pages)
+                        }
+                        else {
+                            $('a#paginator_pages_first').attr("class", "btn btn-outline-info btn-xlarge href_p")
+                            $('a#paginator_pages_prev').attr("class", "btn btn-outline-info btn-xlarge href_p")
+                            $("a#paginator_pages_prev").attr('href', resp.previous_page_n)
+                            $('a#paginator_pages_current').attr("class", "btn btn-outline-info btn-xlarge href_p active")
+
+                            $('a#paginator_pages_next').attr("class", "btn btn-outline-info btn-xlarge href_p")
+                            $("a#paginator_pages_next").attr('href', resp.next_page_n)
+                            $('a#paginator_pages_last').attr("class", "btn btn-outline-info btn-xlarge href_p")
+                            $("a#paginator_pages_last").attr('href', resp.num_pages)
+                        }
                     }
 
                     $("a#paginator_pages_current").attr('href', page_n)

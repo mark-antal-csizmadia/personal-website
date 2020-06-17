@@ -1,81 +1,141 @@
 {% extends "blog/blog_base.html" %}
 {% block content %}
-    <div id="post_list" class="container">
+    <div class="container pt-5">
         <div class="row text-center">
-            <div class="col-lg-5 order-lg-2">
-                <div id="sidebar2" class="container sticky-top">
-                    <h2 class="text-left">Filter by</h2>
-                    <div class="row justify-content-left">
-                        <div class="col-xs-8 mx-5 pt-5">
-                            <h2 class="text-left">Topics</h2>
-                        </div>
-                        <div class="col-xs-4">
-                            <div class="list-group">
-                                <a href="{% url 'blog-home' %}" class="list-group-item list-group-item-action">Everything</a>
-                                {% for tag in tags %}
-                                    {% if tag == filtered_by %}
-                                        <a href="{% url 'blog-filter' tag.slug %}" class="list-group-item list-group-item-action active">{{ tag.name }}</a>
-                                    {% else %}
-                                        <a href="{% url 'blog-filter' tag.slug %}" class="list-group-item list-group-item-action">{{ tag.name }}</a>
-                                    {% endif %}
-                                {% endfor %}
-                            </div>
-                        </div>
+            <div class="col-md-3 offset-md-3 order-md-2">
+                <p>Filter by tags</p>
+            </div>
+            <div class="col-md-2 order-md-2">
+                <div class="dropdown show">
+                    {% for tag in tags %}
+                        {% if tag == filtered_by %}
+                            <a class="btn btn-secondary dropdown-toggle btn-xlarge href_p" href="{% url 'blog-filter' tag.slug %}" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ tag.name }}
+                            </a>
+                        {% endif %}
+                    {% endfor %}
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <a class="dropdown-item href_p" href="{% url 'blog-home' %}">
+                            Everything
+                        </a>
+                        {% for tag in tags %}
+                            <a class="dropdown-item href_p" href="{% url 'blog-filter' tag.slug %}">{{ tag.name }}</a>
+                        {% endfor %}
                     </div>
-
                 </div>
             </div>
-            <div class="col-lg-7 order-lg-1">
-                <h2>Filtered by {{ filtered_by }}</h2>
-                {% for post in posts %}
-                    <div class="card my-5">
-                        <div class="card">
-                            <div class="card-header text-muted text-left">
-                                <ul class="list-inline">
-                                    <span class="glyphicon glyphicon-tags"></span>
-                                    {% for tag in post.tags.all %}
-                                        <a href="{% url 'blog-filter' tag.slug %}"><li class="list-inline-item text-muted"> {{ tag.name }}</li></a>
-                                    {% endfor %}
-                            </ul>
-                            </div>
-                            <div class="embed-responsive embed-responsive-16by9">
+            <div class="col-md-4 order-md-1">
+                <p>{{ posts.paginator.count }} posts for {{ filtered_by }}</p>
+            </div>
+        </div>
+    </div>
+    <div id="post_list" class="container">
+        {% for post in posts %}
+            <div class="card my-5">
+                <div class="card-header p-small text-left">
+                    <ul class="list-inline">
+                        <span class="glyphicon glyphicon-tags"></span>
+                        {% for tag in post.tags.all %}
+                            {% if forloop.last %}
+                                <a href="{% url 'blog-filter' tag.slug %}"><li class="list-inline-item p-small"> {{ tag.name }}</li></a>
+                            {% else %}
+                                <a href="{% url 'blog-filter' tag.slug %}"><li class="list-inline-item p-small"> {{ tag.name }},</li></a>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="row no-gutters">
+                    <div class="col-lg-6">
+                        <div class="embed-responsive embed-responsive-16by9 embed-responsive-select-effect">
+                            <a href="{% url 'post-detail' post.slug %}">
                                 <img class="card-img-top embed-responsive-item fadeIn" src="{{ post.image.url }}" alt="Card image cap">
-                            </div>
-                            <div class="card-body">
-                                <h2 class="card-title">{{ post.title }}</h2>
-                                <p class="card-text">{{ post.short_intro }}</p>
-                            </div>
-
-                            <div class="card-body align-items-center d-flex justify-content-center">
-                                <a href="{% url 'post-detail' post.slug %}" class="btn btn-primary mb-2 btn-xlarge mx-2">Read the post</a>
-                            </div>
+                            </a>
                         </div>
                     </div>
-                {% endfor %}
+                    <div class="col-lg-6">
+                        <div class="card-body">
+                            <a href="{% url 'post-detail' post.slug %}">
+                                <h2 class="card-title">{{ post.title }}</h2>
+                            </a>
+                            <p class="card-text">
+                                <p>{{ post.short_intro }}</p>
+                                <p class="p-small">{{ post.date_posted }}</p>
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-        </div>
+        {% endfor %}
     </div>
 
 
-        <div class="container text-center">
-
-            {% if posts.has_previous %}
-                <a class="btn btn-outline-info mb-4 btn-xlarge mx-2" href="?page=1">First</a>
-                <a class="btn btn-outline-info mb-4 btn-xlarge mx-2" href="?page={{ posts.previous_page_number }}">Previous</a>
+    <div class="container text-center mb-4">
+        {% if previous_page_number == next_page_number %}
+            <a class="btn btn-outline-info btn-xlarge href_p active" href="?page=1">
+                <span class="glyphicon glyphicon-fast-backward"></span>
+            </a>
+            <a class="btn btn-outline-info btn-xlarge href_p disabled" href="?page={{ previous_page_number }}">
+                <span class="glyphicon glyphicon-step-backward"></span>
+            </a>
+            <a class="btn btn-outline-info btn-xlarge href_p active" href="?page={{ posts.number }}">
+                {{ posts.number }}/{{ posts.paginator.num_pages }}
+            </a>
+            <a class="btn btn-outline-info btn-xlarge href_p disabled" href="?page={{ next_page_number }}">
+                <span class="glyphicon glyphicon-step-forward"></span>
+            </a>
+            <a class="btn btn-outline-info btn-xlarge href_p active" href="?page={{ posts.paginator.num_pages }}">
+                <span class="glyphicon glyphicon-fast-forward"></span>
+            </a>
+        {% else %}
+            {% if posts.number == previous_page_number %}
+                <a class="btn btn-outline-info btn-xlarge href_p active" href="?page=1">
+                    <span class="glyphicon glyphicon-fast-backward"></span>
+                </a>
+                <a class="btn btn-outline-info btn-xlarge href_p disabled" href="?page={{ previous_page_number }}">
+                    <span class="glyphicon glyphicon-step-backward"></span>
+                </a>
+                <a class="btn btn-outline-info btn-xlarge href_p active" href="?page={{ posts.number }}">
+                    {{ posts.number }}/{{ posts.paginator.num_pages }}
+                </a>
+                <a class="btn btn-outline-info btn-xlarge href_p" href="?page={{ next_page_number }}">
+                    <span class="glyphicon glyphicon-step-forward"></span>
+                </a>
+                <a class="btn btn-outline-info btn-xlarge href_p" href="?page={{ posts.paginator.num_pages }}">
+                    <span class="glyphicon glyphicon-fast-forward"></span>
+                </a>
+            {% elif posts.number == next_page_number %}
+                <a class="btn btn-outline-info btn-xlarge href_p" href="?page=1">
+                    <span class="glyphicon glyphicon-fast-backward"></span>
+                </a>
+                <a class="btn btn-outline-info btn-xlarge href_p" href="?page={{ previous_page_number }}">
+                    <span class="glyphicon glyphicon-step-backward"></span>
+                </a>
+                <a class="btn btn-outline-info btn-xlarge href_p active" href="?page={{ posts.number }}">
+                    {{ posts.number }}/{{ posts.paginator.num_pages }}
+                </a>
+                <a class="btn btn-outline-info btn-xlarge href_p disabled" href="?page={{ next_page_number }}">
+                    <span class="glyphicon glyphicon-step-forward"></span>
+                </a>
+                <a class="btn btn-outline-info btn-xlarge href_p active" href="?page={{ posts.paginator.num_pages }}">
+                    <span class="glyphicon glyphicon-fast-forward"></span>
+                </a>
+            {% else %}
+                <a class="btn btn-outline-info btn-xlarge href_p" href="?page=1">
+                    <span class="glyphicon glyphicon-fast-backward"></span>
+                </a>
+                <a class="btn btn-outline-info btn-xlarge href_p" href="?page={{ previous_page_number }}">
+                    <span class="glyphicon glyphicon-step-backward"></span>
+                </a>
+                <a class="btn btn-outline-info btn-xlarge href_p active" href="?page={{ posts.number }}">
+                    {{ posts.number }}/{{ posts.paginator.num_pages }}
+                </a>
+                <a class="btn btn-outline-info btn-xlarge href_p" href="?page={{ next_page_number }}">
+                    <span class="glyphicon glyphicon-step-forward"></span>
+                </a>
+                <a class="btn btn-outline-info btn-xlarge href_p" href="?page={{ posts.paginator.num_pages }}">
+                    <span class="glyphicon glyphicon-fast-forward"></span>
+                </a>
             {% endif %}
-            {% for num in posts.paginator.page_range %}
-                {% if posts.number == num %}
-                    <a class="btn btn-outline-info mb-4 btn-xlarge mx-2 active" href="?page={{ num }}">{{ num }}</a>
-                {% elif num > posts.number|add:'-3' and num < posts.number|add:'3' %}
-                    <a class="btn btn-outline-info mb-4 btn-xlarge mx-2" href="?page={{ num }}">{{ num }}</a>
-                {% endif %}
-            {% endfor %}
-            {% if posts.has_next %}
-                <a class="btn btn-outline-info mb-4 btn-xlarge mx-2" href="?page={{ posts.next_page_number }}">Next</a>
-                <a class="btn btn-outline-info mb-4 btn-xlarge mx-2" href="?page={{ posts.paginator.num_pages }}">Last</a>
-            {% endif %}
-
-        </div>
-
+        {% endif %}
+    </div>
 {% endblock content %}
