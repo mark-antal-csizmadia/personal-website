@@ -1,0 +1,36 @@
+{% for post in posts %}
+    <div class="card my-5 infinite-item">
+        <div class="card-header p-small text-left">
+            <ul class="list-inline">
+                <span class="glyphicon glyphicon-tags"></span>
+                {% for tag in post.tags.all %}
+                    {% if forloop.last %}
+                        <a href="{% url 'blog-filter' tag.slug %}"><li class="list-inline-item p-small"> {{ tag.name }}</li></a>
+                    {% else %}
+                            <a href="{% url 'blog-filter' tag.slug %}"><li class="list-inline-item p-small"> {{ tag.name }},</li></a>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="row no-gutters">
+            <div class="col-lg-6">
+                <div class="embed-responsive embed-responsive-16by9 embed-responsive-select-effect">
+                    <a href="{% url 'post-detail' post.slug %}">
+                        <img class="card-img-top embed-responsive-item fadeIn" src="{{ post.image.url }}" alt="Card image cap">
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card-body">
+                    <a class="h2-hyperlink" href="{% url 'post-detail' post.slug %}">
+                        <h2 class="card-title">{{ post.title }}</h2>
+                    </a>
+                    <p class="card-text">
+                        <p>{{ post.short_intro }}</p>
+                        <p class="p-small">{{ post.date_posted }}</p>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
