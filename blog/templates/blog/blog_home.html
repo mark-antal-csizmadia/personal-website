@@ -26,7 +26,11 @@
                                     <div class="carousel-caption d-xs-block d-md-block px-5">
                                         <h2>{{ featured_post.title }}</h2>
                                         <p>{{ featured_post.short_intro }}</p>
-                                        <p class="p-small">{{ featured_post.date_posted }}</p>
+                                        <span class="glyphicon glyphicon-calendar mt-1"></span>
+                                        <small class="p-small">{{ featured_post.date_posted }}</small>
+                                        <br>
+                                        <span class="glyphicon glyphicon-time mt-1 mb-5"></span>
+                                        <small class="p-small">{{ featured_post.post_readtime }}</small>
                                     </div>
                                 </div>
                             {% else %}
@@ -38,7 +42,11 @@
                                     <div class="carousel-caption d-xs-block d-md-block px-5">
                                         <h2>{{ featured_post.title }}</h2>
                                         <p>{{ featured_post.short_intro }}</p>
-                                        <p class="p-small">{{ featured_post.date_posted }}</p>
+                                        <span class="glyphicon glyphicon-calendar mt-1"></span>
+                                        <small class="p-small">{{ featured_post.date_posted }}</small>
+                                        <br>
+                                        <span class="glyphicon glyphicon-time mt-1 mb-5"></span>
+                                        <small class="p-small">{{ featured_post.post_readtime }}</small>
                                     </div>
                                 </div>
                             {% endif %}

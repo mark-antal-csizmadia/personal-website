@@ -52,7 +52,12 @@
 }
 
 #footer {
-    padding-top: 70px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+#post_list {
+    padding-top: 0px;
     padding-bottom: 50px;
 }
 
@@ -66,14 +71,14 @@
 }
 
 h1 {
-    font: 32px Arial, sans-serif !important;
+    font: 28px Arial, sans-serif !important;
     padding-bottom: 5px;
     letter-spacing: 4px;
 }
 
 .h1-sunshine {
     color: var(--main-color-2);
-    font: 48px Arial, sans-serif !important;
+    font: 32px Arial, sans-serif !important;
 }
 
 .text-underline {
@@ -121,7 +126,7 @@ h3 {
     font: 24px Arial, sans-serif !important;
 }
 
-p {
+p, li {
     font: 16px Arial, sans-serif !important;
     padding-top: 5px;
     padding-bottom: 0px;
@@ -171,9 +176,9 @@ p {
 
 .p-small {
     font: 12px Arial, sans-serif !important;
-    padding-top: 5px;
+    /* padding-top: 5px; */
     padding-bottom: 0px;
-    line-height: 1.4 !important;
+    /* line-height: 1.4 !important; */
     letter-spacing: 2px;
 
     color: var(--main-color-3);
@@ -525,12 +530,12 @@ body {
 }
 
 #detailed_post_embedded {
-    padding-top: 70px;
-    width: 60%;
+    padding-top: 30px;
+    width: 70%;
 }
 @media (max-width: 991px) {
   #detailed_post_embedded {
-    padding-top: 70px;
+    padding-top: 30px;
     width: 100%;
   }
 }
@@ -538,19 +543,47 @@ body {
 #sidebar {
     margin-top: 70px;
     padding: 100px 20px;
+    z-index: 1;
+}
 
+@media (max-width: 1199px) {
+  #sidebar {
+    margin-top: 0px;
+    padding: 100px 20px;
+    z-index: 1;
+  }
+}
+
+@media (max-width: 991px) {
+  #sidebar {
+    margin-top: 0px;
+    padding: 50px 10px;
+    z-index: 1;
+  }
 }
 
 .list-group-item-action {
     background: var(--main-color-white);
-    color: var(--main-color-black);
-    border: 2px solid var(--main-color-white);
+    border: 1px solid var(--main-color-white);
 }
 
 .list-group-item-action.active {
     background: var(--main-color-white);
-    color: var(--main-color-black);
-    border: 1px solid #000;
+    border: 1px solid var(--main-color-text);
+}
+
+.list-group-item-action:focus {
+    background: var(--main-color-white);
+}
+
+.list-group-item-action:hover {
+    background: var(--main-color-white);
+    border: 1px dashed var(--main-color-text);
+}
+
+.list-group-item-action.active:hover {
+    background: var(--main-color-white);
+    border: 1px solid var(--main-color-text);
 }
 
 #contents_header {
@@ -560,7 +593,6 @@ body {
 
 #sidebar2 {
     padding: 90px 20px;
-
 }
 
 

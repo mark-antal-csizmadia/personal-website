@@ -27,7 +27,11 @@
                     </a>
                     <p class="card-text">
                         <p>{{ post.short_intro }}</p>
-                        <p class="p-small">{{ post.date_posted }}</p>
+                        <span class="glyphicon glyphicon-calendar mt-1"></span>
+                        <small class="p-small">{{ post.date_posted }}</small>
+                        <br>
+                        <span class="glyphicon glyphicon-time mt-1"></span>
+                        <small class="p-small">{{ post.post_readtime }}</small>
                     </p>
                 </div>
             </div>

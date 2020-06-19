@@ -3,33 +3,98 @@
     <div class="progress-container" id="progress_container">
         <div class="progress-bar" id="myBar"></div>
     </div>
-    <div class="container">
+    <div class="container text-center" style="padding-top: 40px;">
+        <h1>{{ object.title }}</h1>
         <div id="detailed_post_embedded" class="container">
             <div class="embed-responsive embed-responsive-16by9">
                 <img class="embed-responsive-item fadeIn" src="{{ object.image.url }}" alt="Card image cap">
             </div>
         </div>
-
+        <span class="glyphicon glyphicon-tags mt-5"></span>
+        {% for tag in object.tags.all %}
+            {% if forloop.last %}
+                <small class="p-small">{{ tag.name }}</small>
+            {% else %}
+                <small class="p-small">{{ tag.name }},</small>
+            {% endif %}
+        {% endfor %}
+        <br>
+        <span class="glyphicon glyphicon-calendar mt-3"></span>
+        <small class="p-small">{{ object.date_posted }}</small>
+        <br>
+        <span class="glyphicon glyphicon-time mt-3"></span>
+        <small class="p-small">{{ object.post_readtime }}</small>
+    </div>
+    <div class="container-fluid" style="border-bottom: 1px solid #d3d3d3;">
         <div class="row">
             <div class="col-lg-3">
                 <div id="sidebar" class="container sticky-top">
-                    <h3 id="contents_header" class="mb-5">Conents</h3>
+                    <p id="contents_header">Contents</p>
                     <div id="sidebar_list" class="list-group">
                         {% for section_id, section_text in sections.items %}
-                            <a href="#{{ section_id }}" class="list-group-item list-group-item-action my-2 text-left">{{ section_text }}</a>
+                            <a href="#{{ section_id }}" class="list-group-item list-group-item-action text-left">
+                                <p class="p-small" style="color: #000;">{{ section_text }}</p>
+                            </a>
                         {% endfor %}
                     </div>
                 </div>
 
             </div>
-            <div class="col-lg-9">
+            <div class="col-lg-6">
                 <div id="post_list" class="container">
-                    <div class="header">
-                        <small class="text-muted">Posted on {{ object.date_posted|date:"F d, Y" }}</small>
-                        <small class="text-muted pull-right">Topic: {{ object.project.title }}</small>
-                    </div>
-
                     {{ object.content|safe }}
+                </div>
+            </div>
+            <div class="col-lg-3"></div>
+        </div>
+    </div>
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-10 offset-1">
+                <h2>Continue reading</h2>
+                <p class="p-small">With these randomly selected posts</p>
+                <div class="row pt-2">
+                    {% for post in random_posts %}
+                        <div class="col-lg-6 d-flex">
+                            <div class="card my-4">
+                                <div class="card-header p-small text-left">
+                                    <ul class="list-inline">
+                                        <span class="glyphicon glyphicon-tags"></span>
+                                        {% for tag in post.tags.all %}
+                                            {% if forloop.last %}
+                                                <a href="{% url 'blog-filter' tag.slug %}"><li class="list-inline-item p-small"> {{ tag.name }}</li></a>
+                                            {% else %}
+                                                    <a href="{% url 'blog-filter' tag.slug %}"><li class="list-inline-item p-small"> {{ tag.name }},</li></a>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                                <div class="card-body">
+                                    <a class="h2-hyperlink" href="{% url 'post-detail' post.slug %}">
+                                        <h2 class="card-title">{{ post.title }}</h2>
+                                    </a>
+                                    <div class="embed-responsive embed-responsive-16by9 embed-responsive-select-effect">
+                                        <a href="{% url 'post-detail' post.slug %}">
+                                            <img class="card-img-top embed-responsive-item fadeIn" src="{{ post.image.url }}" alt="Card image cap">
+                                        </a>
+                                    </div>
+                                    <p class="card-text">
+                                        <p>{{ post.short_intro }}</p>
+                                        <span class="glyphicon glyphicon-calendar mt-1"></span>
+                                        <small class="p-small">{{ post.date_posted }}</small>
+                                        <br>
+                                        <span class="glyphicon glyphicon-time mt-1"></span>
+                                        <small class="p-small">{{ post.post_readtime }}</small>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="d-flex justify-content-center">
+                    <a class="btn btn-outline-info btn-xlarge href_p" href="{% url 'blog-home' %}">
+                        Back to blog main page
+                    </a>
                 </div>
             </div>
         </div>

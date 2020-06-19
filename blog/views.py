@@ -3,6 +3,8 @@ from blog.models import Post, Tag
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.template import loader
 from django.http import JsonResponse
+from django.db.models import Q
+import random
 
 PAGINATION_OBJECTS_PER_PAGE = 2
 
@@ -126,9 +128,11 @@ def blog_filter_view_lazy(request, tag_slug):
 
 def post_detail_view(request, slug):
     post = Post.objects.get(slug=slug)
+    possible_random_posts = Post.objects.filter(~Q(slug=post.slug))
+    random_posts = random.sample(list(possible_random_posts), 2)
     sections = {}
     for idx, section_text in enumerate(post.section_texts.split("#")):
         sections["section_"+str(idx+1)] = section_text
-    context = {"object": post, "sections": sections}
+    context = {"object": post, "sections": sections, "random_posts": random_posts}
     return render(request, 'blog/post_detail.html', context)
 

@@ -4,6 +4,7 @@ from django.utils import  timezone
 from django.template.defaultfilters import slugify
 from django.urls import reverse
 from PIL import Image
+import readtime
 
 
 class TagNameField(models.CharField):
@@ -31,6 +32,7 @@ class Post(models.Model):
     image = models.ImageField(default='default.jpg', upload_to='post_pics')
     short_intro = models.TextField(default="default short intro")
     content = models.TextField(default="default content")
+    post_readtime = models.CharField(max_length=100, default="no readtime estimate")
     section_texts = models.TextField(default="none")
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     tags = models.ManyToManyField(Tag)
@@ -48,6 +50,7 @@ class Post(models.Model):
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
+        self.post_readtime = readtime.of_html(self.content)
         super().save(*args, **kwargs)
         #size = (600, 600)
         #image = Image.open(self.image.path)
