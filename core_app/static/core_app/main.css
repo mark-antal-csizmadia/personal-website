@@ -524,7 +524,7 @@ body {
 }
 
 .progress-bar {
-  height: 8px;
+  height: 10px;
   background: var(--main-color-1);
   width: 0%;
 }

@@ -38,7 +38,8 @@ def blog_home_view(request):
                "next_page_number":next_page_number,
                "tags": Tag.objects.all(),
                "featured_posts": featured_posts,
-               "filtered_by": "Everything"}
+               "filtered_by": "Everything",
+               "post_detail": False}
 
     return render(request, 'blog/blog_home.html', context)
 
@@ -94,7 +95,8 @@ def blog_filter_view(request, tag_slug):
                "previous_page_number": previous_page_number,
                "next_page_number": next_page_number,
                "tags": Tag.objects.all(),
-               "filtered_by": t}
+               "filtered_by": t,
+               "post_detail": False}
 
     return render(request, 'blog/blog_filter.html', context)
 
@@ -133,6 +135,6 @@ def post_detail_view(request, slug):
     sections = {}
     for idx, section_text in enumerate(post.section_texts.split("#")):
         sections["section_"+str(idx+1)] = section_text
-    context = {"object": post, "sections": sections, "random_posts": random_posts}
+    context = {"object": post, "sections": sections, "random_posts": random_posts, "post_detail": True}
     return render(request, 'blog/post_detail.html', context)
 
