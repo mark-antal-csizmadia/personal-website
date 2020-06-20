@@ -137,4 +137,3 @@ def post_detail_view(request, slug):
         sections["section_"+str(idx+1)] = section_text
     context = {"object": post, "sections": sections, "random_posts": random_posts, "post_detail": True}
     return render(request, 'blog/post_detail.html', context)
-

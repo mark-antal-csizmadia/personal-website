@@ -63,24 +63,27 @@
                 </div>
             </div>
         </div>
-
     </div>
     <div class="container pt-5">
-        <p class="p-small">Filter result: {{ posts.paginator.count }} posts</p>
-        <div class="dropdown show">
-            <a class="btn btn-secondary dropdown-toggle btn-xlarge href_p" href="{% url 'blog-home' %}" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Filtered by {{ filtered_by }}
-            </a>
-
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item href_p" href="{% url 'blog-home' %}">
-                    Everything
-                </a>
-                {% for tag in tags %}
-                    <a class="dropdown-item href_p" href="{% url 'blog-filter' tag.slug %}">{{ tag.name }}</a>
-                {% endfor %}
+        <div class="row">
+            <div class="col-md-6">
+                <p class="p-small">Filter result: {{ posts.paginator.count }} posts</p>
+                <div class="dropdown show">
+                    <a class="btn btn-secondary dropdown-toggle btn-xlarge href_p" href="{% url 'blog-home' %}" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Filtered by {{ filtered_by }}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <a class="dropdown-item href_p" href="{% url 'blog-home' %}">
+                            Everything
+                        </a>
+                        {% for tag in tags %}
+                            <a class="dropdown-item href_p" href="{% url 'blog-filter' tag.slug %}">{{ tag.name }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
         </div>
+
     </div>
     <div id="post_list" class="container infinite-container">
         {% include 'blog/posts.html' %}
