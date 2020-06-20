@@ -44,7 +44,9 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarToggle">
                     <div class="navbar-nav ml-auto">
-                        <a class="nav-link text-uppercase" href="{% url 'core_app_view' %}">Back to the Website</a>
+                        <a class="nav-link text-uppercase" href="{% url 'core_app_view' %}">
+                            <span class="glyphicon glyphicon-log-out"></span> Leave Blog
+                        </a>
                     </div>
                 </div>
             </div>
@@ -53,19 +55,7 @@
 
 
     {% block content %}{% endblock %}
-    <footer id="footer" class="page-footer">
-        <div class="container text-center">
-            <p>
-                Thank you for reading my blog!
-            </p>
-        </div>
-        <div class="container text-center pt-2">
-            <a id="totop" href="#"><span id="totopicon" class="glyphicon glyphicon-chevron-up"></span></a>
-        </div>
-        <div class="footer-copyright text-center pt-5">
-            <p>© 2020 Mark Csizmadia</p>
-        </div>
-    </footer>
+    {% include 'blog/footer.html' %}
     <script
         src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
