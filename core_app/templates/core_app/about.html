@@ -1,7 +1,14 @@
 <div id="about" class="container bg-white" style="border-bottom: 1px solid #d3d3d3;">
     <h1><span class="h1-sunshine">A</span>bout</h1>
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-lg-4 offset-lg-1 order-lg-2">
+            <div class="d-flex justify-content-center">
+                <div id="portrait" class="embed-responsive embed-responsive-1by1 mb-5">
+                    <img class="embed-responsive-item rounded-circle fadeIn" src="{{ mark_profile.image.url }}" alt="Card image cap">
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-7 order-lg-1">
             <p style="text-indent: 2em;">
                 I’m interested in <span class="text-underline">machine learning</span> and
                 <span class="text-underline">deep learning</span>
@@ -19,23 +26,20 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="d-flex justify-content-center">
-                        <a href="{% url 'download-pdf' cv_file_object.identifier %}" class="btn btn-primary btn-xlarge my-4">
-                            Download CV as PDF ({{ cv_file_object.pdf.size|filesizeformat }})
+                        <a href="{% url 'download-pdf' cv_file_object.identifier %}" class="btn btn-primary btn-xlarge href_p my-4">
+                            <span class="glyphicon glyphicon-download-alt"></span>
+                            CV as PDF ({{ cv_file_object.pdf.size|filesizeformat }})
                         </a>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="d-flex justify-content-center">
-                        <a href="{% url 'download-pdf' project_report_file_object.identifier %}" class="btn btn-primary btn-xlarge my-4">
-                            Download Thesis as PDF ({{ project_report_file_object.pdf.size|filesizeformat }})
+                        <a href="{% url 'download-pdf' project_report_file_object.identifier %}" class="btn btn-primary btn-xlarge href_p my-4">
+                            <span class="glyphicon glyphicon-download-alt"></span>
+                            Thesis as PDF ({{ project_report_file_object.pdf.size|filesizeformat }})
                         </a>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="embed-responsive embed-responsive-1by1">
-                <img class="embed-responsive-item rounded-circle fadeIn" src="{{ mark_profile.image.url }}" alt="Card image cap">
             </div>
         </div>
     </div>

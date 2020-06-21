@@ -1065,3 +1065,19 @@ ol.carousel-indicators li.active {
     top: 0;
     color: var(--main-color-text);
 }
+
+#portrait {
+    width: 100%;
+}
+
+@media (max-width: 991px) {
+    #portrait {
+        width: 50%;
+    }
+}
+
+@media (max-width: 767px) {
+    #portrait {
+        width: 70%;
+    }
+}
