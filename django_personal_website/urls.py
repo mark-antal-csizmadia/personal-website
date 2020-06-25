@@ -24,6 +24,7 @@ from django.urls import include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', core_app_views.core_app_view, name="core_app_view"),
+    path('lazy_load_posts/', core_app_views.projects_filter_view_lazy, name='lazy_load_posts'),
     path('summernote/', include('django_summernote.urls')),
     path('blog/', include('blog.urls')),
     path('pdf/<str:pdf_file_identifier>', core_app_views.download_pdf, name='download-pdf'),

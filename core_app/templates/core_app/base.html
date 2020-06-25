@@ -18,6 +18,11 @@
     {% else %}
         <title>Mark Csizmadia</title>
     {% endif %}
+    <script type="text/javascript">
+      // A CSRF token is required when making post requests in Django
+      // To be used for making AJAX requests in script.js
+      window.CSRF_TOKEN = "{{ csrf_token }}";
+    </script>
 
 
 </head>
@@ -68,221 +73,9 @@
     </script>
 
     <script>
-        $('.dropdown-item').click(function(event){
-            event.preventDefault();
-            var filtered_tag_slug_jquery = $(this).attr('href');
-            var filtered_tag_name_jquery = $(this).text();
-            var page_n = 1;
-
-            // ajax
-            $.ajax({
-                type: "POST",
-                data : {
-                    filtered_tag_slug_jquery: filtered_tag_slug_jquery,
-                    page_n: page_n,
-                    csrfmiddlewaretoken: '{{ csrf_token }}',
-                },
-                success: function (resp) {
-                    $('a#dropdownMenuLink').text(filtered_tag_name_jquery)
-                    $('a#dropdownMenuLink').attr("href", filtered_tag_slug_jquery)
-                    //loop
-                    $('#posts').html('')
-                    $.each(resp.serializer, function(i, val) {
-                        //apending posts
-                        $('#posts').append(
-                            '<div class="col-lg-4 d-flex align-items-stretch">' +
-                                '<div class="card mb-5">' +
-                                    '<div class="card-header">' +
-                                       '<p class="p-small"><span class="glyphicon glyphicon-tags"></span> '+ val.tags_as_str +'</p>' +
-                                    '</div>' +
-                                    '<div class="embed-responsive embed-responsive-16by9 ">' +
-                                        '<img class="card-img-top embed-responsive-item fadeIn" src="'+ val.image +'" alt="Card image cap">' +
-                                    '</div>' +
-                                    '<div class="card-body">' +
-                                        '<h3 class="card-title">'+ val.title +'</h3>' +
-                                        '<p class="card-text">'+ val.description +'</p>' +
-                                    '</div>' +
-                                    '<ul class="list-group list-group-flush">' +
-                                        '<li class="list-group-item p-small py-2"><span class="glyphicon glyphicon-wrench"></span>'+ val.technologies +'</li>' +
-                                    '</ul>' +
-                                    '<div class="card-body align-items-center d-flex justify-content-center">' +
-                                        '<a href="'+ val.project_url +'" target="_blank" class="btn btn-primary btn-xlarge href_p">' +
-                                            'View on <span class="fa fa-github fa-lg"></span>' +
-                                        '</a>' +
-                                    '</div>' +
-                                '</div>' +
-                            '</div>'
-                        )
-
-                    });
-                    if (resp.page_n == resp.num_pages) {
-                        $('a#paginator_pages_first').attr("class", "btn btn-outline-info btn-xlarge href_p active")
-                        $('a#paginator_pages_prev').attr("class", "btn btn-outline-info btn-xlarge href_p disabled")
-                        $('a#paginator_pages_current').attr("class", "btn btn-outline-info btn-xlarge href_p active")
-
-                        $('a#paginator_pages_next').attr("class", "btn btn-outline-info btn-xlarge href_p disabled")
-                        $('a#paginator_pages_last').attr("class", "btn btn-outline-info btn-xlarge href_p active")
-                        $("a#paginator_pages_last").attr('href', resp.num_pages)
-                    }
-                    else {
-                        if (resp.page_n == resp.previous_page_n) {
-                            $('a#paginator_pages_first').attr("class", "btn btn-outline-info btn-xlarge href_p active")
-                            $('a#paginator_pages_prev').attr("class", "btn btn-outline-info btn-xlarge href_p disabled")
-                            $('a#paginator_pages_current').attr("class", "btn btn-outline-info btn-xlarge href_p active")
-
-                            $('a#paginator_pages_next').attr("class", "btn btn-outline-info btn-xlarge href_p")
-                            $("a#paginator_pages_next").attr('href', resp.next_page_n)
-                            $('a#paginator_pages_last').attr("class", "btn btn-outline-info btn-xlarge href_p")
-                            $("a#paginator_pages_last").attr('href', resp.num_pages)
-                        }
-                        else if (resp.page_n == resp.next_page_n) {
-                            $('a#paginator_pages_first').attr("class", "btn btn-outline-info btn-xlarge href_p")
-                            $('a#paginator_pages_prev').attr("class", "btn btn-outline-info btn-xlarge href_p")
-                            $("a#paginator_pages_prev").attr('href', resp.previous_page_n)
-                            $('a#paginator_pages_current').attr("class", "btn btn-outline-info btn-xlarge href_p active")
-
-                            $('a#paginator_pages_next').attr("class", "btn btn-outline-info btn-xlarge href_p disabled")
-                            $('a#paginator_pages_last').attr("class", "btn btn-outline-info btn-xlarge href_p active")
-                            $("a#paginator_pages_last").attr('href', resp.num_pages)
-                        }
-                        else {
-                            $('a#paginator_pages_first').attr("class", "btn btn-outline-info btn-xlarge href_p")
-                            $('a#paginator_pages_prev').attr("class", "btn btn-outline-info btn-xlarge href_p")
-                            $("a#paginator_pages_prev").attr('href', resp.previous_page_n)
-                            $('a#paginator_pages_current').attr("class", "btn btn-outline-info btn-xlarge href_p active")
-
-                            $('a#paginator_pages_next').attr("class", "btn btn-outline-info btn-xlarge href_p")
-                            $("a#paginator_pages_next").attr('href', resp.next_page_n)
-                            $('a#paginator_pages_last').attr("class", "btn btn-outline-info btn-xlarge href_p")
-                            $("a#paginator_pages_last").attr('href', resp.num_pages)
-                        }
-                    }
-                    $("a#paginator_pages_current").attr('href', page_n)
-                    $('a#paginator_pages_current').text(page_n + "/" + resp.num_pages)
-
-                },
-                error: function () {}
-            }); //
-            $('html, body').animate({
-                    scrollTop: $("#projects").offset().top
-            }, 800, function() {
-
-                // Add hash (#) to URL when done scrolling (default click behavior)
-                window.location.hash = "project";
-              });
-        });
-    </script>
-    <script>
-        $('.btn-outline-info').click(function(event){
-            event.preventDefault();
-            var filtered_tag_slug_jquery = $("a#dropdownMenuLink").attr('href');
-            var filtered_tag_name_jquery = $("a#dropdownMenuLink").text();
-            var page_n = $(this).attr('href');
-
-            // ajax
-            $.ajax({
-                type: "POST",
-                data : {
-                    filtered_tag_slug_jquery: filtered_tag_slug_jquery,
-                    page_n: page_n,
-                    csrfmiddlewaretoken: '{{ csrf_token }}',
-                },
-                success: function (resp) {
-                    $('a#dropdownMenuLink').text(filtered_tag_name_jquery)
-                    $('a#dropdownMenuLink').attr("href", filtered_tag_slug_jquery)
-                    //loop
-                    $('#posts').html('')
-                    $.each(resp.serializer, function(i, val) {
-                        //apending posts
-                        $('#posts').append(
-                            '<div class="col-lg-4 d-flex align-items-stretch">' +
-                                '<div class="card mb-5">' +
-                                    '<div class="card-header">' +
-                                       '<p class="p-small"><span class="glyphicon glyphicon-tags"></span> '+ val.tags_as_str +'</p>' +
-                                    '</div>' +
-                                    '<div class="embed-responsive embed-responsive-16by9 ">' +
-                                        '<img class="card-img-top embed-responsive-item fadeIn" src="'+ val.image +'" alt="Card image cap">' +
-                                    '</div>' +
-                                    '<div class="card-body">' +
-                                        '<h3 class="card-title">'+ val.title +'</h3>' +
-                                        '<p class="card-text">'+ val.description +'</p>' +
-                                    '</div>' +
-                                    '<ul class="list-group list-group-flush">' +
-                                        '<li class="list-group-item p-small py-2"><span class="glyphicon glyphicon-wrench"></span>'+ val.technologies +'</li>' +
-                                    '</ul>' +
-                                    '<div class="card-body align-items-center d-flex justify-content-center">' +
-                                        '<a href="'+ val.project_url +'" target="_blank" class="btn btn-primary btn-xlarge href_p">' +
-                                            'View on <span class="fa fa-github fa-lg"></span>' +
-                                        '</a>' +
-                                    '</div>' +
-                                '</div>' +
-                            '</div>'
-                        )
-
-                    });
-
-                    if (resp.page_n == resp.num_pages) {
-                        $('a#paginator_pages_first').attr("class", "btn btn-outline-info btn-xlarge href_p active")
-                        $('a#paginator_pages_prev').attr("class", "btn btn-outline-info btn-xlarge href_p disabled")
-                        $('a#paginator_pages_current').attr("class", "btn btn-outline-info btn-xlarge href_p active")
-
-                        $('a#paginator_pages_next').attr("class", "btn btn-outline-info btn-xlarge href_p disabled")
-                        $('a#paginator_pages_last').attr("class", "btn btn-outline-info btn-xlarge href_p active")
-                        $("a#paginator_pages_last").attr('href', resp.num_pages)
-                    }
-                    else {
-                        if (resp.page_n == resp.previous_page_n) {
-                            $('a#paginator_pages_first').attr("class", "btn btn-outline-info btn-xlarge href_p active")
-                            $('a#paginator_pages_prev').attr("class", "btn btn-outline-info btn-xlarge href_p disabled")
-                            $('a#paginator_pages_current').attr("class", "btn btn-outline-info btn-xlarge href_p active")
-
-                            $('a#paginator_pages_next').attr("class", "btn btn-outline-info btn-xlarge href_p")
-                            $("a#paginator_pages_next").attr('href', resp.next_page_n)
-                            $('a#paginator_pages_last').attr("class", "btn btn-outline-info btn-xlarge href_p")
-                            $("a#paginator_pages_last").attr('href', resp.num_pages)
-                        }
-                        else if (resp.page_n == resp.next_page_n) {
-                            $('a#paginator_pages_first').attr("class", "btn btn-outline-info btn-xlarge href_p")
-                            $('a#paginator_pages_prev').attr("class", "btn btn-outline-info btn-xlarge href_p")
-                            $("a#paginator_pages_prev").attr('href', resp.previous_page_n)
-                            $('a#paginator_pages_current').attr("class", "btn btn-outline-info btn-xlarge href_p active")
-
-                            $('a#paginator_pages_next').attr("class", "btn btn-outline-info btn-xlarge href_p disabled")
-                            $('a#paginator_pages_last').attr("class", "btn btn-outline-info btn-xlarge href_p active")
-                            $("a#paginator_pages_last").attr('href', resp.num_pages)
-                        }
-                        else {
-                            $('a#paginator_pages_first').attr("class", "btn btn-outline-info btn-xlarge href_p")
-                            $('a#paginator_pages_prev').attr("class", "btn btn-outline-info btn-xlarge href_p")
-                            $("a#paginator_pages_prev").attr('href', resp.previous_page_n)
-                            $('a#paginator_pages_current').attr("class", "btn btn-outline-info btn-xlarge href_p active")
-
-                            $('a#paginator_pages_next').attr("class", "btn btn-outline-info btn-xlarge href_p")
-                            $("a#paginator_pages_next").attr('href', resp.next_page_n)
-                            $('a#paginator_pages_last').attr("class", "btn btn-outline-info btn-xlarge href_p")
-                            $("a#paginator_pages_last").attr('href', resp.num_pages)
-                        }
-                    }
-
-                    $("a#paginator_pages_current").attr('href', page_n)
-                    $('a#paginator_pages_current').text(page_n + "/" + resp.num_pages)
-
-                },
-                error: function () {}
-            }); //
-            $('html, body').animate({
-                    scrollTop: $("#projects").offset().top
-            }, 800, function() {
-
-                // Add hash (#) to URL when done scrolling (default click behavior)
-                window.location.hash = "project";
-              });
-        });
-    </script>
-    <script>
         $(document).ready(function(){
             // Add scrollspy to <body>
-            $('body').scrollspy({target: ".navbar", offset: 50});
+            $('body').scrollspy({target: "#navbar", offset: 50});
 
             // Add smooth scrolling on all links inside the navbar
             $("#navbarToggle a").on('click', function(event) {
@@ -306,8 +99,10 @@
 
                 }  // End if
 
+                $('#bs-example-navbar-collapse-1').collapse("hide");
+
                 if ( $('#navbarToggle').hasClass('show')) {
-                    $('.collapse').collapse("hide")
+                    $('.collapse').collapse("hide");
                 }
             });
 
@@ -344,6 +139,11 @@
                 $("html, body").animate({
                     scrollTop: 0
                 }, 800);
+            });
+
+            $('a[href*="pills"]').on('click', function(event) {
+                $('#project_selector').text($(this).text());
+                $('#bs-example-navbar-collapse-1').collapse("hide")
             });
 
         });
@@ -659,6 +459,76 @@
             }
         });
 
+    </script>
+
+    <script>
+        (function($) {
+          $('#lazyLoadLinkProjectsActive').on('click', function() {
+            var link = $(this);
+            var page = link.data('page');
+            var tag_slug = link.data('tag');
+
+            $.ajax({
+              type: 'post',
+              url: 'lazy_load_posts/',
+              data: {
+                'page': page,
+                'tag_slug': tag_slug,
+                'csrfmiddlewaretoken': window.CSRF_TOKEN // from index.html
+              },
+              success: function(data) {
+                // if there are still more pages to load,
+                // add 1 to the "Load More Posts" link's page data attribute
+                // else hide the link
+                if (data.has_next) {
+                    link.data('page', page+1);
+                } else {
+                  link.hide();
+                }
+                // append html to the posts div
+                $('#project_list_active').append(data.project_html);
+              },
+              error: function(xhr, status, error) {
+                // shit happens friends!
+              }
+            });
+          });
+        }(jQuery));
+    </script>
+
+    <script>
+        (function($) {
+          $('#lazyLoadLinkProjects').on('click', function() {
+            var link = $(this);
+            var page = link.data('page');
+            var tag_slug = link.data('tag');
+
+            $.ajax({
+              type: 'post',
+              url: 'lazy_load_posts/',
+              data: {
+                'page': page,
+                'tag_slug': tag_slug,
+                'csrfmiddlewaretoken': window.CSRF_TOKEN // from index.html
+              },
+              success: function(data) {
+                // if there are still more pages to load,
+                // add 1 to the "Load More Posts" link's page data attribute
+                // else hide the link
+                if (data.has_next) {
+                    link.data('page', page+1);
+                } else {
+                  link.hide();
+                }
+                // append html to the posts div
+                $('#project_list').append(data.project_html);
+              },
+              error: function(xhr, status, error) {
+                // shit happens friends!
+              }
+            });
+          });
+        }(jQuery));
     </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>

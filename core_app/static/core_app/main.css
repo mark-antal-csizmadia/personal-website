@@ -233,19 +233,6 @@ body {
     transition: all 0.5s;
 }
 
-@media (max-width: 991px) {
-    .navbar-collapse:not(.show) {
-        border: none;
-        border-width: 0px 0px 0px 0px;
-
-    }
-
-    .navbar-collapse.show {
-        border: solid var(--main-color-white);
-        border-width: 1px 0px 0px 0px;
-    }
-}
-
 .navbar-toggler:focus, .navbar-toggler:active, .navbar-toggler-icon:focus {
     outline: none;
     box-shadow: none;
@@ -278,6 +265,33 @@ body {
 	margin-top: 4px;
 
 }
+
+#project_nav_but .icon-bar {
+	width: 22px;
+	height: 2px;
+	background-color: var(--main-color-text);
+	display: block;
+	transition: all 0.2s;
+	margin-top: 4px;
+
+}
+
+.nav-pills a.nav-link {
+    color: var(--main-color-text);
+    background: var(--main-color-white);
+}
+
+.nav-pills a.nav-link:hover {
+    color: #fff;
+    background: var(--main-color-3)!important;
+}
+
+.nav-pills a.nav-link.active {
+    color: #fff;
+    background: var(--main-color-3)!important;
+}
+
+
 
 .navbar-toggler {
   border: none;
@@ -1081,3 +1095,4 @@ ol.carousel-indicators li.active {
         width: 70%;
     }
 }
+

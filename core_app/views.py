@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from projects.models import Project
 from projects.serializer import ProjectSerializer
-from django.core.paginator import Paginator
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import JsonResponse
+from django.template import loader
 from .forms import ContactForm
 from django.core.mail import EmailMessage
 from django.conf import settings
@@ -11,20 +12,31 @@ from .models import Profile, FilePDF
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from blog.models import Tag
+from collections import OrderedDict
+
+
+PAGINATION_OBJECTS_PER_PAGE = 3
 
 
 def core_app_view(request):
-    # Always show 3 Projects in paginated form.
-    number_of_projects_on_page = 3
-    # Everything tag.
-    everything_tag_name = "everything".title()
-    everything_tag_slug = "everything"
-    # Initial Projects. Filter is Everything, paginate all of the Projects.
-    projects = Project.objects.all().order_by('-date_posted')
-    paginator = Paginator(projects, number_of_projects_on_page)
-    first_page = paginator.page(1)
-    page_n = 1
 
+    projects_as_dict = OrderedDict()
+
+    tags = Tag.objects.all()
+
+    for tag in tags:
+        projects = Project.objects.filter(tags=tag).order_by('-date_posted')
+        paginator = Paginator(projects, PAGINATION_OBJECTS_PER_PAGE)
+        page = 1
+        try:
+            projects = paginator.page(page)
+        except PageNotAnInteger:
+            projects = paginator.page(2)
+        except EmptyPage:
+            projects = paginator.page(paginator.num_pages)
+
+        projects_as_dict[tag] = projects
+    print(projects_as_dict)
     # POST request can be:
     # (1) contact form sent
     # (2) Projects filtered by tags
@@ -69,50 +81,8 @@ def core_app_view(request):
             messages.success(request, f'Thank you for your message, {name}!')
             return redirect('core_app_view')
         else:
-            # If visitor interacts with the Projects section.
-            # Retrieve the filter slug, and the upcoming page number.
-            filtered_tag_slug_jquery = request.POST.get('filtered_tag_slug_jquery', None)
-            page_n = request.POST.get('page_n', None)
+            pass
 
-            # Filter Projects.
-            # If filter tag is everything, get all of the Projects.
-            if filtered_tag_slug_jquery == everything_tag_slug:
-                projects = Project.objects.all().order_by('-date_posted')
-            # If filter tag is anything other than everything, filter Projects.
-            else:
-                t = Tag.objects.get(slug=filtered_tag_slug_jquery)
-                projects = Project.objects.filter(tags=t).order_by('-date_posted')
-
-            # Paginate the filtered Projects.
-            paginator = Paginator(projects, number_of_projects_on_page)
-
-            # Pagination logic.
-            # If the upcoming page has a next page, get the next page number.
-            if paginator.page(page_n).has_next():
-                next_page_n = paginator.page(page_n).next_page_number()
-            # If the upcoming page doesn't have a next page, set the next page number to the upcoming page number.
-            else:
-                next_page_n = page_n
-            # If the upcoming page has a previous page, get the previous page number.
-            if paginator.page(page_n).has_previous():
-                previous_page_n = paginator.page(page_n).previous_page_number()
-            # If the upcoming page doesn't have a prev. page, set the prev. page number to the upcoming page number.
-            else:
-                previous_page_n = page_n
-
-        # Serialize the filtered and paginated Projects into JSON format for processing in jQuery.
-        serializer = ProjectSerializer(paginator.page(page_n).object_list, many=True)
-
-        # Dictionary for processing POST data in jQuery.
-        data = {
-            "serializer": serializer.data,
-            "page_n": page_n,
-            "num_pages":paginator.num_pages,
-            "next_page_n": next_page_n,
-            "previous_page_n": previous_page_n
-        }
-
-        return JsonResponse(data, safe=False)
     # If not POST request, lean the form.
     else:
         form = ContactForm()
@@ -120,20 +90,45 @@ def core_app_view(request):
     # Build context for accessing data in HTML.
     context = {
         "title": "Mark Csizmadia | Personal Website",
-        "paginator": paginator,
-        "first_page": first_page,
-        "page_n": page_n,
         "form": form,
         "mark_profile": Profile.objects.get(user=User.objects.get(username="mark")),
         "cv_file_object": FilePDF.objects.get(identifier="cv"),
         "project_report_file_object": FilePDF.objects.get(identifier="project_report"),
         "internship_report_file_object": FilePDF.objects.get(identifier="internship_report"),
-        "tags": Tag.objects.all(),
-        "everything_tag_name": everything_tag_name,
-        "everything_tag_slug": everything_tag_slug
+        "projects_as_dict": projects_as_dict
     }
 
     return render(request, 'core_app/base.html', context)
+
+
+def projects_filter_view_lazy(request):
+    print("executing projects_filter_view_lazy")
+    page = request.POST.get('page')
+    tag_slug = request.POST.get('tag_slug')
+    print("tag_slug_ajax: {0}".format(tag_slug))
+    t = Tag.objects.get(slug=tag_slug)
+    projects = Project.objects.filter(tags=t).order_by('-date_posted')
+    # use Django's pagination
+    # https://docs.djangoproject.com/en/dev/topics/pagination/
+    paginator = Paginator(projects, PAGINATION_OBJECTS_PER_PAGE)
+    try:
+        projects = paginator.page(page)
+    except PageNotAnInteger:
+        projects = paginator.page(2)
+    except EmptyPage:
+        projects = paginator.page(paginator.num_pages)
+    # build a html posts list with the paginated posts
+    project_html = loader.render_to_string(
+        'core_app/project.html',
+        {'projects': projects}
+    )
+    print("project_html")
+    # package output data and return it as a JSON object
+    output_data = {
+        'project_html': project_html,
+        'has_next': projects.has_next()
+    }
+    return JsonResponse(output_data)
 
 
 def download_pdf(request, pdf_file_identifier):

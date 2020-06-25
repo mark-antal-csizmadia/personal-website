@@ -1,0 +1,26 @@
+<div class="row justify-content-center py-4">
+    {% for project in projects %}
+        <div class="col-lg-4 d-flex align-items-stretch">
+            <div class="card mx-2 my-2">
+                <div class="card-header">
+                   <p class="p-small"><span class="glyphicon glyphicon-tags"></span> {{ project.tags_as_str }}</p>
+                </div>
+                <div class="embed-responsive embed-responsive-16by9 ">
+                    <img class="card-img-top embed-responsive-item fadeIn" src="{{ project.image.url }}" alt="Card image cap">
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">{{ project.title }}</h3>
+                    <p class="card-text">{{ project.description }}</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item p-small py-2"><span class="glyphicon glyphicon-wrench"></span> {{ project.technologies }}</li>
+                </ul>
+                <div class="card-body align-items-center d-flex justify-content-center">
+                    <a href="{{ project.project_url }}" target="_blank" class="btn btn-primary btn-xlarge href_p">
+                        View on <span class="fa fa-github fa-lg"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>

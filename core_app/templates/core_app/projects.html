@@ -1,77 +1,83 @@
 <div id="projects" class="container bg-white" style="border-bottom: 1px solid #d3d3d3;">
-    <div class="row text-center">
-        <div class="col-md-8 text-left">
-            <h1><span class="h1-sunshine">P</span>rojects</h1>
-        </div>
+    <h1><span class="h1-sunshine">P</span>rojects</h1>
 
-        <div class="col-md-4">
-            <div class="row">
-                <div class="col-md-6 pt-5">
-                    <h3>Filter by tag</h3>
-                </div>
-                <div class="col-md-6">
-                    <div class="dropdown show">
-                        <a class="btn btn-secondary dropdown-toggle btn-xlarge my-5 href_p" href="{{ everything_tag_slug }}" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            {{ everything_tag_name }}
-                        </a>
-
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <a class="dropdown-item href_p" href="{{ everything_tag_slug }}">
-                                {{ everything_tag_name }}
-                            </a>
-                            {% for tag in tags %}
-                                <a class="dropdown-item href_p" href="{{ tag.slug }}">{{ tag.name }}</a>
+    <nav id="navbar_projects" class="navbar navbar-dark bg-white">
+        <div class="container">
+            <div class="navbar-header" style="width: 100%;">
+                <div class="row">
+                    <div class="col-lg-1">
+                        <button id="project_nav_but" class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="icon-bar top-bar" data-toggle="tooltip" data-placement="top" title="Filter by tag."></span>
+                            <span class="icon-bar middle-bar" data-toggle="tooltip" data-placement="top" title="Filter by tag."></span>
+                            <span class="icon-bar bottom-bar" data-toggle="tooltip" data-placement="top" title="Filter by tag."></span>
+                        </button>
+                    </div>
+                    <div class="col-lg-11">
+                        <p class="my-2 ml-2" data-toggle="tooltip" data-placement="top" title="Filter by tag using the menu.">
+                            {% for tag, projects in projects_as_dict.items %}
+                                {% if forloop.first %}
+                                    Filtered by: <span id="project_selector"> {{ tag.name }} ({{ projects.paginator.count }})</span>
+                                {% endif %}
                             {% endfor %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav nav-pills" id="pills-tab" role="tablist">
+                    {% for tag, projects in projects_as_dict.items %}
+                        {% if forloop.first %}
+                            <li class="nav-item">
+                                <a class="nav-link active p-small py-2" id="pills-{{ tag.slug }}-tab" data-toggle="pill" href="#pills-{{ tag.slug }}" role="tab" aria-controls="pills-{{ tag.slug }}" aria-selected="true">
+                                    {{ tag.name }} ({{ projects.paginator.count }})
+                                </a>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link p-small py-2" id="pills-{{ tag.slug }}-tab" data-toggle="pill" href="#pills-{{ tag.slug }}" role="tab" aria-controls="pills-{{ tag.slug }}" aria-selected="false">
+                                    {{ tag.name }} ({{ projects.paginator.count }})
+                                </a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="tab-content" id="pills-tabContent">
+                {% for tag, projects in projects_as_dict.items %}
+                    {% if forloop.first %}
+                        <div class="tab-pane fade show active" id="pills-{{ tag.slug }}" role="tabpanel" aria-labelledby="pills-{{ tag.slug }}-tab">
+                            <div id="project_list_active" class="container infinite-container">
+                                {% include 'core_app/project.html '%}
+                            </div>
+                            {% if not projects.has_next %}
+                            {% else %}
+                                <div class="d-flex justify-content-center">
+                                    <a id="lazyLoadLinkProjectsActive" class="btn btn-outline-info btn-xlarge href_p" href="javascript:void(0);" data-page="2" data-tag="{{ tag.slug }}">
+                                        Load More Projects
+                                    </a>
+                                </div>
+                            {% endif %}
                         </div>
-                    </div>
-                </div>
+                    {% else %}
+                        <div class="tab-pane fade" id="pills-{{ tag.slug }}" role="tabpanel" aria-labelledby="pills-{{ tag.slug }}-tab">
+                            <div id="project_list" class="container infinite-container">
+                                {% include 'core_app/project.html '%}
+                            </div>
+                            {% if not projects.has_next %}
+                            {% else %}
+                                <div class="d-flex justify-content-center">
+                                    <a id="lazyLoadLinkProjects" class="btn btn-outline-info btn-xlarge href_p" href="javascript:void(0);" data-page="2" data-tag="{{ tag.slug }}">
+                                        Load More Projects
+                                    </a>
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                {% endfor %}
             </div>
-
         </div>
+    </nav>
 
-    </div>
-    <div id="posts" class="row justify-content-center">
-        {% for project in first_page %}
-            <div class="col-lg-4 d-flex align-items-stretch">
-                <div class="card mb-5">
-                    <div class="card-header">
-                       <p class="p-small"><span class="glyphicon glyphicon-tags"></span> {{ project.tags_as_str }}</p>
-                    </div>
-                    <div class="embed-responsive embed-responsive-16by9 ">
-                        <img class="card-img-top embed-responsive-item fadeIn" src="{{ project.image.url }}" alt="Card image cap">
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">{{ project.title }}</h3>
-                        <p class="card-text">{{ project.description }}</p>
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item p-small py-2"><span class="glyphicon glyphicon-wrench"></span> {{ project.technologies }}</li>
-                    </ul>
-                    <div class="card-body align-items-center d-flex justify-content-center">
-                        <a href="{{ project.project_url }}" target="_blank" class="btn btn-primary btn-xlarge href_p">
-                            View on <span class="fa fa-github fa-lg"></span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        {% endfor %}
-    </div>
-    <div class="container text-center mb-5">
-        <a class="btn btn-outline-info btn-xlarge href_p active" id="paginator_pages_first" href="{{ first_page.number }}">
-            <span class="glyphicon glyphicon-fast-backward"></span>
-        </a>
-        <a class="btn btn-outline-info btn-xlarge href_p disabled" id="paginator_pages_prev" href="#">
-            <span class="glyphicon glyphicon-step-backward"></span>
-        </a>
-        <a class="btn btn-outline-info btn-xlarge href_p active" id="paginator_pages_current" href="{{ first_page.number }}">
-            {{ first_page.number }}/{{ paginator.num_pages }}
-        </a>
-        <a class="btn btn-outline-info btn-xlarge href_p" id="paginator_pages_next" href="{{ first_page.next_page_number }}">
-            <span class="glyphicon glyphicon-step-forward"></span>
-        </a>
-        <a class="btn btn-outline-info btn-xlarge href_p" id="paginator_pages_last" href="{{ paginator.num_pages }}">
-            <span class="glyphicon glyphicon-fast-forward"></span>
-        </a>
-    </div>
 </div>
 
