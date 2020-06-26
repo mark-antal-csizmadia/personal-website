@@ -5,15 +5,15 @@
         <div class="container">
             <div class="navbar-header" style="width: 100%;">
                 <div class="row">
-                    <div class="col-lg-1">
-                        <button id="project_nav_but" class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <div class="col-2">
+                        <button id="project_nav_but" class="navbar-toggler collapsed my-1" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                             <span class="icon-bar top-bar" data-toggle="tooltip" data-placement="top" title="Filter by tag."></span>
                             <span class="icon-bar middle-bar" data-toggle="tooltip" data-placement="top" title="Filter by tag."></span>
                             <span class="icon-bar bottom-bar" data-toggle="tooltip" data-placement="top" title="Filter by tag."></span>
                         </button>
                     </div>
-                    <div class="col-lg-11">
-                        <p class="my-2 ml-2" data-toggle="tooltip" data-placement="top" title="Filter by tag using the menu.">
+                    <div class="col-10">
+                        <p class="my-1" data-toggle="tooltip" data-placement="top" title="Filter by tag using the menu.">
                             {% for tag, projects in projects_as_dict.items %}
                                 {% if forloop.first %}
                                     Filtered by: <span id="project_selector"> {{ tag.name }} ({{ projects.paginator.count }})</span>
