@@ -33,7 +33,8 @@ def blog_home_view(request):
     else:
         next_page_number = posts.number
 
-    context = {"posts": posts,
+    context = {"title": "Blog",
+               "posts": posts,
                "previous_page_number": previous_page_number,
                "next_page_number":next_page_number,
                "tags": Tag.objects.all(),
@@ -91,7 +92,8 @@ def blog_filter_view(request, tag_slug):
     else:
         next_page_number = posts.number
 
-    context = {"posts": posts,
+    context = {"title": "Blog",
+               "posts": posts,
                "previous_page_number": previous_page_number,
                "next_page_number": next_page_number,
                "tags": Tag.objects.all(),
@@ -135,5 +137,9 @@ def post_detail_view(request, slug):
     sections = {}
     for idx, section_text in enumerate(post.section_texts.split("#")):
         sections["section_"+str(idx+1)] = section_text
-    context = {"object": post, "sections": sections, "random_posts": random_posts, "post_detail": True}
+    context = {"title": post.title,
+               "object": post,
+               "sections": sections,
+               "random_posts": random_posts,
+               "post_detail": True}
     return render(request, 'blog/post_detail.html', context)

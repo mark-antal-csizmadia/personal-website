@@ -13,8 +13,11 @@
     <!-- Glyps -->
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
 
+    <!-- Favicon in browser tab -->
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
+
     {% if title %}
-        <title>Mark Csizmadia - {{ title }}</title>
+        <title>Mark Csizmadia | {{ title }}</title>
     {% else %}
         <title>Mark Csizmadia</title>
     {% endif %}
