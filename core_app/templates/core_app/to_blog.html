@@ -1,61 +1,78 @@
 <div id="to_blog" class="container bg-white" style="border-bottom: 1px solid #d3d3d3;">
     <h1>Blog</h1>
-    <div class="row pt-5">
-        <div class="col-md-6 py-3">
+    <div class="row">
+        <div class="col-lg-6">
             <div class="row">
-                <div class="col-6">
+                <div class="col-sm-6 my-5">
                     <div class="d-flex justify-content-center">
-                        <span class="glyphicon glyphicon-cog" style="font-size: 3rem; color: #fba100;"></span>
+                        <p class="p-small">Topics</p>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <span class="glyphicon glyphicon-tags" style="font-size: 3rem; color: #fba100;"></span>
                     </div>
                     <div class="d-flex justify-content-center mt-4">
-                        <h3>Projects</h3>
+                        <ul>
+                            {% for tag in tags %}
+                                {% if forloop.last %}
+                                    <li> {{ tag.name }}</li>
+                                {% else %}
+                                    <li> {{ tag.name }},</li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
                     </div>
                 </div>
-                <div class="col-6">
+                <div class="col-sm-6 my-5">
+                    <div class="d-flex justify-content-center">
+                        <p class="p-small">Number of blog posts</p>
+                    </div>
                     <div class="d-flex justify-content-center">
                         <span class="glyphicon glyphicon-book" style="font-size: 3rem; color: #fba100;"></span>
                     </div>
                     <div class="d-flex justify-content-center mt-4">
-                        <h3>Tutorials</h3>
+                        <p>{{ number_of_posts }}</p>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-6 py-3">
+        <div class="col-lg-6">
             <div class="row">
-                <div class="col-6">
+                <div class="col-sm-6 my-5">
                     <div class="d-flex justify-content-center">
-                        <span class="glyphicon glyphicon-pencil" style="font-size: 3rem; color: #fba100;"></span>
+                        <p class="p-small">Date of latest blog post</p>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <span class="glyphicon glyphicon-calendar" style="font-size: 3rem; color: #fba100;"></span>
                     </div>
                     <div class="d-flex justify-content-center mt-4">
-                        <h3>Thoughts</h3>
+                        <p>{{ latest_post_date }}</p>
                     </div>
                 </div>
-                <div class="col-6">
+                <div class="col-sm-6 my-5">
                     <div class="d-flex justify-content-center">
-                        <span class="glyphicon glyphicon-globe" style="font-size: 3rem; color: #fba100;"></span>
+                        <p class="p-small">Overall reading time</p>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <span class="glyphicon glyphicon-time" style="font-size: 3rem; color: #fba100;"></span>
                     </div>
                     <div class="d-flex justify-content-center mt-4">
-                        <h3>Experiences</h3>
+                        <p>{{ overall_reading_time }} mins</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row pt-5">
-        <div class="col-md-6">
+    <div class="row mt-3">
+        <div class="col-md-6 offset-md-3">
             <p>
                 I am writing a blog to capture my professional development and journey.
-            </p>
-        </div>
-        <div class="col-md-6">
-            <p>
                 I mostly go into the details of my <span class="text-underline">projects</span>,
                 create <span class="text-underline">tutorial-like guides</span>,
                 put down my <span class="text-underline">thoughts</span> on machine learning and deep learning related topics,
                 and elaborate on my <span class="text-underline">experiences</span> that shaped my thinking and interests.
             </p>
         </div>
+        <div class="col-md-3"></div>
     </div>
     <div class="d-flex justify-content-center my-5">
         <a href="{% url 'blog-home' %}" class="btn btn-primary btn-xlarge href_p">Check Out the Blog</a>

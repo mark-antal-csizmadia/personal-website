@@ -11,7 +11,7 @@ from django.contrib import messages
 from .models import Profile, FilePDF
 from django.contrib.auth.models import User
 from django.http import HttpResponse
-from blog.models import Tag
+from blog.models import Post, Tag
 from collections import OrderedDict
 
 
@@ -23,8 +23,9 @@ def core_app_view(request):
     projects_as_dict = OrderedDict()
 
     tags = Tag.objects.all()
+    tags_project_mask = [tag for tag in tags if tag.name not in ["My Journey"]]
 
-    for tag in tags:
+    for tag in tags_project_mask:
         projects = Project.objects.filter(tags=tag).order_by('-date_posted')
         paginator = Paginator(projects, PAGINATION_OBJECTS_PER_PAGE)
         page = 1
@@ -87,6 +88,14 @@ def core_app_view(request):
     else:
         form = ContactForm()
 
+    posts = Post.objects.all().order_by('-date_posted')
+    latest_post_date = posts[0].date_posted
+
+    overall_reading_time_mins = \
+        sum(
+            [int(readtime_mins) for post in Post.objects.all() for readtime_mins in post.post_readtime.split() if readtime_mins.isdigit()]
+        )
+
     # Build context for accessing data in HTML.
     context = {
         "title": "Portfolio",
@@ -95,7 +104,11 @@ def core_app_view(request):
         "cv_file_object": FilePDF.objects.get(identifier="cv"),
         "project_report_file_object": FilePDF.objects.get(identifier="project_report"),
         "internship_report_file_object": FilePDF.objects.get(identifier="internship_report"),
-        "projects_as_dict": projects_as_dict
+        "projects_as_dict": projects_as_dict,
+        "tags": tags,
+        "latest_post_date": latest_post_date,
+        "overall_reading_time": overall_reading_time_mins,
+        "number_of_posts": len(posts),
     }
 
     return render(request, 'core_app/base.html', context)
