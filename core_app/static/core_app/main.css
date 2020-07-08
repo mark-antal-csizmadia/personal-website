@@ -71,14 +71,15 @@
 }
 
 h1 {
-    font: 28px Arial, sans-serif !important;
+    font: 34px Georgia, serif !important;
     padding-bottom: 5px;
     letter-spacing: 4px;
 }
 
 .h1-sunshine {
     color: var(--main-color-2);
-    font: 32px Arial, sans-serif !important;
+    font: 34px Georgia, serif !important;
+    letter-spacing: 4px;
 }
 
 .text-underline {
@@ -87,17 +88,17 @@ h1 {
 }
 
 h2 {
-    font: 24px Arial, sans-serif !important;
+    font: 20px Arial, sans-serif !important;
     padding-top: 5px;
     padding-bottom: 5px;
-    letter-spacing: 4px;
+    letter-spacing: 2px;
 }
 
 .h2-hyperlink {
-    font: 24px Arial, sans-serif !important;
+    font: 20px Arial, sans-serif !important;
     padding-top: 5px;
     padding-bottom: 5px;
-    letter-spacing: 4px;
+    letter-spacing: 2px;
     text-decoration: none;
     color: var(--main-color-text)!important;
 }
@@ -115,7 +116,7 @@ h2 {
 }
 
 h3 {
-    font: 20px Arial, sans-serif !important;
+    font: 18px Arial, sans-serif !important;
     padding-top: 5px;
     padding-bottom: 5px;
     letter-spacing: 2px;
@@ -123,27 +124,27 @@ h3 {
 
 .h3-sunshine {
     color: var(--main-color-2);
-    font: 24px Arial, sans-serif !important;
+    font: 18px Arial, sans-serif !important;
 }
 
 p, li {
-    font: 16px Arial, sans-serif !important;
+    font: 15px Arial, sans-serif !important;
     padding-top: 5px;
     padding-bottom: 0px;
     line-height: 1.4 !important;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
 }
 
 
 .href_p {
-    font: 16px Arial, sans-serif !important;
+    font: 15px Arial, sans-serif !important;
     padding-top: 5px;
     padding-bottom: 0px;
     line-height: 1.4 !important;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
 }
 
-ol {
+.ol-no-overflow {
     white-space: pre-wrap; /* CSS3 */
     white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
     white-space: -pre-wrap; /* Opera 4-6 */
@@ -152,11 +153,11 @@ ol {
 }
 
 .href-a {
-    font: 16px Arial, sans-serif !important;
+    font: 15px Arial, sans-serif !important;
     padding-top: 5px;
     padding-bottom: 0px;
     line-height: 1.4 !important;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
     text-decoration: none!important;
     color: var(--main-color-hyperlink)!important;
 }
@@ -172,11 +173,11 @@ ol {
 }
 
 .p-sunshine {
-    font: 16px Arial, sans-serif !important;
+    font: 15px Arial, sans-serif !important;
     padding-top: 5px;
     padding-bottom: 0px;
     line-height: 1.4 !important;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
 
     color: var(--main-color-2);
     font-weight: 700!important;
@@ -187,7 +188,7 @@ ol {
     /* padding-top: 5px; */
     padding-bottom: 0px;
     /* line-height: 1.4 !important; */
-    letter-spacing: 2px;
+    letter-spacing: 1px;
 
     color: var(--main-color-3);
 
@@ -338,7 +339,7 @@ body {
 
 .btn-xlarge {
     padding: 5px 5px;
-    font-size: 16px; //change this to your desired size
+    font-size: 15px; //change this to your desired size
     line-height: normal;
     -webkit-border-radius: 8px;
        -moz-border-radius: 8px;

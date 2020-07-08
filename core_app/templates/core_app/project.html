@@ -5,8 +5,10 @@
                 <div class="card-header">
                    <p class="p-small"><span class="glyphicon glyphicon-tags"></span> {{ project.tags_as_str }}</p>
                 </div>
-                <div class="embed-responsive embed-responsive-16by9 ">
-                    <img class="card-img-top embed-responsive-item fadeIn" src="{{ project.image.url }}" alt="Card image cap">
+                <div class="embed-responsive embed-responsive-16by9 embed-responsive-select-effect">
+                    <a href="{{ project.project_url }}" target="_blank">
+                        <img class="card-img-top embed-responsive-item fadeIn" src="{{ project.image.url }}" alt="Card image cap">
+                    </a>
                 </div>
                 <div class="card-body">
                     <h3 class="card-title">{{ project.title }}</h3>

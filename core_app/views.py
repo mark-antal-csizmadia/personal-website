@@ -89,7 +89,7 @@ def core_app_view(request):
 
     # Build context for accessing data in HTML.
     context = {
-        "title": "Portfolio Website",
+        "title": "Portfolio",
         "form": form,
         "mark_profile": Profile.objects.get(user=User.objects.get(username="mark")),
         "cv_file_object": FilePDF.objects.get(identifier="cv"),
