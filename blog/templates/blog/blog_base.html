@@ -127,7 +127,7 @@
             });
 
             $("#navibut").on('click', function(event) {
-                if ( !$('#navbarToggle').hasClass('show')) {
+                if ( !$('#navbarToggle').hasClass('show') || document.body.scrollTop > 1 || document.documentElement.scrollTop > 1) {
                     document.getElementById("navbar").style.boxShadow = "0 1px 3px rgba(0,0,0, 0.14), 0 2px 3px rgba(0,0,0,0.24)";
                 }
                 else {
