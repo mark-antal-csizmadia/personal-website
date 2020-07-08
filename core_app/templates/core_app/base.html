@@ -116,6 +116,15 @@
                 }, 800);
             });
 
+            $("#navibut").on('click', function(event) {
+                if ( !$('#navbarToggle').hasClass('show')) {
+                    document.getElementById("navbar").style.boxShadow = "0 1px 3px rgba(0,0,0, 0.14), 0 2px 3px rgba(0,0,0,0.24)";
+                }
+                else {
+                    document.getElementById("navbar").style.boxShadow = "0 0px 0px rgba(0,0,0, 0.14), 0 0px 0px rgba(0,0,0,0.24)";
+                }
+            });
+
             $("#contactfooter").on('click', function(event) {
                 // Make sure this.hash has a value before overriding default behavior
                 if (this.hash !== "") {
@@ -163,7 +172,12 @@
           } else {
             document.getElementById("navbar").style.padding = "2.5rem 1.5rem";
             document.getElementById("navbarbrand").style.fontSize = "18px Arial, sans-serif !important";
-            document.getElementById("navbar").style.boxShadow = "0 0px 0px rgba(0,0,0, 0.14), 0 0px 0px rgba(0,0,0,0.24)";
+            if ( !$('#navbarToggle').hasClass('show')) {
+                document.getElementById("navbar").style.boxShadow = "0 0px 0px rgba(0,0,0, 0.14), 0 0px 0px rgba(0,0,0,0.24)";
+                }
+            else {
+                document.getElementById("navbar").style.boxShadow = "0 1px 3px rgba(0,0,0, 0.14), 0 2px 3px rgba(0,0,0,0.24)";
+            }
           }
         }
     </script>
