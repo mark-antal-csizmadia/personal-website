@@ -36,8 +36,8 @@
     <div class="container">
         <nav id="navbar" class="navbar navbar-expand-lg navbar-dark bg-aqua fixed-top">
             <div class="container">
-                <a id="navbarbrand" class="navbar-brand text-uppercase" href="{% url 'blog-home' %}">
-                    Mark Csizmadia <span class="bg-sunshine py-2 px-2">BLOG</span>
+                <a id="navbarbrand" class="navbar-brand" href="{% url 'blog-home' %}">
+                    Mark Csizmadia <span class="bg-sunshine py-2 px-2">Blog</span>
                 </a>
                 <button id="navibut" class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarToggle">
                     <span class="icon-bar top-bar"></span>
@@ -47,11 +47,11 @@
                 <div class="collapse navbar-collapse" id="navbarToggle">
                     <div class="navbar-nav ml-auto">
                         {% if post_detail %}
-                            <a class="nav-link text-uppercase" href="{% url 'blog-home' %}">
+                            <a class="nav-link" href="{% url 'blog-home' %}">
                                 <span class="glyphicon glyphicon-home"></span> Blog Home
                             </a>
                         {% endif %}
-                        <a class="nav-link text-uppercase" href="{% url 'core_app_view' %}">
+                        <a class="nav-link" href="{% url 'core_app_view' %}">
                             <span class="glyphicon glyphicon-log-out"></span> Leave Blog
                         </a>
                     </div>

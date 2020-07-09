@@ -12,8 +12,7 @@
 }
 
 /* root end */
-/* basics start */
-
+/* backgrounds start */
 
 .bg-sunshine {
     background: var(--main-color-2);
@@ -34,18 +33,24 @@
     color: var(--main-color-white);
 }
 
+/* backgrounds end */
+/* main sections spacing start */
+
 #about {
     padding-top: 50px;
     padding-bottom: 20px;
 }
+
 #projects {
     padding-top: 50px;
     padding-bottom: 20px;
 }
+
 #contact {
     padding-top: 50px;
     padding-bottom: 20px;
 }
+
 #to_blog {
     padding-top: 50px;
     padding-bottom: 80px;
@@ -58,7 +63,7 @@
 
 #post_list {
     padding-top: 0px;
-    padding-bottom: 50px;
+    padding-bottom: 0px;
 }
 
 #jumbotron {
@@ -70,53 +75,29 @@
     padding-top: 50px;
 }
 
+/* main sections spacing end */
+/* typography start */
+
 h1 {
-    font: 34px Georgia, serif !important;
+    font: 40px Georgia, serif !important;
+    padding-top: 5px;
     padding-bottom: 5px;
     letter-spacing: 4px;
 }
 
 .h1-sunshine {
     color: var(--main-color-2);
-    font: 34px Georgia, serif !important;
-    letter-spacing: 4px;
-}
-
-.text-underline {
-    font-style: italic;
-    color: var(--main-color-2)!important;
 }
 
 h2 {
-    font: 20px Arial, sans-serif !important;
+    font: 30px Arial, sans-serif !important;
     padding-top: 5px;
     padding-bottom: 5px;
     letter-spacing: 2px;
-}
-
-.h2-hyperlink {
-    font: 20px Arial, sans-serif !important;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    letter-spacing: 2px;
-    text-decoration: none;
-    color: var(--main-color-text)!important;
-}
-
-.h2-hyperlink:hover {
-    color: var(--main-color-text)!important;
-    border-bottom: none;
-    text-decoration: none;
-}
-
-.h2-hyperlink:active, .h2-hyperlink:focus {
-    color: var(--main-color-text)!important;
-    border-bottom: none;
-    text-decoration: none;
 }
 
 h3 {
-    font: 18px Arial, sans-serif !important;
+    font: 25px Arial, sans-serif !important;
     padding-top: 5px;
     padding-bottom: 5px;
     letter-spacing: 2px;
@@ -124,17 +105,20 @@ h3 {
 
 .h3-sunshine {
     color: var(--main-color-2);
-    font: 18px Arial, sans-serif !important;
 }
 
 p, li {
-    font: 15px Arial, sans-serif !important;
+    font: 16px Arial, sans-serif !important;
     padding-top: 5px;
     padding-bottom: 0px;
     line-height: 1.4 !important;
     letter-spacing: 1px;
 }
 
+.text-emphasis {
+    font-style: italic;
+    color: var(--main-color-2)!important;
+}
 
 .href_p {
     font: 15px Arial, sans-serif !important;
@@ -142,14 +126,6 @@ p, li {
     padding-bottom: 0px;
     line-height: 1.4 !important;
     letter-spacing: 1px;
-}
-
-.ol-no-overflow {
-    white-space: pre-wrap; /* CSS3 */
-    white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
-    white-space: -pre-wrap; /* Opera 4-6 */
-    white-space: -o-pre-wrap; /* Opera 7 */
-    word-wrap: break-word; /* Internet Explorer 5.5+ */
 }
 
 .href-a {
@@ -170,6 +146,23 @@ p, li {
 .href-a:active, .href-a:focus {
     color: var(--main-color-hyperlink-visited)!important;
     border-bottom: 1px solid var(--main-color-hyperlink-visited);
+}
+
+.black-hyperlink {
+    text-decoration: none;
+    color: var(--main-color-text)!important;
+}
+
+.black-hyperlink:hover {
+    color: var(--main-color-text)!important;
+    border-bottom: none;
+    text-decoration: none;
+}
+
+.black-hyperlink:active, .black-hyperlink:focus {
+    color: var(--main-color-text)!important;
+    border-bottom: none;
+    text-decoration: none;
 }
 
 .p-sunshine {
@@ -194,7 +187,45 @@ p, li {
 
 }
 
-/* basics end */
+.tag-like-text {
+    font: 12px Arial, sans-serif !important;
+    background: var(--main-color-2);
+    color: var(--main-color-white);
+    border-radius: 25px;
+    margin: 5px;
+    padding: 5px;
+}
+
+.navbar-text {
+    font: 20px Arial, sans-serif !important;
+}
+
+/* this one for no letting references overflow at the end of blog posts */
+.ol-no-overflow {
+    white-space: pre-wrap; /* CSS3 */
+    white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+    white-space: -pre-wrap; /* Opera 4-6 */
+    white-space: -o-pre-wrap; /* Opera 7 */
+    word-wrap: break-word; /* Internet Explorer 5.5+ */
+}
+
+/* typography end */
+
+/* parallax scrolling effect */
+.parallax {
+    /* The image used */
+    background-image: url("1.png");
+
+    /* Set a specific height */
+    min-height: 500px;
+
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: repeat;
+    background-size: cover;
+
+}
+
 /* body  start */
 
 body {
@@ -434,16 +465,16 @@ body {
     background: var(--main-color-1);
 }
 
-#contactfooter {
+.footer-href {
     color: var(--main-color-white);
-    background: var(--main-color-1);
-    text-decoration: underline;
+    text-decoration: none;
+    border-bottom: 1px solid var(--main-color-white);
 }
 
-#contactfooter:hover {
-    color: var(--main-color-2);
-    background: var(--main-color-1);
+.footer-href:hover {
+    color: var(--main-color-white);
     text-decoration: none;
+    border-bottom: 0px solid var(--main-color-white);
 }
 
 #totop {
@@ -452,7 +483,7 @@ body {
 }
 
 #totop:hover {
-    color: var(--main-color-2);
+    color: var(--main-color-white);
     background: var(--main-color-1);
 
 }

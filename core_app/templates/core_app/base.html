@@ -33,23 +33,25 @@
 <body>
     <div class="container">
         <nav id="navbar" class="navbar navbar-expand-lg navbar-dark bg-aqua fixed-top">
-        <div class="container">
-            <a id="navbarbrand" class="navbar-brand text-uppercase" href="#">Mark Csizmadia</a>
-            <button id="navibut" class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarToggle">
-                <span class="icon-bar top-bar"></span>
-                <span class="icon-bar middle-bar"></span>
-                <span class="icon-bar bottom-bar"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarToggle">
-                <div class="navbar-nav ml-auto">
-                    <a class="nav-link text-uppercase" href="#about">About</a>
-                    <a class="nav-link text-uppercase" href="#projects">Projects</a>
-                    <a class="nav-link text-uppercase" href="#contact">Contact</a>
-                    <a class="nav-link text-uppercase" href="#to_blog">Blog</a>
+            <div class="container">
+                <a id="navbarbrand" class="navbar-brand navbar-text" href="#">
+                    Mark Csizmadia
+                </a>
+                <button id="navibut" class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarToggle">
+                    <span class="icon-bar top-bar"></span>
+                    <span class="icon-bar middle-bar"></span>
+                    <span class="icon-bar bottom-bar"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarToggle">
+                    <div class="navbar-nav ml-auto">
+                        <a class="nav-link navbar-text" href="#about">About</a>
+                        <a class="nav-link navbar-text" href="#projects">Projects</a>
+                        <a class="nav-link navbar-text" href="#contact">Contact</a>
+                        <a class="nav-link navbar-text" href="#to_blog">Blog</a>
+                    </div>
                 </div>
             </div>
-        </div>
-    </nav>
+        </nav>
     </div>
 
     {% include "core_app/jumbotron.html" %}

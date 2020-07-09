@@ -15,7 +15,7 @@ from blog.models import Post, Tag
 from collections import OrderedDict
 
 
-PAGINATION_OBJECTS_PER_PAGE = 3
+PAGINATION_OBJECTS_PER_PAGE = 2
 
 
 def core_app_view(request):
@@ -63,7 +63,7 @@ def core_app_view(request):
                 body=incoming_message["body"],
                 from_email=settings.EMAIL_HOST_USER,
                 to=[settings.EMAIL_HOST_USER])
-            #incoming_email.send(fail_silently=False)
+            incoming_email.send(fail_silently=False)
             # Prepare thank you message to be sent to myself, convert it to an EmailMessage, and send email to myself.
             thank_you_message = {
                 "subject": "Thank you for contacting me! (Mark Csizmadia)",
@@ -77,7 +77,7 @@ def core_app_view(request):
                 body=thank_you_message["body"],
                 from_email=settings.EMAIL_HOST_USER,
                 to=[email])
-            #thank_you_email.send(fail_silently=False)
+            thank_you_email.send(fail_silently=False)
             # User feedback as message to confirm that they contacted me successfully via email.
             messages.success(request, f'Thank you for your message, {name}!')
             return redirect('core_app_view')
