@@ -85,6 +85,12 @@ h1 {
     letter-spacing: 4px;
 }
 
+@media (max-width: 991px) {
+  h1 {
+    text-align: center;
+  }
+}
+
 .h1-sunshine {
     color: var(--main-color-2);
 }
@@ -109,10 +115,14 @@ h3 {
 
 p, li {
     font: 16px Arial, sans-serif !important;
-    padding-top: 5px;
-    padding-bottom: 0px;
     line-height: 1.4 !important;
     letter-spacing: 1px;
+}
+
+.p-border {
+    border-left: 2px solid var(--main-color-2);
+    padding-left: 15px;
+    margin-left: 0px;
 }
 
 .text-emphasis {
@@ -188,7 +198,7 @@ p, li {
 }
 
 .tag-like-text {
-    font: 12px Arial, sans-serif !important;
+    font: 14px Arial, sans-serif !important;
     background: var(--main-color-2);
     color: var(--main-color-white);
     border-radius: 25px;
@@ -577,6 +587,8 @@ body {
   }
 }
 
+
+
 .progress-bar {
   height: 10px;
   background: var(--main-color-1);
@@ -692,7 +704,7 @@ body {
   position: relative;
   height: 100px;
   width: 90%;
-  max-width: 800px;
+  max-width: 8000px; /* was 800px */
   margin: 0 auto;
 }
 .cd-horizontal-timeline .events-wrapper {
@@ -896,7 +908,7 @@ body {
   -ms-transform: translateX(-100%);
   -o-transform: translateX(-100%);
   transform: translateX(-100%);
-  padding: 0 5%;
+  /* padding: 0 5%; */
   opacity: 0;
   -webkit-animation-duration: 0.4s;
   -moz-animation-duration: 0.4s;

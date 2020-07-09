@@ -157,6 +157,7 @@
 
             $('a[href*="pills"]').on('click', function(event) {
                 $('#project_selector').text($(this).text());
+                $('#tag_n').text($(this).data('n'));
                 $('#bs-example-navbar-collapse-1').collapse("hide")
             });
 

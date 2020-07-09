@@ -1,41 +1,39 @@
-<div id="projects" class="container bg-white" style="border-bottom: 1px solid #d3d3d3;">
+<div id="projects" class="container bg-white px-0" style="border-bottom: 1px solid #d3d3d3;">
     <h1>Projects</h1>
 
-    <nav id="navbar_projects" class="navbar navbar-dark bg-white">
-        <div class="container">
-            <div class="navbar-header" style="width: 100%;">
-                <div class="row">
-                    <div class="col-1">
-                        <button id="project_nav_but" class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                            <span class="icon-bar top-bar" data-toggle="tooltip" data-placement="top" title="Filter by tag."></span>
-                            <span class="icon-bar middle-bar" data-toggle="tooltip" data-placement="top" title="Filter by tag."></span>
-                            <span class="icon-bar bottom-bar" data-toggle="tooltip" data-placement="top" title="Filter by tag."></span>
-                        </button>
-                    </div>
-                    <div class="col-11">
-                        <p data-toggle="tooltip" data-placement="top" title="Filter by tag using the menu.">
-                            {% for tag, projects in projects_as_dict.items %}
-                                {% if forloop.first %}
-                                    Filtered by: <span id="project_selector"> {{ tag.name }} ({{ projects.paginator.count }})</span>
-                                {% endif %}
-                            {% endfor %}
+    <nav id="navbar_projects" class="navbar navbar-dark bg-white mr-auto">
+        <div class="container px-0">
+            <div class="navbar-header px-0 ml-5">
+
+                <button id="project_nav_but" class="navbar-toggler collapsed px-0" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="icon-bar top-bar" data-toggle="tooltip" data-placement="top" title="Filter by tag."></span>
+                    <span class="icon-bar middle-bar" data-toggle="tooltip" data-placement="top" title="Filter by tag."></span>
+                    <span class="icon-bar bottom-bar" data-toggle="tooltip" data-placement="top" title="Filter by tag."></span>
+                </button>
+
+                {% for tag, projects in projects_as_dict.items %}
+                    {% if forloop.first %}
+                        <p class="p-small mt-3">
+                            Filter result: <span id="tag_n">{{ projects.paginator.count }}</span> projects</p>
+                        <p class="mt-3" data-toggle="tooltip" data-placement="top" title="Filter by tag using the menu.">
+                            Filtered by <span id="project_selector"> {{ tag.name }}</span>
                         </p>
-                    </div>
-                </div>
+                    {% endif %}
+                {% endfor %}
             </div>
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav nav-pills" id="pills-tab" role="tablist">
+            <div class="collapse navbar-collapse ml-5" id="bs-example-navbar-collapse-1">
+                <ul class="nav nav-pills" id="pills-tab" role="tablist" style="border-bottom: 1px solid #d3d3d3; margin-bottom: 15px; padding-bottom: 15px;">
                     {% for tag, projects in projects_as_dict.items %}
                         {% if forloop.first %}
                             <li class="nav-item">
-                                <a class="nav-link active p-small py-2" id="pills-{{ tag.slug }}-tab" data-toggle="pill" href="#pills-{{ tag.slug }}" role="tab" aria-controls="pills-{{ tag.slug }}" aria-selected="true">
-                                    {{ tag.name }} ({{ projects.paginator.count }})
+                                <a data-n="{{ projects.paginator.count }}" class="nav-link active p-small py-2" id="pills-{{ tag.slug }}-tab" data-toggle="pill" href="#pills-{{ tag.slug }}" role="tab" aria-controls="pills-{{ tag.slug }}" aria-selected="true">
+                                    {{ tag.name }}
                                 </a>
                             </li>
                         {% else %}
                             <li class="nav-item">
-                                <a class="nav-link p-small py-2" id="pills-{{ tag.slug }}-tab" data-toggle="pill" href="#pills-{{ tag.slug }}" role="tab" aria-controls="pills-{{ tag.slug }}" aria-selected="false">
-                                    {{ tag.name }} ({{ projects.paginator.count }})
+                                <a data-n="{{ projects.paginator.count }}" class="nav-link p-small py-2" id="pills-{{ tag.slug }}-tab" data-toggle="pill" href="#pills-{{ tag.slug }}" role="tab" aria-controls="pills-{{ tag.slug }}" aria-selected="false">
+                                    {{ tag.name }}
                                 </a>
                             </li>
                         {% endif %}
@@ -43,7 +41,7 @@
                 </ul>
             </div>
 
-            <div class="tab-content" id="pills-tabContent">
+            <div class="tab-content mt-4" id="pills-tabContent">
                 {% for tag, projects in projects_as_dict.items %}
                     {% if forloop.first %}
                         <div class="tab-pane fade show active" id="pills-{{ tag.slug }}" role="tabpanel" aria-labelledby="pills-{{ tag.slug }}-tab">
@@ -52,7 +50,7 @@
                             </div>
                             {% if not projects.has_next %}
                             {% else %}
-                                <div class="d-flex justify-content-center">
+                                <div class="d-flex justify-content-center mt-5">
                                     <a id="lazyLoadLinkProjectsActive" class="btn btn-outline-info btn-xlarge href_p" href="javascript:void(0);" data-page="2" data-tag="{{ tag.slug }}">
                                         Load More Projects
                                     </a>
@@ -66,7 +64,7 @@
                             </div>
                             {% if not projects.has_next %}
                             {% else %}
-                                <div class="d-flex justify-content-center">
+                                <div class="d-flex justify-content-center mt-5">
                                     <a id="lazyLoadLinkProjects" class="btn btn-outline-info btn-xlarge href_p" href="javascript:void(0);" data-page="2" data-tag="{{ tag.slug }}">
                                         Load More Projects
                                     </a>
