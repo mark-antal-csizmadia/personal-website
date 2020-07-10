@@ -119,10 +119,17 @@ p, li {
     letter-spacing: 1px;
 }
 
-.contact-form-p, #id_name, #id_email, #id_subject, #id_message {
-    font: 15px Arial, sans-serif !important;
+.contact-form-p {
+    font: 16px Arial, sans-serif !important;
     line-height: 1.4 !important;
     letter-spacing: 1px;
+}
+
+#id_name, #id_email, #id_subject, #id_message {
+    font: 14px Arial, sans-serif !important;
+    line-height: 1.4 !important;
+    letter-spacing: 1px;
+
 }
 
 .p-border {

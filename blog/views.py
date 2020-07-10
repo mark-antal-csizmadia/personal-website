@@ -105,7 +105,6 @@ def blog_filter_view(request, tag_slug):
 
 def blog_filter_view_lazy(request, tag_slug):
     page = request.POST.get('page')
-    print(page)
     t = Tag.objects.get(slug=tag_slug)
     posts = Post.objects.filter(tags=t).order_by('-date_posted')
     # use Django's pagination

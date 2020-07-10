@@ -38,7 +38,7 @@ def core_app_view(request):
             projects = paginator.page(paginator.num_pages)
 
         projects_as_dict[tag] = projects
-    print(projects_as_dict)
+
     # POST request can be:
     # (1) contact form sent
     # (2) Projects filtered by tags
@@ -120,10 +120,8 @@ def core_app_view(request):
 
 
 def projects_filter_view_lazy(request):
-    print("executing projects_filter_view_lazy")
     page = request.POST.get('page')
     tag_slug = request.POST.get('tag_slug')
-    print("tag_slug_ajax: {0}".format(tag_slug))
     t = Tag.objects.get(slug=tag_slug)
     projects = Project.objects.filter(tags=t).order_by('-date_posted')
     # use Django's pagination
@@ -140,7 +138,6 @@ def projects_filter_view_lazy(request):
         'core_app/project.html',
         {'projects': projects}
     )
-    print("project_html")
     # package output data and return it as a JSON object
     output_data = {
         'project_html': project_html,
