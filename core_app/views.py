@@ -13,6 +13,7 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse
 from blog.models import Post, Tag
 from collections import OrderedDict
+from django.utils import timezone
 
 
 PAGINATION_OBJECTS_PER_PAGE = 2
@@ -49,6 +50,7 @@ def core_app_view(request):
         if form.is_valid():
             # Save form content, and extract information.
             form.save()
+            form_submission_timestamp = timezone.now()
             name = form.cleaned_data['name']
             subject = form.cleaned_data['subject']
             email = form.cleaned_data['email']
@@ -56,7 +58,10 @@ def core_app_view(request):
             # Prepare incoming message to be sent to myself, convert it to an EmailMessage, and send email to myself.
             incoming_message = {
                 "subject": subject + " from {0}, through Django".format(name),
-                "body": message + "\n\nYou received this email from '{0}', email: {1}".format(name, email)
+                "body":
+                    subject + "\n\n" + message +
+                    "\n\nTo self: I received this email from '{0}', email: '{1}' (form submitted {2})".format(
+                        name, email, form_submission_timestamp)
             }
             incoming_email = EmailMessage(
                 subject=incoming_message["subject"],

@@ -34,7 +34,7 @@
     <div class="container">
         <nav id="navbar" class="navbar navbar-expand-lg navbar-dark bg-aqua fixed-top">
             <div class="container">
-                <a id="navbarbrand" class="navbar-brand navbar-text" href="#">
+                <a id="navbarbrand" class="navbar-brand navbar-text" href="{% url 'core_app_view' %}">
                     Mark Csizmadia
                 </a>
                 <button id="navibut" class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarToggle">
@@ -109,13 +109,6 @@
                 if ( $('#navbarToggle').hasClass('show')) {
                     $('.collapse').collapse("hide");
                 }
-            });
-
-
-            $(".navbar-brand").on('click', function(event) {
-                $("html, body").animate({
-                    scrollTop: 0
-                }, 800);
             });
 
             $("#navibut").on('click', function(event) {

@@ -36,8 +36,9 @@
                             {% else %}
                                 <div class="carousel-item">
                                     <div class="embed-responsive embed-responsive-16by9 embed-responsive-select-featured-effect">
-                                        <img class="embed-responsive-item d-block" src="{{ featured_post.image.url }}" alt="Slide no. {{ forloop.counter0 }}">
-                                        <a href="{% url 'post-detail' featured_post.slug %}"></a>
+                                        <a href="{% url 'post-detail' featured_post.slug %}">
+                                            <img class="embed-responsive-item d-block" src="{{ featured_post.image.url }}" alt="Slide no. {{ forloop.counter0 }}">
+                                        </a>
                                     </div>
                                     <div class="carousel-caption d-xs-block d-md-block px-5">
                                         <h2>{{ featured_post.title }}</h2>
@@ -93,7 +94,7 @@
         {% if next_page_number == previous_page_number %}
         {% else %}
             <a id="lazyLoadLink" class="btn btn-outline-info btn-xlarge href_p" href="javascript:void(0);" data-page="2">
-                Load More Posts
+                <span class="glyphicon glyphicon-refresh"></span> More Posts
             </a>
         {% endif %}
 

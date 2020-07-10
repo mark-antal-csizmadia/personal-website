@@ -2,7 +2,7 @@
 <div id="contact" class="container" style="border-bottom: 1px solid #d3d3d3;">
     <h1>Contact</h1>
     <div class="row">
-        <div class="col-md-5 bg-white my-3">
+        <div class="col-lg-5 bg-white my-3">
             <p>Drop me a line and I will get back to you in <span class="text-emphasis">24 hours.</span></p>
             <p><span class="glyphicon glyphicon-map-marker"></span> Stockholm, Sweden</p>
             <p><span class="glyphicon glyphicon-phone"></span> +36 309524269 (HU)</p>
@@ -10,10 +10,10 @@
             <p><span class="fa fa-linkedin fa-lg"></span> <a class="href-a" href="https://www.linkedin.com/in/mark-antal-csizmadia/" target="_blank"> LinkedIn</a></p>
             <p><span class="fa fa-github fa-lg"></span> <a class="href-a" href="https://github.com/mark-antal-csizmadia" target="_blank"> GitHub</a></p>
         </div>
-        <div class="col-md-7 my-3">
-            <form method="POST">
+        <div class="col-lg-7 my-3">
+            <form method="POST" class="mx-4">
                 {% csrf_token %}
-                <fieldset class="form-group row">
+                <fieldset class="form-group row contact-form-shadow-effect contact-form-p">
                     {{ form|crispy }}
                 </fieldset>
                 <div class="form-group text-center">

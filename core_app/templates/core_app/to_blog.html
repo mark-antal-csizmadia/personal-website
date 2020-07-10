@@ -12,7 +12,9 @@
         </div>
         <div class="col-lg-6">
             <p>
-                Currently, my blog has <span class="tag-like-text">{{ number_of_posts }} posts</span> in topics such as
+                Currently, my blog has <span class="text-emphasis">{{ number_of_posts }} posts</span> with an
+                overall reading time of <span class="text-emphasis">{{ overall_reading_time }} minutes</span>
+                in topics such as
             </p>
             <p>
                 {% for tag in tags %}
@@ -22,9 +24,6 @@
                         <li class="list-inline-item tag-like-text"> {{ tag.name }},</li>
                     {% endif %}
                 {% endfor %}
-            </p>
-            <p>
-                with an overall reading time of <span class="tag-like-text">{{ overall_reading_time }} minutes</span>.
             </p>
         </div>
     </div>

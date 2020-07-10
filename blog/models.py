@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.utils import  timezone
+from django.utils import timezone
 from django.template.defaultfilters import slugify
 from django.urls import reverse
 from PIL import Image
@@ -30,6 +30,7 @@ class Tag(models.Model):
 class Post(models.Model):
     title = models.CharField(max_length=200)
     image = models.ImageField(default='default.jpg', upload_to='post_pics')
+    image_source = models.CharField(default="default_image_source", max_length=300)
     short_intro = models.TextField(default="default short intro")
     content = models.TextField(default="default content")
     post_readtime = models.CharField(max_length=100, default="no readtime estimate")

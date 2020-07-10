@@ -9,6 +9,7 @@
             <div class="embed-responsive embed-responsive-16by9">
                 <img class="embed-responsive-item fadeIn" src="{{ object.image.url }}" alt="Card image cap">
             </div>
+            <p class="p-small mt-3">Image source: {{ object.image_source }}</p>
         </div>
         <span class="glyphicon glyphicon-tags mt-5"></span>
         {% for tag in object.tags.all %}

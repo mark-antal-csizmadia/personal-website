@@ -72,7 +72,7 @@
 }
 
 #featured_posts {
-    padding-top: 50px;
+    padding-top: 60px;
 }
 
 /* main sections spacing end */
@@ -115,6 +115,12 @@ h3 {
 
 p, li {
     font: 16px Arial, sans-serif !important;
+    line-height: 1.4 !important;
+    letter-spacing: 1px;
+}
+
+.contact-form-p, #id_name, #id_email, #id_subject, #id_message {
+    font: 15px Arial, sans-serif !important;
     line-height: 1.4 !important;
     letter-spacing: 1px;
 }
@@ -198,12 +204,13 @@ p, li {
 }
 
 .tag-like-text {
-    font: 14px Arial, sans-serif !important;
+    font: 13px Arial, sans-serif !important;
     background: var(--main-color-2);
     color: var(--main-color-white);
     border-radius: 25px;
     margin: 5px;
-    padding: 5px;
+    padding: 8px;
+    white-space: nowrap;
 }
 
 .navbar-text {
@@ -401,7 +408,8 @@ body {
 .btn-outline-info, .btn-outline-info:focus {
     background: var(--main-color-white);
     color: var(--main-color-3);
-    box-shadow: none;
+    box-shadow: 0 4px 8px rgba(0,0,0, 0.19), 0 2px 2px rgba(0,0,0, 0.23);
+    border: none!important;
 }
 
 .btn-outline-info:not(:disabled):not(.disabled).active,
@@ -409,6 +417,7 @@ body {
     background: var(--main-color-3);
     color: var(--main-color-white);
     box-shadow: none;
+    border: none;
 }
 
 .btn-outline-info.disabled,
@@ -416,16 +425,18 @@ body {
     background: var(--main-color-white);
     color: var(--main-color-3);
     box-shadow: none;
+    border: none;
 }
 
 .btn-outline-info:hover{
     box-shadow: 0 10px 20px rgba(0,0,0, 0.19), 0 6px 6px rgba(0,0,0, 0.23);
     background: var(--main-color-3);
     color: var(--main-color-white);
+    border: none;
 }
 
 .btn-primary, .btn-primary:focus  {
-    box-shadow: none;
+    box-shadow: 0 4px 8px rgba(0,0,0, 0.19), 0 2px 2px rgba(0,0,0, 0.23);
     background: var(--main-color-3);
     color: var(--main-color-white);
 }
@@ -439,6 +450,14 @@ body {
 
 .card-header {
     background-color: var(--main-color-white);
+}
+
+.card-shadow-effect {
+    box-shadow: 0 5px 15px rgba(0,0,0, 0.14), 0 2px 3px rgba(0,0,0,0.24);
+}
+
+.contact-form-shadow-effect {
+    box-shadow: 0 5px 15px rgba(0,0,0, 0.14), 0 2px 3px rgba(0,0,0,0.24);
 }
 
 .embed-responsive-select-featured-effect:hover {
