@@ -67,13 +67,13 @@
     </div>
     <div class="container pt-5">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-6">
                 <p class="p-small">Filter result: {{ posts.paginator.count }} posts</p>
                 <div class="dropdown show">
-                    <a class="btn btn-secondary dropdown-toggle btn-xlarge href_p" href="{% url 'blog-home' %}" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="btn btn-primary btn-xlarge href_p dropdown-toggle" href="{% url 'blog-home' %}" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Filtered by {{ filtered_by }}
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <div class="dropdown-menu card-shadow-effect" style="border: none!important; width: 100%!important;" aria-labelledby="dropdownMenuLink">
                         <a class="dropdown-item href_p" href="{% url 'blog-home' %}">
                             Everything
                         </a>
@@ -83,6 +83,7 @@
                     </div>
                 </div>
             </div>
+            <div class="col-6"></div>
         </div>
 
     </div>
