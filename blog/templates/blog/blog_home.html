@@ -66,10 +66,10 @@
         </div>
     </div>
     <div class="container pt-5">
-        <div class="row">
+        <div id="post_dropdown_row" class="row">
             <div class="col-6">
                 <p class="p-small">Filter result: {{ posts.paginator.count }} posts</p>
-                <div class="dropdown show">
+                <div id="post_dropdown_menu" class="dropdown">
                     <a class="btn btn-primary btn-xlarge href_p dropdown-toggle" href="{% url 'blog-home' %}" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Filtered by {{ filtered_by }}
                     </a>
