@@ -40,7 +40,7 @@ def blog_home_view(request):
                "tags": Tag.objects.all(),
                "featured_posts": featured_posts,
                "filtered_by": "Everything",
-               "post_detail": False}
+               "show_blog_home_button": False}
 
     return render(request, 'blog/blog_home.html', context)
 
@@ -98,7 +98,7 @@ def blog_filter_view(request, tag_slug):
                "next_page_number": next_page_number,
                "tags": Tag.objects.all(),
                "filtered_by": t,
-               "post_detail": False}
+               "show_blog_home_button": True}
 
     return render(request, 'blog/blog_filter.html', context)
 
@@ -140,5 +140,5 @@ def post_detail_view(request, slug):
                "object": post,
                "sections": sections,
                "random_posts": random_posts,
-               "post_detail": True}
+               "show_blog_home_button": True}
     return render(request, 'blog/post_detail.html', context)
