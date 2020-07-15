@@ -25,6 +25,7 @@ SECRET_KEY = 'g$5p&8o&8-s=*3=pv-y4ysfwlc)p$5rq7p_99)j$ih+%*ot7sp'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# The second and the third elements in the list are used to tunnel to my phone using ngrok.
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'cf64fc5c1ade.ngrok.io']
 
 
@@ -126,11 +127,16 @@ STATIC_URL = '/static/'
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
 
+# Media root (.png, .jpg, etc.)
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+# Use crispy forms for easier for design and usage.
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
+# Email backend for the Contact section where users can contact me with a form.
+# The information they provide in the contact form is sent to me by me (same email).
+# This serves a notification to myself.
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
@@ -138,5 +144,8 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS')
 
+# Recommended setting for using the summmernote module.
+# The summernote module is used to make the text in blog posts easily modifiable.
+# Essentially, I store HTML markup in the database with the use of summernote.
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 SUMMERNOTE_THEME = 'bs4'
