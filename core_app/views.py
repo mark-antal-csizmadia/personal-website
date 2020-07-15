@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
 from projects.models import Project
-from projects.serializer import ProjectSerializer
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import JsonResponse
 from django.template import loader
