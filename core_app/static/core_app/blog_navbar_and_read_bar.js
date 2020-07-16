@@ -22,8 +22,10 @@ function scrollFunction() {
     }
     // Show the percentage of a post detail view that the user read in the form of a vertical loading bar just
     // under the navbar.
-    var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-    var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    var scrolled = (winScroll / height) * 100;
-    document.getElementById("myBar").style.width = scrolled + "%";
+    if (document.getElementById('myBar') !== null) {
+        var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        var scrolled = (winScroll / height) * 100;
+        document.getElementById("myBar").style.width = scrolled + "%";
+    }
 }
