@@ -16,14 +16,20 @@ dependencies:
   - zlib=1.2.11=h62dcd97_4
   - pip:
     - asgiref==3.2.7
+    - beautifulsoup4==4.9.1
     - chardet==3.0.4
+    - cssselect==1.1.0
     - django==3.0.6
     - django-crispy-forms==1.9.1
     - django-summernote==0.8.11.6
     - djangorestframework==3.11.0
     - idna==2.9
+    - markdown2==2.3.9
+    - pyquery==1.4.1
     - pytz==2020.1
+    - readtime==1.1.1
     - requests==2.23.0
+    - soupsieve==2.0.1
     - sqlparse==0.3.1
     - urllib3==1.25.9
 prefix: D:\Mark\Programs\Anaconda\envs\django_portfolio
