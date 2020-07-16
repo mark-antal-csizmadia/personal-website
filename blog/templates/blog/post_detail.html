@@ -1,5 +1,7 @@
+<!-- Extend the blog_base.html -->
 {% extends "blog/blog_base.html" %}
 {% block content %}
+    <!-- Reading progress bar -->
     <div class="progress-container" id="progress_container">
         <div class="progress-bar" id="myBar"></div>
     </div>
@@ -26,8 +28,10 @@
         <span class="glyphicon glyphicon-time mt-3"></span>
         <small class="p-small">{{ object.post_readtime }}</small>
     </div>
+    <!-- Grid structure for splitting the space between the floating contents window and the post content -->
     <div class="container-fluid" style="border-bottom: 1px solid #d3d3d3;">
         <div class="row">
+            <!-- Floating sidebar for content-based navigation -->
             <div class="col-lg-3">
                 <div id="sidebar" class="container sticky-top">
                     <p id="contents_header">Contents</p>
@@ -39,16 +43,19 @@
                         {% endfor %}
                     </div>
                 </div>
-
             </div>
+            <!-- The post content columns -->
             <div class="col-lg-6">
                 <div id="post_list" class="container">
                     {{ object.content|safe }}
                 </div>
             </div>
+            <!-- Empty columns for symmetrical spacing -->
             <div class="col-lg-3"></div>
         </div>
     </div>
+    <!-- Keep reader in a reading loop by offering two randomly selected blog post to read at the
+    end of the current one -->
     <div class="container py-5">
         <h2>Continue reading</h2>
         <p class="p-small">With these randomly selected posts</p>
@@ -59,6 +66,7 @@
                         <div class="card-header p-small text-left">
                             <ul class="list-inline">
                                 <span class="glyphicon glyphicon-tags"></span>
+                                <!-- Solution for clickable/anchor tags that are shortcuts for filtering posts -->
                                 {% for tag in post.tags.all %}
                                     {% if forloop.last %}
                                         <a href="{% url 'blog-filter' tag.slug %}"><li class="list-inline-item p-small"> {{ tag.name }}</li></a>

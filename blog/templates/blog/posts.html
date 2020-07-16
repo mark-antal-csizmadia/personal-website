@@ -1,8 +1,10 @@
+<!-- Creates a card for each post -->
 {% for post in posts %}
     <div class="card card-shadow-effect my-5 infinite-item">
         <div class="card-header p-small text-left">
             <ul class="list-inline">
                 <span class="glyphicon glyphicon-tags"></span>
+                <!-- Solution for clickable/anchor tags that are shortcuts for filtering posts -->
                 {% for tag in post.tags.all %}
                     {% if forloop.last %}
                         <a href="{% url 'blog-filter' tag.slug %}"><li class="list-inline-item p-small"> {{ tag.name }}</li></a>

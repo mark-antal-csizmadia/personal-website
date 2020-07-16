@@ -6,46 +6,58 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
+    <!-- Bootstrap CSS via CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <!-- AJAX via CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!-- Summernote CSS -->
+
+    <!-- Summernote CSS via CDN -->
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+
+    <!-- main CSS file -->
     <link rel="stylesheet" type="text/css" href="{% static 'core_app/main.css' %}">
-    <!-- Glyps -->
+
+    <!-- Bootstrap glyphicons via CDN -->
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 
     <!-- Favicon in browser tab -->
     <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
 
+    <!-- A CSRF token is required when making post requests in Django.
+    To be used for making AJAX requests in script.js for lazy loading posts -->
+    <script type="text/javascript">
+        window.CSRF_TOKEN = "{{ csrf_token }}";
+    </script>
+
+    <!-- Title of browser tab -->
     {% if title %}
         <title>Mark Csizmadia | {{ title }}</title>
     {% else %}
         <title>Mark Csizmadia</title>
     {% endif %}
-    <script type="text/javascript">
-      // A CSRF token is required when making post requests in Django
-      // To be used for making AJAX requests in script.js
-      window.CSRF_TOKEN = "{{ csrf_token }}";
-    </script>
-
 </head>
 
 <body>
+    <!-- Navbar container -->
     <div class="container">
+        <!-- Navbar -->
         <nav id="navbar" class="navbar navbar-expand-lg navbar-dark bg-aqua fixed-top">
             <div class="container">
+                <!-- Navbar brand with my name -->
                 <a id="navbarbrand" class="navbar-brand" href="{% url 'blog-home' %}">
                     Mark Csizmadia <span class="bg-sunshine py-2 px-2">Blog</span>
                 </a>
+                <!-- Navbar button -->
                 <button id="navibut" class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarToggle">
                     <span class="icon-bar top-bar"></span>
                     <span class="icon-bar middle-bar"></span>
                     <span class="icon-bar bottom-bar"></span>
                 </button>
+                <!-- Navbar collapse -->
                 <div class="collapse navbar-collapse" id="navbarToggle">
                     <div class="navbar-nav ml-auto">
+                        <!-- Show extra Back to Blog Home navlink when posts are filtered or viewed in detail -->
                         {% if show_blog_home_button %}
                             <a class="nav-link" href="{% url 'blog-home' %}">
                                 <span class="glyphicon glyphicon-home"></span> Blog Home
@@ -60,136 +72,52 @@
         </nav>
     </div>
 
-
+    <!-- insert content from one of the following: blog_home.html, blog_filter.html, post_detail.html -->
     {% block content %}{% endblock %}
+
+    <!-- Include the Footer -->
     {% include 'blog/footer.html' %}
+
+    <!-- JQuery script -->
     <script
         src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
         crossorigin="anonymous">
     </script>
 
-    <script>
-        // When the user scrolls down 80px from the top of the document, resize the navbar's padding and the logo's font size
-        window.onscroll = function() {scrollFunction()};
-
-        function scrollFunction() {
-          if (document.body.scrollTop > 1 || document.documentElement.scrollTop > 1) {
-            document.getElementById("navbar").style.padding = "1rem 1rem";
-            document.getElementById("navbarbrand").style.font = "25px Arial, sans-serif !important";
-            document.getElementById("navbar").style.boxShadow = "0 1px 3px rgba(0,0,0, 0.14), 0 2px 3px rgba(0,0,0,0.24)";
-          } else {
-            document.getElementById("navbar").style.padding = "2.5rem 1.5rem";
-            document.getElementById("navbarbrand").style.fontSize = "18px Arial, sans-serif !important";
-            if ( !$('#navbarToggle').hasClass('show')) {
-                document.getElementById("navbar").style.boxShadow = "0 0px 0px rgba(0,0,0, 0.14), 0 0px 0px rgba(0,0,0,0.24)";
-                }
-            else {
-                document.getElementById("navbar").style.boxShadow = "0 1px 3px rgba(0,0,0, 0.14), 0 2px 3px rgba(0,0,0,0.24)";
-            }
-
-          }
-          var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-          var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-          var scrolled = (winScroll / height) * 100;
-          document.getElementById("myBar").style.width = scrolled + "%";
-
-        }
+    <!-- Script for resizing navbar and playing with its shadow effect, and reading percentage bar for post
+     detailed view (Medium style) -->
+    <script
+        src="{% static 'core_app/blog_navbar_and_read_bar.js' %}">
     </script>
-    <script>
-        $(document).ready(function(){
-            // Add scrollspy to <body>
-            $('body').scrollspy({target: "#sidebar_list", offset: 120});
 
-            // Add smooth scrolling on all links inside the navbar
-            $(".list-group-item-action").on('click', function(event) {
-                // Make sure this.hash has a value before overriding default behavior
-                if (this.hash !== "") {
-                    // Prevent default anchor click behavior
-                    event.preventDefault();
-
-                    // Store hash
-                    var hash = this.hash;
-
-                    // Using jQuery's animate() method to add smooth page scroll
-                    // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
-                    $('html, body').animate({
-                        scrollTop: $(hash).offset().top - 80
-                    }, 800, function(){
-
-                        // Add hash (#) to URL when done scrolling (default click behavior)
-                        // window.location.hash = hash;
-                    });
-
-                }  // End if
-
-
-            });
-
-            $("#navibut").on('click', function(event) {
-                if ( !$('#navbarToggle').hasClass('show') || document.body.scrollTop > 1 || document.documentElement.scrollTop > 1) {
-                    document.getElementById("navbar").style.boxShadow = "0 1px 3px rgba(0,0,0, 0.14), 0 2px 3px rgba(0,0,0,0.24)";
-                }
-                else {
-                    document.getElementById("navbar").style.boxShadow = "0 0px 0px rgba(0,0,0, 0.14), 0 0px 0px rgba(0,0,0,0.24)";
-                }
-            });
-
-
-            $(".navbar-brand").on('click', function(event) {
-                $("html, body").animate({
-                    scrollTop: 0
-                }, 800);
-            });
-
-            $("#totop").on('click', function(event) {
-                $("html, body").animate({
-                    scrollTop: 0
-                }, 800);
-            });
-
-            $(".navbar-brand").on('click', function(event) {
-                $("html, body").animate({
-                    scrollTop: 0
-                }, 800);
-            });
-
-        });
+    <!-- Document ready scripts -->
+    <script
+        src="{% static 'core_app/blog_document_ready.js' %}">
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
-    <script>
-        (function($) {
-          $('#lazyLoadLink').on('click', function() {
-            var link = $(this);
-            var page = link.data('page');
-            $.ajax({
-              type: 'post',
-              url: 'lazy_load_posts/',
-              data: {
-                'page': page,
-                'csrfmiddlewaretoken': window.CSRF_TOKEN // from index.html
-              },
-              success: function(data) {
-                // if there are still more pages to load,
-                // add 1 to the "Load More Posts" link's page data attribute
-                // else hide the link
-                if (data.has_next) {
-                    link.data('page', page+1);
-                } else {
-                  link.hide();
-                }
-                // append html to the posts div
-                $('#post_list').append(data.posts_html);
-              },
-              error: function(xhr, status, error) {
-                // shit happens friends!
-              }
-            });
-          });
-        }(jQuery));
+    <!-- Popper JS script -->
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous">
+    </script>
+
+    <!-- Bootstrap JS script -->
+    <script
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous">
+    </script>
+
+    <!-- Summernote JS script -->
+    <script
+        src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js">
+    </script>
+
+    <!-- Lazy load for blog posts (almost identical to that used in the core_app module) -->
+    <script
+        src="{% static 'core_app/blog_lazy_load_posts.js' %}">
     </script>
 </body>
 </html>

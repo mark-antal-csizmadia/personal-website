@@ -1,6 +1,10 @@
+<!-- Extend the blog_base.html -->
+<!-- the blog_filter.html is almost the same the blog_home.html except the following:
+(1) featured posts
+(2) there is a Back to Blog Home navlink in the main navbar
+(3) the lazy load only load the filtered posts -->
 {% extends "blog/blog_base.html" %}
 {% block content %}
-
     <div class="container" style="padding-top: 50px;">
         <div class="row">
             <div class="col-6">
@@ -23,7 +27,8 @@
             <div class="col-6"></div>
         </div>
     </div>
-    <div id="post_list" class="container infinite-container"    >
+
+    <div id="post_list" class="container infinite-container">
         {% include 'blog/posts.html' %}
     </div>
 
@@ -35,6 +40,4 @@
             </a>
         {% endif %}
     </div>
-
-
 {% endblock content %}
