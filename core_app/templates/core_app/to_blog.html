@@ -1,5 +1,8 @@
+<!-- The Blog section -->
 <div id="to_blog" class="container bg-white" style="border-bottom: 1px solid #d3d3d3;">
+    <!-- The blog header -->
     <h1>Blog</h1>
+    <!-- The grid structure of the blog section -->
     <div class="row">
         <div class="col-lg-6">
             <p>
@@ -17,6 +20,10 @@
                 in topics such as
             </p>
             <p>
+                <!-- Show all of the tags that are used in the blog application.
+                The for loop is used to build and inline list of the tags. Here is it pointless, but in the
+                blog application it is an effective way to create an inline list of anchors that can be used as filter
+                shortcuts (see in the blog app) -->
                 {% for tag in tags %}
                     {% if forloop.last %}
                         <li class="list-inline-item tag-like-text"> {{ tag.name }}</li>

@@ -1,13 +1,21 @@
-<div id="about" class="container bg-white" style="border-bottom: 1px solid #d3d3d3;">
+<!-- The About section container -->
+<div id="about" class="container bg-white">
+    <!-- The About header -->
     <h1>About</h1>
+    <!-- The row and column structure for the portrait picture of me and text -->
     <div class="row">
+        <!-- 4 columns with 1 offset, 2nd in order on greater than or equal to large screens, otherwise first -->
+        <!-- The image of me is on the right on large screens, and on the top on small ones -->
         <div class="col-lg-4 offset-lg-1 order-lg-2">
+            <!-- Flex to center portrait image -->
             <div class="d-flex justify-content-center">
                 <div id="portrait" class="embed-responsive embed-responsive-1by1 mb-5">
-                    <img class="embed-responsive-item fadeIn" src="{{ mark_profile.image.url }}" alt="Card image cap">
+                    <img class="embed-responsive-item fadeIn" src="{{ mark_profile.image.url }}" alt="Portrait of Mark">
                 </div>
             </div>
         </div>
+        <!-- 7 columns, 1 is left blank of the 12 -->
+        <!-- The text is on the left on large screens, and on the bottom on small ones -->
         <div class="col-lg-7 order-lg-1">
             <p class="mb-5">
                 I’m interested in <span class="text-emphasis">machine learning</span> and
@@ -25,10 +33,12 @@
                 I graduated with a Bachelor of Engineering degree in Electronic Engineering degree from
                 the University of Manchester in Manchester, United Kingdom.
             </p>
+            <!-- Nested row-column structure for making PDF download buttons responsive -->
             <div class="row">
                 <div class="col-lg-6 mt-2">
                     <div class="d-flex justify-content-center">
-                        <a href="{% url 'download-pdf' cv_file_object.identifier %}" class="btn btn-primary btn-xlarge href_p my-4">
+                        <a href="{% url 'download-pdf' cv_file_object.identifier %}"
+                           class="btn btn-primary btn-xlarge href_p my-4">
                             <span class="glyphicon glyphicon-download-alt"></span>
                             CV as PDF ({{ cv_file_object.pdf.size|filesizeformat }})
                         </a>
@@ -36,7 +46,8 @@
                 </div>
                 <div class="col-lg-6 mt-2">
                     <div class="d-flex justify-content-center">
-                        <a href="{% url 'download-pdf' project_report_file_object.identifier %}" class="btn btn-primary btn-xlarge href_p my-4">
+                        <a href="{% url 'download-pdf' project_report_file_object.identifier %}"
+                           class="btn btn-primary btn-xlarge href_p my-4">
                             <span class="glyphicon glyphicon-download-alt"></span>
                             Thesis as PDF ({{ project_report_file_object.pdf.size|filesizeformat }})
                         </a>
@@ -45,5 +56,6 @@
             </div>
         </div>
     </div>
+    <!-- Include the timeline -->
     {% include "core_app/timeline.html "%}
 </div>
