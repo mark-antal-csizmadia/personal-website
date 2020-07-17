@@ -69,7 +69,7 @@
                         <div class="tab-pane fade show active" id="pills-{{ tag.slug }}" role="tabpanel"
                              aria-labelledby="pills-{{ tag.slug }}-tab">
                             <div id="project_list_active" class="container infinite-container">
-                                {% include 'core_app/project.html '%}
+                                {% include 'core_app/project.html' %}
                             </div>
                             <!-- If the current page does not have a next page, do not keep the Load Glyph More
                             Projects button for lazy loading more (handled in lazy_load_active_project_pills.js and
@@ -92,7 +92,7 @@
                         <div class="tab-pane fade" id="pills-{{ tag.slug }}" role="tabpanel"
                              aria-labelledby="pills-{{ tag.slug }}-tab">
                             <div id="project_list" class="container infinite-container">
-                                {% include 'core_app/project.html '%}
+                                {% include 'core_app/project.html' %}
                             </div>
                             {% if not projects.has_next %}
                             {% else %}
