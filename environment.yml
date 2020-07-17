@@ -33,6 +33,7 @@ dependencies:
     - markdown2==2.3.9
     - pyquery==1.4.1
     - pytz==2020.1
+    - pywin32==226
     - readtime==1.1.1
     - requests==2.23.0
     - s3transfer==0.3.3
