@@ -37,5 +37,5 @@ class Project(models.Model):
         :param kwargs: Key-worded arguments used to save models.Model.
         :return:
         """
-        self.tags_as_str = ', '.join([tag.name for tag in self.tags.all()])
         super().save(*args, **kwargs)
+        self.tags_as_str = ', '.join([tag.name for tag in self.tags.all()])
