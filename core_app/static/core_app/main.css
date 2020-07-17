@@ -146,7 +146,7 @@ h3 {
 }
 
 p, li {
-    font: 16px Arial, sans-serif !important;
+    font: 15px Arial, sans-serif !important;
     line-height: 1.4 !important;
     letter-spacing: 1px;
 }
@@ -179,14 +179,14 @@ p, li {
 
 /* special typography for form paragraph text that are names above fields */
 .contact-form-p {
-    font: 16px Arial, sans-serif !important;
+    font: 15px Arial, sans-serif !important;
     line-height: 1.4 !important;
     letter-spacing: 1px;
 }
 
 /* for the text to be filled by user in the contact form */
 #id_name, #id_email, #id_subject, #id_message {
-    font: 14px Arial, sans-serif !important;
+    font: 15px Arial, sans-serif !important;
     line-height: 1.4 !important;
     letter-spacing: 1px;
 }
