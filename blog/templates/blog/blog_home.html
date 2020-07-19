@@ -68,10 +68,28 @@
             </div>
         </div>
     </div>
+
+    <div class="container mt-5">
+        <!-- If any message -->
+        {% if messages %}
+            <!-- Show every message (for now, there can only be one when the user successfully contacted me) -->
+            {% for message in messages %}
+                {% if message.tags == 'blog_use_filter_message info' %}
+                    <div class="alert alert-info text-left">
+                        <button type="button" class="close btn-lg mx-4" data-dismiss="alert" aria-hidden="true">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </button>
+                        <p class="mx-4">{{ message }}</p>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    </div>
+
     <!-- The dropdown menu for filtering the posts -->
     <div class="container pt-5">
         <div id="post_dropdown_row" class="row">
-            <div class="col-6">
+            <div class="col-lg-6">
                 <p class="p-small">Filter result: {{ posts.paginator.count }} posts</p>
                 <div id="post_dropdown_menu" class="dropdown">
                     <a class="btn btn-primary btn-xlarge href_p dropdown-toggle" href="{% url 'blog-home' %}" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -87,7 +105,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-6"></div>
+            <div class="col-lg-6"></div>
         </div>
 
     </div>

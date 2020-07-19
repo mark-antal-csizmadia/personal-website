@@ -3,6 +3,20 @@
 <div id="projects" class="container bg-white" style="border-bottom: 1px solid #d3d3d3;">
     <!-- Project header -->
     <h1>Projects</h1>
+    <!-- If any message -->
+    {% if messages %}
+        <!-- Show every message (for now, there can only be one when the user successfully contacted me) -->
+        {% for message in messages %}
+            {% if message.tags == 'projects_message info' %}
+                <div class="alert alert-info text-left">
+                    <button type="button" class="close btn-lg mx-4" data-dismiss="alert" aria-hidden="true">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                    <p class="mx-4">{{ message }}</p>
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
     <!-- Navbar for filtering projects -->
     <nav id="navbar_projects" class="navbar navbar-dark bg-white mr-auto">
         <div class="container px-0">

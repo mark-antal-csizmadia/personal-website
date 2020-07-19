@@ -1,5 +1,19 @@
 <!-- Source: https://www.bootdey.com/snippets/view/bs4-Horizontal-timeline -->
 <div class="card mt-5" style="border: none;">
+    <!-- If any message -->
+    {% if messages %}
+        <!-- Show every message (for now, there can only be one when the user successfully contacted me) -->
+        {% for message in messages %}
+            {% if message.tags == 'timeline_message info' %}
+                <div class="alert alert-info text-left">
+                    <button type="button" class="close btn-lg mx-4" data-dismiss="alert" aria-hidden="true">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                    <p class="mx-4">{{ message }}</p>
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
     <div class="body">
         <div class="cd-horizontal-timeline loaded">
             <div class="timeline">
@@ -41,9 +55,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <p class="p-small">19/09/2016</p>
-                                <h3>
-                                    <span class="h3-sunshine">A</span>pplying to undergraduate degree programs
-                                </h3>
+                                <h3>Applying to undergraduate degree programs</h3>
                                 <hr>
                                 <p>
                                     During my secondary school studies in Hungary, I developed an
@@ -79,9 +91,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <p class="p-small">07/06/2017</p>
-                                <h3>
-                                    <span class="h3-sunshine">F</span>irst year at the University of Manchester
-                                </h3>
+                                <h3>First year at the University of Manchester</h3>
                                 <hr>
                                 <p>
                                     At the beginning of my Bachelor’s studies, I was awarded the
@@ -116,7 +126,7 @@
                             <div class="col-md-12">
                                 <p class="p-small">20/07/2017</p>
                                 <h3>
-                                    <span class="h3-sunshine">B</span>ecoming interested in machine learning
+                                    First encounter with machine learning
                                 </h3>
                                 <hr>
                                 <p>
@@ -137,9 +147,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <p class="p-small">18/09/2017</p>
-                                <h3>
-                                    <span class="h3-sunshine">S</span>econd year at the University of Manchester
-                                </h3>
+                                <h3>Second year at the University of Manchester</h3>
                                 <hr>
                                 <p>
                                     During the second year of my studies, my interest in machine learning led me to
@@ -161,9 +169,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <p class="p-small">15/10/2017</p>
-                                <h3>
-                                    <span class="h3-sunshine">T</span>eam project to build an autonomous robot car
-                                </h3>
+                                <h3>Team project to build an autonomous robot car</h3>
                                 <hr>
                                 <p>
                                     I started working in a team of five to plan, design, and build a
@@ -180,9 +186,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <p class="p-small">16/07/2018</p>
-                                <h3>
-                                    <span class="h3-sunshine">A</span> journey from the university to the industry
-                                </h3>
+                                <h3>A journey from the university to the industry</h3>
                                 <hr>
                                 <p>
                                     I completed my second year at the University of Manchester with a
@@ -204,9 +208,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <p class="p-small">03/09/2018</p>
-                                <h3>
-                                    <span class="h3-sunshine">F</span>irst day as a full-time R&D intern
-                                </h3>
+                                <h3>First day as a full-time R&D intern</h3>
                                 <hr>
                                 <p>
                                     My first day at Nexperia in Manchester in the United Kingdom as a
@@ -227,7 +229,7 @@
                             <div class="col-md-12 text-center">
                                 <a href="{% url 'download-pdf' internship_report_file_object.identifier %}" class="btn btn-primary btn-xlarge mt-5" style="color: #fff;">
                                     <span class="glyphicon glyphicon-download-alt"></span>
-                                    Overview as PDF ({{ internship_report_file_object.pdf.size|filesizeformat }})
+                                    Internship Report ({{ internship_report_file_object.pdf.size|filesizeformat }})
                                 </a>
                             </div>
                         </div>
@@ -236,9 +238,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <p class="p-small">17/01/2019</p>
-                                <h3>
-                                    <span class="h3-sunshine">P</span>resenting my project to the internal R&D forum
-                                </h3>
+                                <h3>Presenting my project to the internal R&D forum</h3>
                                 <hr>
                                 <p>
                                     Having been in development for four months, I gave my
@@ -266,7 +266,7 @@
                             <div class="col-md-12 text-center">
                                 <a href="{% url 'download-pdf' internship_report_file_object.identifier %}" class="btn btn-primary btn-xlarge mt-5" style="color: #fff;">
                                     <span class="glyphicon glyphicon-download-alt"></span>
-                                    Overview as PDF ({{ internship_report_file_object.pdf.size|filesizeformat }})
+                                    Internship Report ({{ internship_report_file_object.pdf.size|filesizeformat }})
                                 </a>
                             </div>
                         </div>
@@ -275,9 +275,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <p class="p-small">25/03/2019</p>
-                                <h3>
-                                    <span class="h3-sunshine">M</span>aking progress with the internship project
-                                </h3>
+                                <h3>Making progress with the internship project</h3>
                                 <hr>
                                 <p>
                                     By the <span class="text-emphasis">half-time</span> of the project,
@@ -295,7 +293,7 @@
                             <div class="col-md-12 text-center">
                                 <a href="{% url 'download-pdf' internship_report_file_object.identifier %}" class="btn btn-primary btn-xlarge mt-5" style="color: #fff;">
                                     <span class="glyphicon glyphicon-download-alt"></span>
-                                    Overview as PDF ({{ internship_report_file_object.pdf.size|filesizeformat }})
+                                    Internship Report ({{ internship_report_file_object.pdf.size|filesizeformat }})
                                 </a>
                             </div>
                         </div>
@@ -304,9 +302,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <p class="p-small">16/04/2019</p>
-                                <h3>
-                                    <span class="h3-sunshine">P</span>resenting to the internal R&D forum for the second time
-                                </h3>
+                                <h3>Presenting to the internal R&D forum for the second time</h3>
                                 <hr>
                                 <p>
                                     I delivered my <span class="text-emphasis">second presentation</span>
@@ -336,7 +332,7 @@
                             <div class="col-md-12 text-center">
                                 <a href="{% url 'download-pdf' internship_report_file_object.identifier %}" class="btn btn-primary btn-xlarge mt-5" style="color: #fff;">
                                     <span class="glyphicon glyphicon-download-alt"></span>
-                                    Overview as PDF ({{ internship_report_file_object.pdf.size|filesizeformat }})
+                                    Internship Report ({{ internship_report_file_object.pdf.size|filesizeformat }})
                                 </a>
                             </div>
                         </div>
@@ -345,9 +341,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <p class="p-small">23/08/2019</p>
-                                <h3>
-                                    <span class="h3-sunshine">H</span>anding over my internship project
-                                </h3>
+                                <h3>Handing over my internship project</h3>
                                 <hr>
                                 <p>
                                     My last day as a Research and Development intern with Nexperia. I produced a
@@ -371,7 +365,7 @@
                             <div class="col-md-12 text-center">
                                 <a href="{% url 'download-pdf' internship_report_file_object.identifier %}" class="btn btn-primary btn-xlarge mt-5" style="color: #fff;">
                                     <span class="glyphicon glyphicon-download-alt"></span>
-                                    Overview as PDF ({{ internship_report_file_object.pdf.size|filesizeformat }})
+                                    Internship Report ({{ internship_report_file_object.pdf.size|filesizeformat }})
                                 </a>
                             </div>
                         </div>
@@ -380,10 +374,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <p class="p-small">16/09/2019</p>
-                                <h3>
-                                    <span class="h3-sunshine">B</span>achelor's thesis project in deep
-                                    learning-based object detection
-                                </h3>
+                                <h3>Bachelor's thesis project in deep learning-based object detection</h3>
                                 <hr>
                                 <p>
                                     I returned from the full-time, year-long internship to the University of
@@ -412,7 +403,7 @@
                             <div class="col-md-12 text-center">
                                 <a href="{% url 'download-pdf' project_report_file_object.identifier %}" class="btn btn-primary btn-xlarge mt-5" style="color: #fff;">
                                     <span class="glyphicon glyphicon-download-alt"></span>
-                                    Thesis as PDF ({{ project_report_file_object.pdf.size|filesizeformat }})
+                                    BEng Thesis ({{ project_report_file_object.pdf.size|filesizeformat }})
                                 </a>
                             </div>
                         </div>
@@ -421,8 +412,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <p class="p-small">01/12/2019</p>
-                                <h3><span class="h3-sunshine">C</span>ompleting multiple online
-                                    courses in deep learning</h3>
+                                <h3>Completing multiple online courses in deep learning</h3>
                                 <hr>
                                 <p>
                                     I completed four of the
@@ -471,8 +461,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <p class="p-small">03/04/2020</p>
-                                <h3><span class="h3-sunshine">B</span>eing admitted to the
-                                    MSc Macine Learning program at KTH Stockholm</h3>
+                                <h3>Admission to the MSc Macine Learning program at KTH Stockholm</h3>
                                 <hr>
                                 <p>
                                     While working on my final year individual thesis project, I grew certain that
@@ -499,7 +488,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <p class="p-small">01/05/2020</p>
-                                <h3><span class="h3-sunshine">S</span>ubmitting the Bachelor's thesis project report</h3>
+                                <h3>Submitting the Bachelor's thesis project report</h3>
                                 <hr>
                                 <p>
                                     After seven months of hard work and studying,
@@ -556,7 +545,7 @@
                             <div class="col-md-12 text-center">
                                 <a href="{% url 'download-pdf' project_report_file_object.identifier %}" class="btn btn-primary btn-xlarge mt-5" style="color: #fff;">
                                     <span class="glyphicon glyphicon-download-alt"></span>
-                                    Thesis as PDF ({{ project_report_file_object.pdf.size|filesizeformat }})
+                                    BEng Thesis ({{ project_report_file_object.pdf.size|filesizeformat }})
                                 </a>
                             </div>
                         </div>
@@ -565,14 +554,16 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <p class="p-small">20/07/2020</p>
-                                <h3><span class="h3-sunshine">G</span>raduating from the University of Manchester</h3>
+                                <h3>Graduating from the University of Manchester</h3>
                                 <hr>
                                 <p>
-                                    I graduated from the <span class="text-emphasis">University of Manchester</span>
-                                    with a <span class="text-emphasis">First-Class Honours (XX %)</span> degree.
+                                    I graduated with a <span class="text-emphasis">First-Class</span>
+                                    Bachelor or Engineering (BEng) with Honours degree from the
+                                    <span class="text-emphasis">University of Manchester</span> and achieved an
+                                    overall GPA of 85 % that ranked me within the top 5 % of my cohort.
                                     Studying at this renowned institution was a great experience. I took
                                     part in the work of several student organizations, attended
-                                    interesting student events, and got to know amazing people.
+                                    interesting extracurricular events, and got to know amazing people.
                                 </p>
                                 <p>
                                     I am starting the <span class="text-emphasis">MSc Machine Learning</span>

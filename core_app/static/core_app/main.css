@@ -114,28 +114,21 @@
 /* typography start */
 
 h1 {
-    font: 40px Georgia, serif !important;
+    font: 32px Georgia, serif !important;
     padding-top: 5px;
     padding-bottom: 5px;
     letter-spacing: 4px;
 }
 
-/* center h1 headers in main page when viewed on phones */
-@media (max-width: 991px) {
-    h1 {
-        text-align: center;
-    }
-}
-
 h2 {
-    font: 30px Arial, sans-serif !important;
+    font: 24px Arial, sans-serif !important;
     padding-top: 5px;
     padding-bottom: 5px;
     letter-spacing: 2px;
 }
 
 h3 {
-    font: 25px Arial, sans-serif !important;
+    font: 20px Arial, sans-serif !important;
     padding-top: 5px;
     padding-bottom: 5px;
     letter-spacing: 2px;
@@ -244,7 +237,7 @@ p, li {
 }
 
 .navbar-text {
-    font: 20px Arial, sans-serif !important;
+    font: 18px Arial, sans-serif !important;
 }
 
 .footer-href {
@@ -457,7 +450,7 @@ body {
 /* button design start */
 
 .btn-xlarge {
-    padding: 5px 5px;
+    padding: 8px 8px;
     font-size: 15px;
     line-height: normal;
     -webkit-border-radius: 8px;
@@ -875,6 +868,7 @@ body {
     -ms-transform: translateX(-50%) translateY(-50%);
     -o-transform: translateX(-50%) translateY(-50%);
     transform: translateX(-50%) translateY(-50%);
+    background: url(../arrow.svg) no-repeat 0 0;
 }
 
 .cd-timeline-navigation a.prev {

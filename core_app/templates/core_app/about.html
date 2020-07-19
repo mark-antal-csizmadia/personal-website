@@ -17,21 +17,27 @@
         <!-- 7 columns, 1 is left blank of the 12 -->
         <!-- The text is on the left on large screens, and on the bottom on small ones -->
         <div class="col-lg-7 order-lg-1">
-            <p class="mb-5">
-                I’m interested in <span class="text-emphasis">machine learning</span> and
+            <p class="mb-4">
+                I am interested in <span class="text-emphasis">machine learning</span> and
                 <span class="text-emphasis">deep learning</span>
-                and my goal is to better explore these ground-breaking fields of study through work experience,
+                and my goal is to explore these ground-breaking fields of study through work experience,
                 university education, self-paced learning.
             </p>
-            <p class="p-border mb-5">
+            <p class="p-border mb-4">
                 I aim to build intelligent systems that make a difference and bring about positive changes in
                 people’s lives.
             </p>
-            <p class="mb-5">
-                I’m currently pursuing a Master of Science degree in Machine Learning at
+            <p class="mb-4">
+                I am currently pursuing a Master of Science degree in Machine Learning at
                 KTH Royal Institute of Technology in Stockholm, Sweden. In 2020,
-                I graduated with a Bachelor of Engineering degree in Electronic Engineering degree from
-                the University of Manchester in Manchester, United Kingdom.
+                I graduated with a First-Class Bachelor of Engineering (BEng) with Honours degree in
+                Electronic Engineering from the University of Manchester in Manchester, United Kingdom.
+            </p>
+            <p class="mb-4">
+                Below, you can download my CV and my Bachelor of
+                Engineering (BEng) Thesis report about deep learning-based object detection on edge computing devices.
+                Furthermore, you can use the interactive timeline below to go through the chapters of my
+                professional development.
             </p>
             <!-- Nested row-column structure for making PDF download buttons responsive -->
             <div class="row">
@@ -40,7 +46,7 @@
                         <a href="{% url 'download-pdf' cv_file_object.identifier %}"
                            class="btn btn-primary btn-xlarge href_p my-4">
                             <span class="glyphicon glyphicon-download-alt"></span>
-                            CV as PDF ({{ cv_file_object.pdf.size|filesizeformat }})
+                            CV ({{ cv_file_object.pdf.size|filesizeformat }})
                         </a>
                     </div>
                 </div>
@@ -49,7 +55,7 @@
                         <a href="{% url 'download-pdf' project_report_file_object.identifier %}"
                            class="btn btn-primary btn-xlarge href_p my-4">
                             <span class="glyphicon glyphicon-download-alt"></span>
-                            Thesis as PDF ({{ project_report_file_object.pdf.size|filesizeformat }})
+                            BEng Thesis ({{ project_report_file_object.pdf.size|filesizeformat }})
                         </a>
                     </div>
                 </div>

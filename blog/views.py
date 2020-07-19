@@ -5,6 +5,7 @@ from django.template import loader
 from django.http import JsonResponse
 from django.db.models import Q
 import random
+from django.contrib import messages
 
 
 # Global variable for paginating posts
@@ -67,6 +68,11 @@ def blog_home_view(request):
         # filtered or in detailed view)
         "show_blog_home_button": False
     }
+
+    blog_use_filter_message = \
+        f'Use the drop-down menu to filter blog posts by different topics. Use the button on the bottom' \
+        f'of the currently filtered blog posts to load more of them. You can close this message.'
+    messages.add_message(request, messages.INFO, blog_use_filter_message, extra_tags='blog_use_filter_message')
 
     return render(request, 'blog/blog_home.html', context)
 

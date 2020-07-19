@@ -4,10 +4,14 @@
     {% if messages %}
         <!-- Show every message (for now, there can only be one when the user successfully contacted me) -->
         {% for message in messages %}
-            <div class="alert alert-{{ message.tags }} text-center">
-                <button type="button" class="close btn-lg" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <p>{{ message }}</p>
-            </div>
+            {% if message.tags == "post_contact_form success" %}
+                <div class="alert alert-success text-left">
+                    <button type="button" class="close btn-lg mx-4" data-dismiss="alert" aria-hidden="true">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                    <p class="mx-4">{{ message }}</p>
+                </div>
+            {% endif %}
         {% endfor %}
     {% endif %}
 </div>
