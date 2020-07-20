@@ -27,7 +27,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = (os.environ.get('DEBUG_VALUE') == "True")
 
 # The second and the third elements in the list are used to tunnel to my phone using ngrok. 4th is for Heroku.
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'cf64fc5c1ade.ngrok.io', 'markcsizmadiawebsite.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '374a6e35870f.ngrok.io', 'markcsizmadiawebsite.herokuapp.com']
 
 
 # Application definition
@@ -170,3 +170,7 @@ SUMMERNOTE_THEME = 'bs4'
 
 # For heroku, sets some of the stuff here like SECRET_KEY, but prefer doing it manually!
 django_heroku.settings(locals())
+
+# Cookies.
+SESSION_COOKIE_SAMESITE = 'Strict'
+

@@ -41,4 +41,23 @@ $(document).ready(function(){
             scrollTop: 0
         }, 800);
     });
+
+    // Enable touchscreen swipe on mobile for carousel
+    // Source: https://stackoverflow.com/questions/21349984/how-to-make-bootstrap-carousel-slider-use-mobile-left-right-swipe
+    // by Liam who answered Nov 3 '16 at 12:50
+    $(".carousel").on("touchstart", function(event){
+        var xClick = event.originalEvent.touches[0].pageX;
+        $(this).one("touchmove", function(event){
+            var xMove = event.originalEvent.touches[0].pageX;
+            if( Math.floor(xClick - xMove) > 5 ){
+                $(this).carousel('next');
+            }
+            else if( Math.floor(xClick - xMove) < -5 ){
+                $(this).carousel('prev');
+            }
+        });
+        $(".carousel").on("touchend", function(){
+                $(this).off("touchmove");
+        });
+    });
 });

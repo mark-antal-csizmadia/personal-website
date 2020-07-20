@@ -45,7 +45,7 @@
         <nav id="navbar" class="navbar navbar-expand-lg navbar-dark bg-aqua fixed-top">
             <div class="container">
                 <!-- Navbar brand with my name -->
-                <a id="navbarbrand" class="navbar-brand" href="{% url 'blog-home' %}">
+                <a id="navbarbrand" class="navbar-brand navbar-text" href="{% url 'blog-home' %}">
                     Mark Csizmadia <span class="bg-sunshine py-2 px-2">Blog</span>
                 </a>
                 <!-- Navbar button -->
@@ -59,11 +59,11 @@
                     <div class="navbar-nav ml-auto">
                         <!-- Show extra Back to Blog Home navlink when posts are filtered or viewed in detail -->
                         {% if show_blog_home_button %}
-                            <a class="nav-link" href="{% url 'blog-home' %}">
+                            <a class="nav-link navbar-text" href="{% url 'blog-home' %}">
                                 <span class="glyphicon glyphicon-home"></span> Blog Home
                             </a>
                         {% endif %}
-                        <a class="nav-link" href="{% url 'core_app_view' %}">
+                        <a class="nav-link navbar-text" href="{% url 'core_app_view' %}">
                             <span class="glyphicon glyphicon-log-out"></span> Leave Blog
                         </a>
                     </div>
@@ -89,10 +89,6 @@
      detailed view (Medium style) -->
     <script
         src="{% static 'core_app/blog_navbar_and_read_bar.js' %}">
-    </script>
-
-    <script
-        src="{% static 'core_app/blog_read_bar.js' %}">
     </script>
 
     <!-- Document ready scripts -->

@@ -34,17 +34,6 @@ def core_app_view(request):
     # Exclude some of the tags that are not relevant in the Project section.
     tags_project_mask = [tag for tag in tags if tag.name not in ["My Journey"]]
 
-    timeline_accessibility_message_to_user = f"Use the interactive timeline to view the chapters of my " \
-                                             "professional development. Use the encircled arrows on the sides to go " \
-                                             "forward and backward in time, and select the dates above the timeline " \
-                                             "to find out more about each chapter. You can close this message."
-    messages.add_message(request, messages.INFO, timeline_accessibility_message_to_user, extra_tags='timeline_message')
-
-    projects_accessibility_message_to_user = f"Use the sandwich menu below to filter projects. " \
-                                             f"Use the button at the bottom of the currently filtered projects" \
-                                             f" to load more projects for that filter. You can close this message."
-    messages.add_message(request, messages.INFO, projects_accessibility_message_to_user, extra_tags='projects_message')
-
     # Iterate over each tag in the masked tags to separate and paginate projects.
     for tag in tags_project_mask:
 
@@ -134,6 +123,19 @@ def core_app_view(request):
 
     # If not POST request, create a new form.
     else:
+        timeline_accessibility_message_to_user = f"Use the interactive timeline to view the chapters of my " \
+                                                 "professional development. Use the encircled arrows on the sides to go " \
+                                                 "forward and backward in time, and select the dates above the timeline " \
+                                                 "to find out more about each chapter. You can close this message."
+        messages.add_message(request, messages.INFO, timeline_accessibility_message_to_user,
+                             extra_tags='timeline_message')
+
+        projects_accessibility_message_to_user = f"Use the sandwich menu below to filter projects. " \
+                                                 f"Use the button at the bottom of the currently filtered projects" \
+                                                 f" to load more projects for that filter. You can close this message."
+        messages.add_message(request, messages.INFO, projects_accessibility_message_to_user,
+                             extra_tags='projects_message')
+
         form = ContactForm()
 
     # Get all blog posts to show statistics to user about blog.

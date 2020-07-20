@@ -620,6 +620,25 @@ body {
     animation-direction: alternate;
 }
 
+/* dsad */
+#toabout {
+    color: var(--main-color-white);
+    background: var(--main-color-1);
+}
+
+#toabout:hover {
+    color: var(--main-color-white);
+    background: var(--main-color-1);
+
+}
+
+#toabouticon {
+    animation-duration: 0.5s;
+    animation-name: changewidth;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
 /* footer design end */
 /* progress bar design for post detail view start */
 
