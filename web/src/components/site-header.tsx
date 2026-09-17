@@ -7,11 +7,13 @@ import { cn } from "cn";
 
 const writingCodeHref = "/is-mark-writing-code";
 const openhedgeHref = "/openhedge";
+const cvHref = "/cv";
 
 export function SiteHeader() {
   const pathname = usePathname();
   const writingCodeActive = pathname === writingCodeHref;
   const openhedgeActive = pathname === openhedgeHref;
+  const cvActive = pathname === cvHref;
 
   return (
     <header className="border-b">
@@ -20,6 +22,18 @@ export function SiteHeader() {
           Márk Csizmadia
         </Link>
         <nav className="flex items-center gap-4">
+          <Link
+            href={cvHref}
+            aria-current={cvActive ? "page" : undefined}
+            className={cn(
+              "text-sm underline-offset-4 hover:text-foreground hover:underline",
+              cvActive
+                ? "font-medium text-foreground"
+                : "text-muted-foreground",
+            )}
+          >
+            CV
+          </Link>
           <Link
             href={openhedgeHref}
             aria-current={openhedgeActive ? "page" : undefined}
@@ -44,12 +58,6 @@ export function SiteHeader() {
           >
             Is Márk writing code?
           </Link>
-          <a
-            className="text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
-            href="https://github.com/mark-antal-csizmadia"
-          >
-            GitHub
-          </a>
         </nav>
       </div>
     </header>

@@ -2,6 +2,7 @@
 
 import { CircleHelpIcon } from "lucide-react";
 
+import { SiteSocials } from "@/components/site-socials";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -29,17 +30,11 @@ export function OpenhedgeHelpDialog() {
           <DialogDescription>
             If you see 4xx or 5xx errors, Márk&apos;s OpenRouter API key has
             likely been maxed out. This demo costs money to run. If you want to
-            try it, please{" "}
-            <a
-              className="font-medium text-foreground underline underline-offset-4"
-              href="https://github.com/mark-antal-csizmadia"
-            >
-              reach out to Márk
-            </a>{" "}
-            so he can top up the key and you can go again. Thank you for
-            understanding.
+            try it, please reach out so he can top up the key and you can go
+            again. Thank you for understanding.
           </DialogDescription>
         </DialogHeader>
+        <SiteSocials contactOnly />
       </DialogContent>
     </Dialog>
   );
