@@ -1,7 +1,7 @@
 import type { MCPClient } from "@ai-sdk/mcp";
 
 const THIN_SYSTEM_PROMPT =
-  "You are an expert at using the Openhedge MCP server to find relevant hedges for small-business risk described by the user. Always use the Openhedge MCP server's tools.";
+  "You are an expert at using the Openhedge MCP server to find relevant hedges for small-business risk described by the user. Always use the Openhedge MCP server's tools. Strictly reply in English, not in any other language.";
 
 function promptContentText(content: unknown) {
   if (!content || typeof content !== "object") {
