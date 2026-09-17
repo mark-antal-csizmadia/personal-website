@@ -158,12 +158,20 @@ function ToolCallPart({
   );
 }
 
+function formatElapsed(ms: number) {
+  const totalSeconds = Math.floor(ms / 1000);
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = totalSeconds % 60;
+  return `${minutes}m ${seconds.toString().padStart(2, "0")}s`;
+}
+
 const PLACEHOLDER_INTERVAL_MS = 4000;
 const FOLLOW_UP_PLACEHOLDER = "Ask a follow-up…";
 
 export function OpenhedgeChat() {
   const [input, setInput] = useState("");
   const [placeholderIndex, setPlaceholderIndex] = useState(0);
+  const [elapsedMs, setElapsedMs] = useState(0);
   const transport = useMemo(
     () =>
       new DefaultChatTransport({
@@ -179,6 +187,20 @@ export function OpenhedgeChat() {
   const busy = status === "submitted" || status === "streaming";
   const canReset = busy || messages.length > 0 || Boolean(error);
   const isEmptyChat = messages.length === 0 && !error;
+
+  useEffect(() => {
+    if (!busy) {
+      setElapsedMs(0);
+      return;
+    }
+
+    const startedAt = Date.now();
+    const id = window.setInterval(() => {
+      setElapsedMs(Date.now() - startedAt);
+    }, 250);
+
+    return () => window.clearInterval(id);
+  }, [busy]);
 
   useEffect(() => {
     if (!isEmptyChat || input.trim() || busy) {
@@ -269,7 +291,10 @@ export function OpenhedgeChat() {
           className="flex items-center gap-2 border-t bg-muted/40 px-3 py-2 text-sm text-muted-foreground"
         >
           <Spinner className="size-4 shrink-0" />
-          <span>{busyLabel(status, messages)}</span>
+          <span className="min-w-0 flex-1">{busyLabel(status, messages)}</span>
+          <span className="shrink-0 font-mono text-xs tabular-nums">
+            {formatElapsed(elapsedMs)}
+          </span>
         </div>
       ) : null}
       <div className="grid gap-3 border-t p-3">
