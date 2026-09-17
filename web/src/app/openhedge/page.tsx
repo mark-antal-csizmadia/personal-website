@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { OpenhedgeChat } from "@/components/openhedge/openhedge-chat";
 import { OpenhedgeHelpDialog } from "@/components/openhedge/openhedge-help-dialog";
+import { SiteFooter } from "@/components/site-footer";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -60,13 +61,16 @@ export default function OpenhedgePage() {
         </section>
         <OpenhedgeChat />
       </main>
-      <footer className="shrink-0 border-t">
-        <div className="mx-auto w-full max-w-4xl px-6 py-4 text-sm text-muted-foreground">
+      <SiteFooter
+        className="shrink-0"
+        contentClassName="max-w-4xl py-4"
+      >
+        <p className="text-sm text-muted-foreground">
           Openhedge does not hold money or place trades. This demo is
           experimental and rate-limited because it spends Márk&apos;s OpenRouter
           credits.
-        </div>
-      </footer>
+        </p>
+      </SiteFooter>
     </div>
   );
 }
