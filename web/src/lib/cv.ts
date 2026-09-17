@@ -1,9 +1,17 @@
+import { KAGGLE_HREF } from "@/lib/socials";
+
 export type CvEntry = {
   dates: string;
   title: string;
   org: string;
   place: string;
   highlights: string[];
+};
+
+export type CvMiscItem = {
+  title: string;
+  href: string;
+  detail: string;
 };
 
 export const cvSummary =
@@ -70,5 +78,19 @@ export const education: CvEntry[] = [
     highlights: [
       "Final-year project: real-time object detection on an NVIDIA Jetson Nano for a robotic arm, supervised by Prof. Hujun Yin.",
     ],
+  },
+];
+
+export const misc: CvMiscItem[] = [
+  {
+    title: "Openhedge",
+    href: "/openhedge",
+    detail:
+      "Building OSS hedging tools for prediction markets and event contracts, including an MCP server that agents can connect to.",
+  },
+  {
+    title: "Kaggle",
+    href: KAGGLE_HREF,
+    detail: "Dabbled in machine learning competitions for a while.",
   },
 ];

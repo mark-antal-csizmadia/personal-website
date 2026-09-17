@@ -1,26 +1,27 @@
 import type { ReactNode } from "react";
 
 import { SiteSocials } from "@/components/site-socials";
+import { SITE_NAME } from "@/lib/site";
 import { cn } from "@/lib/utils";
+
+const COPYRIGHT_YEAR = 2026;
 
 export function SiteFooter({
   children,
   className,
-  contentClassName,
 }: {
   children?: ReactNode;
   className?: string;
-  contentClassName?: string;
 }) {
   return (
     <footer className={cn("mt-auto border-t", className)}>
-      <div
-        className={cn(
-          "mx-auto flex w-full max-w-3xl flex-col gap-3 px-6 py-6",
-          contentClassName,
-        )}
-      >
-        {children}
+      <div className="mx-auto flex w-full max-w-3xl flex-col gap-6 px-6 py-8 sm:flex-row sm:items-start sm:justify-between">
+        <div className="flex flex-col gap-3">
+          {children}
+          <p className="text-sm text-muted-foreground">
+            © {COPYRIGHT_YEAR} {SITE_NAME}
+          </p>
+        </div>
         <SiteSocials />
       </div>
     </footer>

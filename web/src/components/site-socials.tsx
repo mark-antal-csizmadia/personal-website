@@ -2,12 +2,15 @@ import type { ReactNode, SVGProps } from "react";
 
 import { MailIcon } from "lucide-react";
 
+import { ExternalLink } from "@/components/external-link";
 import { cn } from "@/lib/utils";
 import {
   EMAIL,
   EMAIL_HREF,
   GITHUB_HREF,
   GITHUB_LABEL,
+  KAGGLE_HREF,
+  KAGGLE_LABEL,
   LINKEDIN_HREF,
   LINKEDIN_LABEL,
   X_HANDLE,
@@ -38,11 +41,18 @@ function GitHubIcon(props: SVGProps<SVGSVGElement>) {
   );
 }
 
+function KaggleIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor" {...props}>
+      <path d="M18.825 23.785c-.064.023-.143.023-.205.023h-.011c-.256 0-.512-.098-.707-.293l-7.116-7.13-2.075 2.076v5.338c0 .562-.456 1.018-1.018 1.018H5.688c-.562 0-1.018-.456-1.018-1.018V1.214c0-.562.456-1.018 1.018-1.018h2.014c.562 0 1.018.456 1.018 1.018v10.968L16.9 2.123c.195-.195.451-.293.707-.293.064 0 .128.01.192.023.391.098.66.44.66.854v2.014c0 .27-.108.534-.293.726l-6.26 6.258 6.26 6.258c.185.192.293.456.293.726v2.014c0 .413-.269.756-.66.854z" />
+    </svg>
+  );
+}
+
 type SocialLink = {
   href: string;
   label: string;
   icon: ReactNode;
-  external?: boolean;
 };
 
 const contactLinks: SocialLink[] = [
@@ -55,7 +65,6 @@ const contactLinks: SocialLink[] = [
     href: X_HREF,
     label: X_HANDLE,
     icon: <XIcon className="size-3.5" />,
-    external: true,
   },
 ];
 
@@ -65,32 +74,40 @@ const socialLinks: SocialLink[] = [
     href: LINKEDIN_HREF,
     label: LINKEDIN_LABEL,
     icon: <LinkedInIcon className="size-4" />,
-    external: true,
   },
   {
     href: GITHUB_HREF,
     label: GITHUB_LABEL,
     icon: <GitHubIcon className="size-4" />,
-    external: true,
+  },
+  {
+    href: KAGGLE_HREF,
+    label: KAGGLE_LABEL,
+    icon: <KaggleIcon className="size-4" />,
   },
 ];
 
-function SocialAnchor({
-  href,
-  label,
-  icon,
-  external,
-}: SocialLink) {
-  return (
-    <a
-      className="inline-flex items-center gap-1.5 text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
-      href={href}
-      {...(external
-        ? { rel: "noopener noreferrer", target: "_blank" }
-        : undefined)}
-    >
+function SocialAnchor({ href, label, icon }: SocialLink) {
+  const className =
+    "inline-flex items-center gap-1.5 text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline";
+  const content = (
+    <>
       {icon}
       <span>{label}</span>
+    </>
+  );
+
+  if (href.startsWith("http")) {
+    return (
+      <ExternalLink className={className} href={href}>
+        {content}
+      </ExternalLink>
+    );
+  }
+
+  return (
+    <a className={className} href={href}>
+      {content}
     </a>
   );
 }
@@ -107,7 +124,7 @@ export function SiteSocials({
   return (
     <nav
       aria-label={contactOnly ? "Contact" : "Social links"}
-      className={cn("flex flex-wrap items-center gap-x-4 gap-y-2", className)}
+      className={cn("flex flex-col items-start gap-2", className)}
     >
       {links.map((link) => (
         <SocialAnchor key={link.href} {...link} />
