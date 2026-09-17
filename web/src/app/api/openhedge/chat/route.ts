@@ -17,7 +17,7 @@ import { buildSystemPrompt } from "@/lib/openhedge/mcp-context";
 import { allowRequest, clientIp } from "@/lib/openhedge/rate-limit";
 import { openrouterModel, generationTimeout } from "@/lib/openhedge/model";
 
-export const maxDuration = 60;
+export const maxDuration = 180;
 
 const DEFAULT_MCP_URL = "https://mcp.openhedge.app/mcp";
 const MAX_MESSAGES = 20;

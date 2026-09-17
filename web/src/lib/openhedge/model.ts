@@ -1,9 +1,9 @@
 /** Override with OPENROUTER_MODEL in .env.local. */
 export const DEFAULT_OPENROUTER_MODEL = "deepseek/deepseek-v4.1-flash";
 
-export const DEFAULT_STEP_TIMEOUT_MS = 15_000;
-export const DEFAULT_TOOL_TIMEOUT_MS = 12_000;
-export const DEFAULT_TOTAL_TIMEOUT_MS = 55_000;
+export const DEFAULT_STEP_TIMEOUT_MS = 90_000;
+export const DEFAULT_TOOL_TIMEOUT_MS = 40_000;
+export const DEFAULT_TOTAL_TIMEOUT_MS = 180_000;
 
 export function openrouterModel() {
   const configured = process.env.OPENROUTER_MODEL?.trim();
