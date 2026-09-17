@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+import { ExternalLink } from "@/components/external-link";
 import { OpenhedgeChat } from "@/components/openhedge/openhedge-chat";
 import { OpenhedgeHelpDialog } from "@/components/openhedge/openhedge-help-dialog";
 import { SiteFooter } from "@/components/site-footer";
@@ -41,37 +42,33 @@ export default function OpenhedgePage() {
           </h1>
           <p className="max-w-xl text-muted-foreground">
             A live chat client for{" "}
-            <a
+            <ExternalLink
               className="font-medium underline underline-offset-4"
               href="https://openhedge.app/"
             >
               Openhedge
-            </a>
+            </ExternalLink>
             , an experimental OSS tool that maps a small-business risk to
             prediction-market event contracts. It talks to the hosted MCP
             server. See the{" "}
-            <a
+            <ExternalLink
               className="font-medium underline underline-offset-4"
               href="https://github.com/mark-antal-csizmadia/openhedge"
             >
               GitHub repo
-            </a>
+            </ExternalLink>
             .
+          </p>
+          <p className="max-w-xl text-sm text-muted-foreground">
+            Openhedge does not hold money or place trades. This demo is
+            experimental and rate-limited because it spends Márk&apos;s
+            OpenRouter credits.
           </p>
           <OpenhedgeHelpDialog />
         </section>
         <OpenhedgeChat />
       </main>
-      <SiteFooter
-        className="shrink-0"
-        contentClassName="max-w-4xl py-4"
-      >
-        <p className="text-sm text-muted-foreground">
-          Openhedge does not hold money or place trades. This demo is
-          experimental and rate-limited because it spends Márk&apos;s OpenRouter
-          credits.
-        </p>
-      </SiteFooter>
+      <SiteFooter className="shrink-0" />
     </div>
   );
 }

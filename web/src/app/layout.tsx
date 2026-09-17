@@ -7,6 +7,7 @@ import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/site";
 import {
   EMAIL,
   GITHUB_HREF,
+  KAGGLE_HREF,
   LINKEDIN_HREF,
   X_HANDLE,
   X_HREF,
@@ -52,7 +53,7 @@ const jsonLd = {
   name: SITE_NAME,
   url: SITE_URL,
   email: EMAIL,
-  sameAs: [X_HREF, GITHUB_HREF, LINKEDIN_HREF],
+  sameAs: [X_HREF, GITHUB_HREF, LINKEDIN_HREF, KAGGLE_HREF],
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

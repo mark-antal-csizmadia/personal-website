@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import { CvTimeline } from "@/components/cv/cv-timeline";
+import { ExternalLink } from "@/components/external-link";
 import { SiteFooter } from "@/components/site-footer";
 import {
   Breadcrumb,
@@ -14,11 +15,11 @@ import {
 import {
   TypographyH1,
   TypographyH2,
+  TypographyH4,
   TypographyLead,
   TypographyMuted,
-  TypographyP,
 } from "@/components/ui/typography";
-import { cvSummary, education, experience } from "@/lib/cv";
+import { cvSummary, education, experience, misc } from "@/lib/cv";
 import { LINKEDIN_HREF } from "@/lib/socials";
 
 export const metadata: Metadata = {
@@ -27,6 +28,30 @@ export const metadata: Metadata = {
     "Work and education for Márk Csizmadia: Trustly, Sellpy, Ecobloom, KTH, and The University of Manchester.",
   alternates: { canonical: "/cv" },
 };
+
+function MiscLink({
+  href,
+  children,
+}: {
+  href: string;
+  children: string;
+}) {
+  const className = "font-medium underline underline-offset-4";
+
+  if (href.startsWith("http")) {
+    return (
+      <ExternalLink className={className} href={href}>
+        {children}
+      </ExternalLink>
+    );
+  }
+
+  return (
+    <Link className={className} href={href}>
+      {children}
+    </Link>
+  );
+}
 
 export default function CvPage() {
   return (
@@ -50,14 +75,12 @@ export default function CvPage() {
           </TypographyLead>
           <TypographyMuted className="mt-4">
             Main roles and studies only. Full profile on{" "}
-            <a
+            <ExternalLink
               className="font-medium text-foreground underline underline-offset-4"
               href={LINKEDIN_HREF}
-              rel="noopener noreferrer"
-              target="_blank"
             >
               LinkedIn
-            </a>
+            </ExternalLink>
             .
           </TypographyMuted>
 
@@ -70,6 +93,20 @@ export default function CvPage() {
           <div className="mt-8">
             <CvTimeline entries={education} label="Education" />
           </div>
+
+          <TypographyH2 className="mt-12">Misc</TypographyH2>
+          <ul className="mt-8 space-y-6" aria-label="Misc">
+            {misc.map((item) => (
+              <li key={item.title}>
+                <TypographyH4>
+                  <MiscLink href={item.href}>{item.title}</MiscLink>
+                </TypographyH4>
+                <p className="mt-1 text-sm leading-6 text-muted-foreground">
+                  {item.detail}
+                </p>
+              </li>
+            ))}
+          </ul>
         </article>
       </main>
       <SiteFooter />
