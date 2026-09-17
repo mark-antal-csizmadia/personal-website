@@ -1,0 +1,702 @@
+[
+  {
+    "day_of_week": "Friday",
+    "hour_of_day": 10,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 0.3,
+    "writing_code": 1
+  },
+  {
+    "day_of_week": "Friday",
+    "hour_of_day": 20,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 0,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Tuesday",
+    "hour_of_day": 12,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 0.2,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Monday",
+    "hour_of_day": 14,
+    "on_holiday": 1,
+    "distance_travelled_during_day": 8.1,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Tuesday",
+    "hour_of_day": 18,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 0,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Saturday",
+    "hour_of_day": 7,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 1.1,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Friday",
+    "hour_of_day": 5,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 0,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Thursday",
+    "hour_of_day": 4,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 0,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Friday",
+    "hour_of_day": 22,
+    "on_holiday": 1,
+    "distance_travelled_during_day": 23.7,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Sunday",
+    "hour_of_day": 3,
+    "on_holiday": 1,
+    "distance_travelled_during_day": 2.4,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Thursday",
+    "hour_of_day": 14,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 0,
+    "writing_code": 1
+  },
+  {
+    "day_of_week": "Friday",
+    "hour_of_day": 4,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 0.4,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Sunday",
+    "hour_of_day": 10,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 1.6,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Saturday",
+    "hour_of_day": 7,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 0,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Sunday",
+    "hour_of_day": 21,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 0,
+    "writing_code": 1
+  },
+  {
+    "day_of_week": "Monday",
+    "hour_of_day": 16,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 0,
+    "writing_code": 1
+  },
+  {
+    "day_of_week": "Thursday",
+    "hour_of_day": 19,
+    "on_holiday": 1,
+    "distance_travelled_during_day": 24.4,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Friday",
+    "hour_of_day": 16,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 0,
+    "writing_code": 1
+  },
+  {
+    "day_of_week": "Tuesday",
+    "hour_of_day": 15,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 9.6,
+    "writing_code": 1
+  },
+  {
+    "day_of_week": "Sunday",
+    "hour_of_day": 8,
+    "on_holiday": 1,
+    "distance_travelled_during_day": 19,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Sunday",
+    "hour_of_day": 21,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 0,
+    "writing_code": 1
+  },
+  {
+    "day_of_week": "Tuesday",
+    "hour_of_day": 1,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 0.2,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Monday",
+    "hour_of_day": 5,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 0,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Tuesday",
+    "hour_of_day": 13,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 8.9,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Wednesday",
+    "hour_of_day": 8,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 0,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Friday",
+    "hour_of_day": 5,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 0,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Tuesday",
+    "hour_of_day": 16,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 8.6,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Tuesday",
+    "hour_of_day": 11,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 0,
+    "writing_code": 1
+  },
+  {
+    "day_of_week": "Thursday",
+    "hour_of_day": 3,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 0,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Thursday",
+    "hour_of_day": 3,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 0.2,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Sunday",
+    "hour_of_day": 11,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 0,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Monday",
+    "hour_of_day": 1,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 0,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Sunday",
+    "hour_of_day": 19,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 0,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Friday",
+    "hour_of_day": 8,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 0,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Sunday",
+    "hour_of_day": 15,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 0,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Wednesday",
+    "hour_of_day": 0,
+    "on_holiday": 1,
+    "distance_travelled_during_day": 16.9,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Sunday",
+    "hour_of_day": 21,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 0,
+    "writing_code": 1
+  },
+  {
+    "day_of_week": "Tuesday",
+    "hour_of_day": 3,
+    "on_holiday": 1,
+    "distance_travelled_during_day": 8.7,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Thursday",
+    "hour_of_day": 17,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 0.3,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Thursday",
+    "hour_of_day": 11,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 8.7,
+    "writing_code": 1
+  },
+  {
+    "day_of_week": "Thursday",
+    "hour_of_day": 6,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 0,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Monday",
+    "hour_of_day": 0,
+    "on_holiday": 1,
+    "distance_travelled_during_day": 23.7,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Sunday",
+    "hour_of_day": 10,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 1.8,
+    "writing_code": 1
+  },
+  {
+    "day_of_week": "Wednesday",
+    "hour_of_day": 5,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 0.4,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Friday",
+    "hour_of_day": 19,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 0,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Monday",
+    "hour_of_day": 2,
+    "on_holiday": 1,
+    "distance_travelled_during_day": 8,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Friday",
+    "hour_of_day": 13,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 8.8,
+    "writing_code": 1
+  },
+  {
+    "day_of_week": "Saturday",
+    "hour_of_day": 12,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 0,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Tuesday",
+    "hour_of_day": 12,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 0,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Saturday",
+    "hour_of_day": 7,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 0,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Friday",
+    "hour_of_day": 13,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 0,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Wednesday",
+    "hour_of_day": 15,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 0,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Wednesday",
+    "hour_of_day": 21,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 0,
+    "writing_code": 1
+  },
+  {
+    "day_of_week": "Sunday",
+    "hour_of_day": 16,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 2,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Tuesday",
+    "hour_of_day": 15,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 0,
+    "writing_code": 1
+  },
+  {
+    "day_of_week": "Saturday",
+    "hour_of_day": 21,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 0,
+    "writing_code": 1
+  },
+  {
+    "day_of_week": "Thursday",
+    "hour_of_day": 21,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 0,
+    "writing_code": 1
+  },
+  {
+    "day_of_week": "Thursday",
+    "hour_of_day": 1,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 8.2,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Saturday",
+    "hour_of_day": 16,
+    "on_holiday": 1,
+    "distance_travelled_during_day": 2.8,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Friday",
+    "hour_of_day": 6,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 0,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Wednesday",
+    "hour_of_day": 2,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 9,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Saturday",
+    "hour_of_day": 12,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 0,
+    "writing_code": 1
+  },
+  {
+    "day_of_week": "Saturday",
+    "hour_of_day": 16,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 1.1,
+    "writing_code": 1
+  },
+  {
+    "day_of_week": "Wednesday",
+    "hour_of_day": 5,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 0,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Wednesday",
+    "hour_of_day": 15,
+    "on_holiday": 1,
+    "distance_travelled_during_day": 18.9,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Wednesday",
+    "hour_of_day": 4,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 0.1,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Thursday",
+    "hour_of_day": 20,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 9.9,
+    "writing_code": 1
+  },
+  {
+    "day_of_week": "Thursday",
+    "hour_of_day": 16,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 0.1,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Friday",
+    "hour_of_day": 13,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 0,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Monday",
+    "hour_of_day": 22,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 8.1,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Saturday",
+    "hour_of_day": 6,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 0,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Friday",
+    "hour_of_day": 12,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 0.1,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Tuesday",
+    "hour_of_day": 11,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 0,
+    "writing_code": 1
+  },
+  {
+    "day_of_week": "Tuesday",
+    "hour_of_day": 23,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 0,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Thursday",
+    "hour_of_day": 11,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 0,
+    "writing_code": 1
+  },
+  {
+    "day_of_week": "Wednesday",
+    "hour_of_day": 6,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 9.3,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Saturday",
+    "hour_of_day": 15,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 1.6,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Thursday",
+    "hour_of_day": 12,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 9.2,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Monday",
+    "hour_of_day": 16,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 0,
+    "writing_code": 1
+  },
+  {
+    "day_of_week": "Friday",
+    "hour_of_day": 21,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 9.1,
+    "writing_code": 1
+  },
+  {
+    "day_of_week": "Thursday",
+    "hour_of_day": 18,
+    "on_holiday": 1,
+    "distance_travelled_during_day": 18.4,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Sunday",
+    "hour_of_day": 19,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 1.9,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Thursday",
+    "hour_of_day": 11,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 0,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Friday",
+    "hour_of_day": 23,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 0,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Saturday",
+    "hour_of_day": 3,
+    "on_holiday": 1,
+    "distance_travelled_during_day": 24.8,
+    "writing_code": 1
+  },
+  {
+    "day_of_week": "Thursday",
+    "hour_of_day": 20,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 0,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Thursday",
+    "hour_of_day": 22,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 8.3,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Monday",
+    "hour_of_day": 3,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 0,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Sunday",
+    "hour_of_day": 9,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 0,
+    "writing_code": 1
+  },
+  {
+    "day_of_week": "Friday",
+    "hour_of_day": 21,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 0,
+    "writing_code": 1
+  },
+  {
+    "day_of_week": "Wednesday",
+    "hour_of_day": 20,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 0,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Tuesday",
+    "hour_of_day": 14,
+    "on_holiday": 1,
+    "distance_travelled_during_day": 16.8,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Thursday",
+    "hour_of_day": 14,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 9.2,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Tuesday",
+    "hour_of_day": 16,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 0,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Sunday",
+    "hour_of_day": 18,
+    "on_holiday": 1,
+    "distance_travelled_during_day": 3.4,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Sunday",
+    "hour_of_day": 0,
+    "on_holiday": 1,
+    "distance_travelled_during_day": 14.1,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Saturday",
+    "hour_of_day": 15,
+    "on_holiday": 1,
+    "distance_travelled_during_day": 11.3,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Wednesday",
+    "hour_of_day": 4,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 0.3,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Saturday",
+    "hour_of_day": 13,
+    "on_holiday": 0,
+    "distance_travelled_during_day": 0,
+    "writing_code": 0
+  },
+  {
+    "day_of_week": "Friday",
+    "hour_of_day": 4,
+    "on_holiday": 1,
+    "distance_travelled_during_day": 18.3,
+    "writing_code": 0
+  }
+]
