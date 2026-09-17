@@ -2,6 +2,7 @@
 
 import { useMemo, useState, type FormEvent } from "react";
 
+import { CodingHints } from "@/components/mark-writing-code/coding-hints";
 import { DatasetDialog } from "@/components/mark-writing-code/dataset-dialog";
 import { ProbabilityMath } from "@/components/mark-writing-code/probability-math";
 import {
@@ -335,6 +336,7 @@ export function MarkWritingCode() {
               </p>
               <GlobalImportanceChart values={trainResult?.globalImportance ?? []} />
             </div>
+            <CodingHints />
           </CardContent>
         </Card>
       ) : null}
