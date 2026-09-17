@@ -17,6 +17,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://markcsizmadia.com"),
   title: {
     default: "Márk Csizmadia",
     template: "%s · Márk Csizmadia",
