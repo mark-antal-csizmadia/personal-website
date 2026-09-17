@@ -3,6 +3,14 @@ import { Geist, Geist_Mono } from "next/font/google";
 
 import { SiteHeader } from "@/components/site-header";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/site";
+import {
+  EMAIL,
+  GITHUB_HREF,
+  LINKEDIN_HREF,
+  X_HANDLE,
+  X_HREF,
+} from "@/lib/socials";
 
 import "./globals.css";
 
@@ -17,13 +25,34 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://markcsizmadia.com"),
+  metadataBase: new URL(SITE_URL),
+  applicationName: SITE_NAME,
   title: {
-    default: "Márk Csizmadia",
-    template: "%s · Márk Csizmadia",
+    default: SITE_NAME,
+    template: `%s · ${SITE_NAME}`,
   },
-  description:
-    "I ship products and experiences with ML/GenAI in fintech and e-commerce.",
+  description: SITE_DESCRIPTION,
+  authors: [{ name: SITE_NAME, url: SITE_URL }],
+  creator: SITE_NAME,
+  openGraph: {
+    type: "website",
+    locale: "en",
+    siteName: SITE_NAME,
+  },
+  twitter: {
+    card: "summary_large_image",
+    creator: X_HANDLE,
+    site: X_HANDLE,
+  },
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: SITE_NAME,
+  url: SITE_URL,
+  email: EMAIL,
+  sameAs: [X_HREF, GITHUB_HREF, LINKEDIN_HREF],
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -33,6 +62,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <TooltipProvider>
           <SiteHeader />
           {children}

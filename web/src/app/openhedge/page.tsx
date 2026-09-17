@@ -17,6 +17,7 @@ export const metadata: Metadata = {
   title: "Openhedge",
   description:
     "Try Openhedge in the browser: an MCP client that searches prediction markets for relevant small-business hedges.",
+  alternates: { canonical: "/openhedge" },
 };
 
 export default function OpenhedgePage() {
