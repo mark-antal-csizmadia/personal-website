@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronDownIcon } from "lucide-react";
+import { ChevronDownIcon, RotateCcwIcon } from "lucide-react";
 import {
   useLayoutEffect,
   useState,
@@ -42,6 +42,7 @@ export function KeepGoingFacts() {
     { length: VISIBLE_COUNT },
     (_, index) => funFacts[(offset + index) % factCount],
   );
+  const isStartOver = offset <= 1;
 
   function keepGoing() {
     if (animating) {
@@ -118,11 +119,13 @@ export function KeepGoingFacts() {
         variant="outline"
         size="sm"
         className="mt-4 rounded-full"
-        aria-label="Show the next fun fact"
+        aria-label={
+          isStartOver ? "Start fun facts over" : "Show the next fun fact"
+        }
         onClick={keepGoing}
       >
-        Keep going
-        <ChevronDownIcon />
+        {isStartOver ? "Start over" : "Keep going"}
+        {isStartOver ? <RotateCcwIcon /> : <ChevronDownIcon />}
       </Button>
     </div>
   );
