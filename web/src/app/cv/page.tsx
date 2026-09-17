@@ -25,6 +25,7 @@ export const metadata: Metadata = {
   title: "CV",
   description:
     "Work and education for Márk Csizmadia: Trustly, Sellpy, Ecobloom, KTH, and The University of Manchester.",
+  alternates: { canonical: "/cv" },
 };
 
 export default function CvPage() {

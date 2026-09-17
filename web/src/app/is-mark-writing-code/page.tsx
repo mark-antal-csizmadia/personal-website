@@ -16,6 +16,7 @@ export const metadata: Metadata = {
   title: "Is Márk writing code right now?",
   description:
     "Train an in-browser XGBoost classifier to predict whether Márk is writing code right now.",
+  alternates: { canonical: "/is-mark-writing-code" },
 };
 
 export default function IsMarkWritingCodePage() {
