@@ -10,8 +10,15 @@ export default function Home() {
           </h1>
           <p className="max-w-xl text-lg leading-relaxed">
             I&apos;m Márk. I ship products and experiences with ML/GenAI in
-            fintech and e-commerce. I&apos;m also building OSS for prediction
-            markets and event contracts. Sounds like a lot of coding, right?{" "}
+            fintech and e-commerce. I&apos;m also building{" "}
+            <Link
+              href="/openhedge"
+              className="font-medium underline underline-offset-4"
+            >
+              Openhedge
+            </Link>
+            , OSS for prediction markets and event contracts. Sounds like a lot
+            of coding, right?{" "}
             <Link
               href="/is-mark-writing-code"
               className="font-medium underline underline-offset-4"

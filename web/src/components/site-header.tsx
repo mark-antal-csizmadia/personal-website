@@ -6,10 +6,12 @@ import { usePathname } from "next/navigation";
 import { cn } from "cn";
 
 const writingCodeHref = "/is-mark-writing-code";
+const openhedgeHref = "/openhedge";
 
 export function SiteHeader() {
   const pathname = usePathname();
   const writingCodeActive = pathname === writingCodeHref;
+  const openhedgeActive = pathname === openhedgeHref;
 
   return (
     <header className="border-b">
@@ -18,6 +20,18 @@ export function SiteHeader() {
           Márk Csizmadia
         </Link>
         <nav className="flex items-center gap-4">
+          <Link
+            href={openhedgeHref}
+            aria-current={openhedgeActive ? "page" : undefined}
+            className={cn(
+              "text-sm underline-offset-4 hover:text-foreground hover:underline",
+              openhedgeActive
+                ? "font-medium text-foreground"
+                : "text-muted-foreground",
+            )}
+          >
+            Openhedge
+          </Link>
           <Link
             href={writingCodeHref}
             aria-current={writingCodeActive ? "page" : undefined}
