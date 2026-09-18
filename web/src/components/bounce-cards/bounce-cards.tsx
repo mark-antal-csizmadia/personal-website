@@ -39,6 +39,10 @@ function getNoRotationTransform(transformStr: string) {
   return `${transformStr} rotate(0deg)`;
 }
 
+function hasFineHover() {
+  return window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+}
+
 function getPushedTransform(baseTransform: string, offsetX: number) {
   const translateRegex = /translate\(([-0-9.]+)px\)/;
   const match = baseTransform.match(translateRegex);
@@ -83,7 +87,7 @@ export function BounceCards({
   }, [animationStagger, easeType, animationDelay]);
 
   const pushSiblings = (hoveredIdx: number) => {
-    if (!enableHover || !containerRef.current) {
+    if (!enableHover || !hasFineHover() || !containerRef.current) {
       return;
     }
 
@@ -121,7 +125,7 @@ export function BounceCards({
   };
 
   const resetSiblings = () => {
-    if (!enableHover || !containerRef.current) {
+    if (!enableHover || !hasFineHover() || !containerRef.current) {
       return;
     }
 
