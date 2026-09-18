@@ -39,6 +39,11 @@ export function OpenhedgeAboutCopy() {
         experimental and rate-limited because it spends Márk&apos;s
         OpenRouter credits.
       </p>
+      <p className="max-w-xl text-sm text-muted-foreground">
+        A full run should take about two minutes. The last tool call should
+        be <span className="font-mono">present_hedge</span>. If you don&apos;t see that as the last
+        tool call, please try again.
+      </p>
     </div>
   );
 }

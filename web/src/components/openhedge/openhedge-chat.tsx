@@ -39,7 +39,7 @@ import {
 } from "@/components/ai-elements/tool";
 import { Spinner } from "@/components/ui/spinner";
 import { Button } from "@/components/ui/button";
-import { SquarePenIcon } from "lucide-react";
+import { SquarePenIcon, TriangleAlertIcon } from "lucide-react";
 import { hedgeExamples } from "@/lib/openhedge/examples";
 import {
   ERROR_CODES,
@@ -158,6 +158,39 @@ function ToolCallPart({
   );
 }
 
+const PRESENT_HEDGE_TOOL = "present_hedge";
+
+function lastToolPart(messages: UIMessage[]) {
+  for (let messageIndex = messages.length - 1; messageIndex >= 0; messageIndex -= 1) {
+    const message = messages[messageIndex];
+    if (!message) {
+      continue;
+    }
+
+    for (let partIndex = message.parts.length - 1; partIndex >= 0; partIndex -= 1) {
+      const part = message.parts[partIndex];
+      if (isToolUIPart(part)) {
+        return part;
+      }
+    }
+  }
+
+  return undefined;
+}
+
+function presentHedgeCompleted(messages: UIMessage[]) {
+  const part = lastToolPart(messages);
+  if (!part) {
+    return false;
+  }
+
+  return (
+    getToolName(part) === PRESENT_HEDGE_TOOL &&
+    part.state === "output-available" &&
+    !part.errorText
+  );
+}
+
 function formatElapsed(ms: number) {
   const totalSeconds = Math.floor(ms / 1000);
   const minutes = Math.floor(totalSeconds / 60);
@@ -187,6 +220,10 @@ export function OpenhedgeChat() {
   const busy = status === "submitted" || status === "streaming";
   const canReset = busy || messages.length > 0 || Boolean(error);
   const isEmptyChat = messages.length === 0 && !error;
+  const showIncompleteFlowWarning =
+    !busy &&
+    messages.some((message) => message.role === "assistant") &&
+    !presentHedgeCompleted(messages);
 
   useEffect(() => {
     if (!busy) {
@@ -280,6 +317,21 @@ export function OpenhedgeChat() {
             <p className="rounded-lg bg-destructive/10 px-3 py-2 text-sm text-destructive">
               {error.message}
             </p>
+          ) : null}
+          {showIncompleteFlowWarning ? (
+            <div
+              role="status"
+              aria-live="polite"
+              className="flex items-start gap-2 rounded-lg bg-muted px-3 py-2 text-sm"
+            >
+              <TriangleAlertIcon className="mt-0.5 size-4 shrink-0 text-muted-foreground" />
+              <p>
+                Sorry — this flow might not have completed successfully. The
+                last tool call should be{" "}
+                <span className="font-mono">{PRESENT_HEDGE_TOOL}</span> and
+                finish without errors. Please try again.
+              </p>
+            </div>
           ) : null}
         </ConversationContent>
         <ConversationScrollButton />
