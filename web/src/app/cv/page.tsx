@@ -3,7 +3,6 @@ import Link from "next/link";
 
 import { CvTimeline } from "@/components/cv/cv-timeline";
 import { ExternalLink } from "@/components/external-link";
-import { SiteFooter } from "@/components/site-footer";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -109,7 +108,6 @@ export default function CvPage() {
           </ul>
         </article>
       </main>
-      <SiteFooter />
     </div>
   );
 }

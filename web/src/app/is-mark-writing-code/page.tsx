@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import { MarkWritingCode } from "@/components/mark-writing-code/mark-writing-code-loader";
-import { SiteFooter } from "@/components/site-footer";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -43,13 +42,13 @@ export default function IsMarkWritingCodePage() {
             a semi-realistic dataset, then score a test row for this moment.
           </p>
         </section>
-        <MarkWritingCode />
+        <div className="flex flex-col gap-4">
+          <MarkWritingCode />
+          <p className="text-sm text-muted-foreground">
+            Model, data, and explanations stay in your browser session.
+          </p>
+        </div>
       </main>
-      <SiteFooter>
-        <p className="text-sm text-muted-foreground">
-          Model, data, and explanations stay in your browser session.
-        </p>
-      </SiteFooter>
     </div>
   );
 }

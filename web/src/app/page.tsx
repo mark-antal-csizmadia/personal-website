@@ -3,7 +3,6 @@ import Link from "next/link";
 
 import { BounceCards } from "@/components/bounce-cards/bounce-cards";
 import { ExternalLink } from "@/components/external-link";
-import { SiteFooter } from "@/components/site-footer";
 import {
   TypographyH1,
   TypographyLead,
@@ -82,7 +81,6 @@ export default function Home() {
           </div>
         </article>
       </main>
-      <SiteFooter />
     </div>
   );
 }
