@@ -1,7 +1,13 @@
 "use client";
 
 import { gsap } from "gsap";
-import { useEffect, useRef, type CSSProperties } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  type CSSProperties,
+  type MouseEvent,
+} from "react";
 
 import { cn } from "@/lib/utils";
 
@@ -14,6 +20,8 @@ const DEFAULT_TRANSFORM_STYLES = [
   "rotate(-10deg) translate(85px)",
   "rotate(2deg) translate(170px)",
 ];
+
+const FOCUS_SCALE = 1.08;
 
 type BounceCardsProps = {
   className?: string;
@@ -37,6 +45,10 @@ function getNoRotationTransform(transformStr: string) {
     return "rotate(0deg)";
   }
   return `${transformStr} rotate(0deg)`;
+}
+
+function getFocusedTransform(baseTransform: string) {
+  return `${getNoRotationTransform(baseTransform)} scale(${FOCUS_SCALE})`;
 }
 
 function hasFineHover() {
@@ -69,6 +81,7 @@ export function BounceCards({
   enableHover = false,
 }: BounceCardsProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [focusedIdx, setFocusedIdx] = useState<number | null>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -85,6 +98,27 @@ export function BounceCards({
     }, containerRef);
     return () => ctx.revert();
   }, [animationStagger, easeType, animationDelay]);
+
+  const applyFocus = (idx: number | null) => {
+    if (!containerRef.current) {
+      return;
+    }
+
+    const q = gsap.utils.selector(containerRef);
+
+    images.forEach((_, i) => {
+      const target = q(`.card-${i}`);
+      gsap.killTweensOf(target);
+      const baseTransform = transformStyles[i] || "none";
+      gsap.to(target, {
+        transform:
+          idx === i ? getFocusedTransform(baseTransform) : baseTransform,
+        duration: 0.4,
+        ease: "back.out(1.4)",
+        overwrite: "auto",
+      });
+    });
+  };
 
   const pushSiblings = (hoveredIdx: number) => {
     if (!enableHover || !hasFineHover() || !containerRef.current) {
@@ -144,6 +178,31 @@ export function BounceCards({
     });
   };
 
+  const handleCardClick = (idx: number, event: MouseEvent<HTMLButtonElement>) => {
+    if (hasFineHover() && event.detail !== 0) {
+      return;
+    }
+
+    const nextIdx = focusedIdx === idx ? null : idx;
+    setFocusedIdx(nextIdx);
+    applyFocus(nextIdx);
+  };
+
+  const handleStageClick = (event: MouseEvent<HTMLDivElement>) => {
+    if (
+      focusedIdx === null ||
+      (event.target instanceof Element && event.target.closest(".card"))
+    ) {
+      return;
+    }
+
+    setFocusedIdx(null);
+    applyFocus(null);
+  };
+
+  const caption =
+    focusedIdx !== null ? (alts[focusedIdx] ?? "") : "";
+
   return (
     <div
       className="bounceCardsViewport"
@@ -154,7 +213,7 @@ export function BounceCards({
         } as CSSProperties
       }
     >
-      <div className="bounceCardsSizer">
+      <div className="bounceCardsSizer" onClick={handleStageClick}>
         <div
           className={cn("bounceCardsContainer", className)}
           ref={containerRef}
@@ -164,26 +223,48 @@ export function BounceCards({
           }}
         >
           {images.map((src, idx) => (
-            <div
+            <button
               key={src}
+              type="button"
               className={`card card-${idx}`}
               style={{
                 transform: transformStyles[idx] ?? "none",
+                zIndex: focusedIdx === idx ? 20 : idx,
               }}
-              onMouseEnter={() => pushSiblings(idx)}
-              onMouseLeave={resetSiblings}
+              aria-pressed={focusedIdx === idx}
+              aria-label={alts[idx] ?? `card-${idx}`}
+              onClick={(event) => {
+                event.stopPropagation();
+                handleCardClick(idx, event);
+              }}
+              onMouseEnter={() => {
+                if (!hasFineHover()) {
+                  return;
+                }
+                setFocusedIdx(idx);
+                pushSiblings(idx);
+              }}
+              onMouseLeave={() => {
+                if (!hasFineHover()) {
+                  return;
+                }
+                setFocusedIdx(null);
+                resetSiblings();
+              }}
             >
               {/* BounceCards animates the wrapper; a plain img keeps the original CSS. */}
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                className="image"
-                src={src}
-                alt={alts[idx] ?? `card-${idx}`}
-              />
-            </div>
+              <img className="image" src={src} alt="" />
+            </button>
           ))}
         </div>
       </div>
+      <p
+        className="mt-3 min-h-6 text-center text-sm text-muted-foreground"
+        aria-live="polite"
+      >
+        {caption || "\u00a0"}
+      </p>
     </div>
   );
 }
