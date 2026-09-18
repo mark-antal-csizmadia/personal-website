@@ -24,7 +24,9 @@ export const experience: CvEntry[] = [
     org: "Trustly",
     place: "Stockholm, Sweden",
     highlights: [
-      "Real-time machine learning for fraud detection on pay-by-bank payments.",
+      "Real-time ML for fraud prevention on pay-by-bank payments.",
+      "Streaming feature engine for sub-second fraud feature extraction.",
+      "Improved fraud labelling processes"
     ],
   },
   {
