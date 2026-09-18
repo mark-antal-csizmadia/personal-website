@@ -38,10 +38,21 @@
   position: absolute;
   width: 170px;
   aspect-ratio: 1;
+  padding: 0;
   border: 5px solid #fff;
   border-radius: 25px;
   overflow: hidden;
+  background: #fff;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  appearance: none;
+  font: inherit;
+  color: inherit;
+}
+
+.bounceCardsContainer .card:focus-visible {
+  outline: 3px solid var(--ring);
+  outline-offset: 3px;
 }
 
 .bounceCardsContainer .card .image {
