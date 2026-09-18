@@ -1,14 +1,19 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+import { BounceCards } from "@/components/bounce-cards/bounce-cards";
 import { ExternalLink } from "@/components/external-link";
-import { KeepGoingFacts } from "@/components/keep-going-facts";
 import { SiteFooter } from "@/components/site-footer";
 import {
   TypographyH1,
   TypographyLead,
   TypographyP,
 } from "@/components/ui/typography";
+import {
+  bounceCardAlts,
+  bounceCardSrcs,
+  bounceCardTransformStyles,
+} from "@/lib/bounce-cards";
 import { KAGGLE_HREF } from "@/lib/socials";
 
 export const metadata: Metadata = {
@@ -34,14 +39,8 @@ export default function Home() {
             >
               CV
             </Link>
-            . I dabbled in a lot of things like {" "}
-            <ExternalLink
-              href={KAGGLE_HREF}
-              className="font-medium underline underline-offset-4"
-            >
-              Kaggle
-            </ExternalLink>{" "}
-            competitions, algorithmic trading and most recently{" "}
+            . I take pride in building products on the side too.
+            Most recently{" "}
             <Link
               href="/openhedge"
               className="font-medium underline underline-offset-4"
@@ -50,6 +49,14 @@ export default function Home() {
             </Link>
             , an OSS hedging tool for prediction markets and event contracts which is deployed as an MCP server that can be connected to from your
             favourite agent like Grok, Cursor, Codex, or Claude.
+            I had a short stint at competing in {" "}
+            <ExternalLink
+              href={KAGGLE_HREF}
+              className="font-medium underline underline-offset-4"
+            >
+              Kaggle
+            </ExternalLink>{" "}
+            competitions and dabbled in algorithmic trading. 
           </TypographyP>
           <TypographyP className="max-w-xl text-muted-foreground">
             Sounds like a lot of coding, right?{" "}
@@ -61,7 +68,18 @@ export default function Home() {
             </Link>{" "}
             uses an in-browser classifier instead of guessing.
           </TypographyP>
-          <KeepGoingFacts />
+          <div className="mt-10 mb-4">
+            <BounceCards
+              images={bounceCardSrcs}
+              alts={bounceCardAlts}
+              containerWidth={720}
+              containerHeight={280}
+              animationDelay={0.5}
+              animationStagger={0.15}
+              enableHover
+              transformStyles={bounceCardTransformStyles}
+            />
+          </div>
         </article>
       </main>
       <SiteFooter />
