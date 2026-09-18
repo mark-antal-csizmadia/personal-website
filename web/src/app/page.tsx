@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <div className="flex flex-1 flex-col">
+    <div className="relative flex min-w-0 flex-1 flex-col overflow-x-clip">
       <main className="mx-auto w-full max-w-3xl flex-1 px-6 py-12">
         <article>
           <TypographyH1>Hey there</TypographyH1>
