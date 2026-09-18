@@ -1,8 +1,15 @@
+"use client";
+
 import type { ReactNode, SVGProps } from "react";
 
 import { MailIcon } from "lucide-react";
 
 import { ExternalLink } from "@/components/external-link";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 import {
   EMAIL,
@@ -87,7 +94,11 @@ const socialLinks: SocialLink[] = [
   },
 ];
 
-function SocialAnchor({ href, label, icon }: SocialLink) {
+function isExternalHref(href: string) {
+  return href.startsWith("http");
+}
+
+function LabeledSocialAnchor({ href, label, icon }: SocialLink) {
   const className =
     "inline-flex items-center gap-1.5 text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline";
   const content = (
@@ -97,7 +108,7 @@ function SocialAnchor({ href, label, icon }: SocialLink) {
     </>
   );
 
-  if (href.startsWith("http")) {
+  if (isExternalHref(href)) {
     return (
       <ExternalLink className={className} href={href}>
         {content}
@@ -109,6 +120,32 @@ function SocialAnchor({ href, label, icon }: SocialLink) {
     <a className={className} href={href}>
       {content}
     </a>
+  );
+}
+
+function IconSocialAnchor({ href, label, icon }: SocialLink) {
+  const className =
+    "inline-flex size-8 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-ring/50";
+
+  return (
+    <Tooltip>
+      <TooltipTrigger
+        render={
+          isExternalHref(href) ? (
+            <ExternalLink
+              aria-label={label}
+              className={className}
+              href={href}
+            />
+          ) : (
+            <a aria-label={label} className={className} href={href} />
+          )
+        }
+      >
+        {icon}
+      </TooltipTrigger>
+      <TooltipContent>{label}</TooltipContent>
+    </Tooltip>
   );
 }
 
@@ -124,11 +161,20 @@ export function SiteSocials({
   return (
     <nav
       aria-label={contactOnly ? "Contact" : "Social links"}
-      className={cn("flex flex-col items-start gap-2", className)}
+      className={cn(
+        contactOnly
+          ? "flex flex-col items-start gap-2"
+          : "flex shrink-0 items-center",
+        className,
+      )}
     >
-      {links.map((link) => (
-        <SocialAnchor key={link.href} {...link} />
-      ))}
+      {links.map((link) =>
+        contactOnly ? (
+          <LabeledSocialAnchor key={link.href} {...link} />
+        ) : (
+          <IconSocialAnchor key={link.href} {...link} />
+        ),
+      )}
     </nav>
   );
 }

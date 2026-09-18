@@ -15,8 +15,8 @@ export function SiteFooter({
 }) {
   return (
     <footer className={cn("mt-auto border-t", className)}>
-      <div className="mx-auto flex w-full max-w-3xl flex-col gap-6 px-6 py-8 sm:flex-row sm:items-start sm:justify-between">
-        <div className="flex flex-col gap-3">
+      <div className="mx-auto flex w-full max-w-3xl flex-col gap-3 px-6 py-4 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex min-w-0 flex-col gap-2">
           {children}
           <p className="text-sm text-muted-foreground">
             © {COPYRIGHT_YEAR} {SITE_NAME}
