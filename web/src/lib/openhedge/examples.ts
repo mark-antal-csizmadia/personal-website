@@ -12,7 +12,7 @@ export const hedgeExamples: HedgeExample[] = [
   {
     title: "Berlin Sports Bar",
     prompt:
-      "I run a bar in Berlin, Germany. If the Union Berlin win a Bundesliga match, I want to fund a customer offer; the promo could cost us about $1,000.",
+      "I run a bar in Berlin, Germany. If Bayern Munich win their women's Champions League match against Manchester City, I want to fund a customer offer; the promo could cost us about $1,000.",
   },
   {
     title: "US Bowling Alley",
@@ -22,7 +22,7 @@ export const hedgeExamples: HedgeExample[] = [
   {
     title: "Breckenridge Ski Shop",
     prompt:
-      "I run a ski rental shop in Breckenridge, Colorado. If Breckenridge Ski Resort does not open before November 15, we could miss about $1,000 of early-season revenue.",
+      "I run a ski rental shop in Breckenridge, Colorado. If Breckenridge Ski Resort does not open before November 8, we could miss about $1,000 of early-season revenue.",
   },
   {
     title: "London Bookshop",
