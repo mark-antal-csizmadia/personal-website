@@ -16,12 +16,12 @@ export function SiteHeader() {
   const cvActive = pathname === cvHref;
 
   return (
-    <header className="border-b">
-      <div className="mx-auto flex w-full max-w-3xl items-center justify-between gap-4 px-6 py-4">
-        <Link href="/" className="text-sm font-medium">
+    <header className="shrink-0 border-b">
+      <div className="mx-auto flex w-full min-w-0 max-w-3xl items-center justify-between gap-4 px-6 py-4">
+        <Link href="/" className="shrink-0 text-sm font-medium">
           Márk Csizmadia
         </Link>
-        <nav className="flex items-center gap-4">
+        <nav className="flex min-w-0 items-center gap-4 overflow-x-auto">
           <Link
             href={cvHref}
             aria-current={cvActive ? "page" : undefined}

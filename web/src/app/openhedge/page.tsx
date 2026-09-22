@@ -22,7 +22,10 @@ export const metadata: Metadata = {
 
 export default function OpenhedgePage() {
   return (
-    <div className="flex min-h-0 grow basis-0 flex-col overflow-hidden">
+    <div
+      data-slot="openhedge-page"
+      className="flex min-h-0 grow basis-0 flex-col overflow-hidden"
+    >
       <main className="mx-auto flex min-h-0 w-full max-w-4xl flex-1 flex-col gap-3 px-6 py-3 md:gap-6 md:py-6">
         <section className="grid shrink-0 gap-3">
           <Breadcrumb>

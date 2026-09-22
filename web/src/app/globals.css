@@ -130,3 +130,12 @@
     @apply font-sans;
   }
 }
+
+html:has([data-slot="openhedge-page"]) {
+  height: 100dvh;
+}
+
+html:has([data-slot="openhedge-page"]) body {
+  height: 100dvh;
+  overflow: hidden;
+}
