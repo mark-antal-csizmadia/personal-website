@@ -12,7 +12,7 @@ export const hedgeExamples: HedgeExample[] = [
   {
     title: "Berlin Sports Bar",
     prompt:
-      "I run a bar in Berlin, Germany. If Bayern Munich win their women's Champions League match against Manchester City, I want to fund a customer offer; the promo could cost us about $1,000.",
+      "I run a bar in Berlin, Germany. If Werder Bremen win their Bundesliga match against Borussia Dortmund, I want to fund a customer offer; the promo could cost us about $1,000.",
   },
   {
     title: "US Bowling Alley",
