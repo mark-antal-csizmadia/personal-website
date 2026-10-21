@@ -17,16 +17,20 @@ function TimelineItem({ entry }: { entry: CvEntry }) {
       <TypographyH4 className="mt-2">{entry.title}</TypographyH4>
       <p className="mt-1 text-sm font-medium">
         {entry.org}
-        <span className="font-normal text-muted-foreground">
-          {" "}
-          · {entry.place}
-        </span>
+        {entry.place ? (
+          <span className="font-normal text-muted-foreground">
+            {" "}
+            · {entry.place}
+          </span>
+        ) : null}
       </p>
-      <ul className="mt-3 space-y-1.5 text-sm leading-6 text-muted-foreground">
-        {entry.highlights.map((highlight) => (
-          <li key={highlight}>{highlight}</li>
-        ))}
-      </ul>
+      {entry.highlights.length > 0 ? (
+        <ul className="mt-3 space-y-1.5 text-sm leading-6 text-muted-foreground">
+          {entry.highlights.map((highlight) => (
+            <li key={highlight}>{highlight}</li>
+          ))}
+        </ul>
+      ) : null}
     </li>
   );
 }
