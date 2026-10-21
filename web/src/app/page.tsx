@@ -26,11 +26,11 @@ export default function Home() {
         <article>
           <TypographyH1>Hey there</TypographyH1>
           <TypographyLead className="mt-6 max-w-xl">
-            I&apos;m Márk. I ship products and experiences with ML/GenAI in
-            fintech and e-commerce.
+            I&apos;m Márk. I ship products and experiences with ML/GenAI in healthtech, fintech, e-commerce.
           </TypographyLead>
           <TypographyP className="max-w-xl">
-            I live in Stockholm, originally from Budapest. The short version of
+            I&apos;m on the founder and CTO journey at
+            a stealth startup. I live in Stockholm, originally from Budapest. The short version of
             where I&apos;ve worked and studied is on my{" "}
             <Link
               href="/cv"

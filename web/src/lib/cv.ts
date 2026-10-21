@@ -19,7 +19,14 @@ export const cvSummary =
 
 export const experience: CvEntry[] = [
   {
-    dates: "Aug 2025 – Present",
+    dates: "2026 – Present",
+    title: "Founder & CTO",
+    org: "Stealth Startup",
+    place: "",
+    highlights: [],
+  },
+  {
+    dates: "2025 – 2026",
     title: "Machine Learning Engineer",
     org: "Trustly",
     place: "Stockholm, Sweden",
@@ -30,7 +37,7 @@ export const experience: CvEntry[] = [
     ],
   },
   {
-    dates: "Dec 2022 – Aug 2025",
+    dates: "2022 – 2025",
     title: "Machine Learning Engineer",
     org: "Sellpy",
     place: "Stockholm, Sweden",
@@ -41,7 +48,7 @@ export const experience: CvEntry[] = [
     ],
   },
   {
-    dates: "Aug 2020 – Dec 2022",
+    dates: "2020 – 2022",
     title: "Machine Learning Engineer",
     org: "Ecobloom",
     place: "Stockholm, Sweden",
@@ -51,7 +58,7 @@ export const experience: CvEntry[] = [
     ],
   },
   {
-    dates: "Sep 2018 – Aug 2019",
+    dates: "2018 – 2019",
     title: "Research and Development Engineer",
     org: "Nexperia",
     place: "Manchester, United Kingdom",
